@@ -10,21 +10,17 @@
 
   <title>{{ config('app.name', 'Laravel') }}</title>
 
-  <!-- Scripts -->
-  <script src="{{ asset('js/app.js') }}" defer></script>
-
   <!-- Fonts -->
   <link rel="dns-prefetch" href="//fonts.gstatic.com" />
   <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" />
-
-  <!-- Styles -->
-  <link href="{{ asset('css/app.css') }}" rel="stylesheet" />
 
   <!-- FontAwesome JS-->
   <script defer src="{{ asset('plugins/fontawesome/js/all.min.js') }}"></script>
 
   <!-- App CSS -->
   <link id="theme-style" rel="stylesheet" href="{{ asset('css/portal.css') }}" />
+
+  @vite(['resources/js/app.js', 'resources/sass/app.scss'])
 </head>
 
 @yield('content')
