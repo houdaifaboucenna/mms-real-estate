@@ -9,9 +9,9 @@
 
         {{-- Banner --}}
         <div class="banner">
-          <img src="{{asset('images/background/background-2.jpg')}}" alt="" class="back">
+          <img src="{{ asset('images/background/background-2.jpg') }}" alt="" class="back">
           <div class="overlay"></div>
-          <h1>{{__('home.all_articles')}}</h1>
+          <h1>{{ __('home.all_articles') }}</h1>
         </div>
 
         {{-- Posts list --}}
@@ -21,16 +21,16 @@
             <div class="col-md-4 mb-2">
               <div class="post">
                 <div class="post-img">
-                  <img src="{{'/storage/' . $post->image}}" alt="">
+                  <img src="{{ '/storage/' . $post->image }}" alt="">
                 </div>
-                <a href="{{route('app.post', $post->slug)}}" class="post-title">
+                <a href="{{ route('app.post', $post->slug) }}" class="post-title">
                   @if (isLang('en'))
-                    {{$post->title}}
+                    {{ $post->title }}
                   @else
-                    {{$post->title_ar}}
+                    {{ $post->title_ar }}
                   @endif
                 </a>
-                <div class="post-date">{{$post->created_at->format('Y-m-d')}}</div>
+                <div class="post-date">{{ $post->created_at->format('Y-m-d') }}</div>
               </div>
             </div>
           @endforeach
@@ -39,7 +39,7 @@
         {{-- Pagination --}}
         <div class="row">
           <div class="col-md">
-            {{$posts->links()}}
+            {{ $posts->links() }}
           </div>
         </div>
       </div>

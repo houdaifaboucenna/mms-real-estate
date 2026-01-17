@@ -13,7 +13,7 @@
         <div class="app-auth-body mx-auto">
 
           <div class="app-auth-branding mb-4"><a class="app-logo" href="index.html"><img class="logo-icon me-2"
-                src="{{asset('images/app-logo.svg')}}" alt="logo"></a>
+                src="{{ asset('images/app-logo.svg') }}" alt="logo"></a>
           </div>
 
           <h2 class="auth-heading text-center mb-5">{{ __('Login') }}</h2>
@@ -64,7 +64,7 @@
                   @if (Route::has('password.request'))
                   <div class="col-6">
                     <div class="forgot-password text-end">
-                      <a href="{{route('password.request')}}">{{ __('Forgot Your Password?') }}</a>
+                      <a href="{{ route('password.request') }}">{{ __('Forgot Your Password?') }}</a>
                     </div>
                   </div>
                   @endif
@@ -80,7 +80,7 @@
             </form>
 
             <div class="auth-option text-center pt-5">No Account? Sign up <a class="text-link"
-                href="{{route("register")}}">here</a>.
+                href="{{ route("register") }}">here</a>.
             </div>
 
           </div>

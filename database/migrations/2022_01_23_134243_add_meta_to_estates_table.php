@@ -14,8 +14,8 @@ class AddMetaToEstatesTable extends Migration
     public function up()
     {
         Schema::table('estates', function (Blueprint $table) {
-          $table->string("keywords")->after("short_ar")->nullable();
-          $table->string("keywords_ar")->after("keywords")->nullable();
+            $table->string('keywords')->after('short_ar')->nullable();
+            $table->string('keywords_ar')->after('keywords')->nullable();
         });
     }
 
@@ -27,8 +27,8 @@ class AddMetaToEstatesTable extends Migration
     public function down()
     {
         Schema::table('estates', function (Blueprint $table) {
-          $table->dropColumn('keywords');
-          $table->dropColumn('keywords_ar');
+            $table->dropColumn('keywords');
+            $table->dropColumn('keywords_ar');
         });
     }
 }

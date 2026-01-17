@@ -15,10 +15,10 @@ class CreateFaqsTable extends Migration
     {
         Schema::create('faqs', function (Blueprint $table) {
             $table->id();
-            $table->text("question");
-            $table->text("question_ar");
-            $table->text("answer");
-            $table->text("answer_ar");
+            $table->text('question');
+            $table->text('question_ar');
+            $table->text('answer');
+            $table->text('answer_ar');
             $table->boolean('show_home')->default(false);
             $table->timestamps();
         });

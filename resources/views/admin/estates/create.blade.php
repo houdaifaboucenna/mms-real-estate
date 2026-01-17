@@ -33,14 +33,14 @@
 
           {{-- Title --}}
           <div class="form-group">
-            <label for="title">{{ __('admin.title')}}</label>
+            <label for="title">{{ __('admin.title') }}</label>
             <span class="asterix">*</span>
             <ul class="nav nav-tabs" id="titleTab" role="tablist">
               <li class="nav-item">
-                <a class="nav-link active" id="enTitle-tab" data-toggle="tab" href="#enTitle" role="tab" aria-controls="enTitle" aria-selected="true">{{__('admin.en')}}</a>
+                <a class="nav-link active" id="enTitle-tab" data-toggle="tab" href="#enTitle" role="tab" aria-controls="enTitle" aria-selected="true">{{ __('admin.en') }}</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" id="arTitle-tab" data-toggle="tab" href="#arTitle" role="tab" aria-controls="arTitle" aria-selected="false">{{__('admin.ar')}}</a>
+                <a class="nav-link" id="arTitle-tab" data-toggle="tab" href="#arTitle" role="tab" aria-controls="arTitle" aria-selected="false">{{ __('admin.ar') }}</a>
               </li>
             </ul>
             <div class="tab-content">
@@ -61,13 +61,13 @@
 
           {{-- Meta Description --}}
           <div class="form-group">
-            <label for="short">{{ __('admin.shortmeta')}}</label>
+            <label for="short">{{ __('admin.shortmeta') }}</label>
             <ul class="nav nav-tabs" id="shortTab" role="tablist">
               <li class="nav-item">
-                <a class="nav-link active" id="enShort-tab" data-toggle="tab" href="#enShort" role="tab" aria-controls="enShort" aria-selected="true">{{__('admin.en')}}</a>
+                <a class="nav-link active" id="enShort-tab" data-toggle="tab" href="#enShort" role="tab" aria-controls="enShort" aria-selected="true">{{ __('admin.en') }}</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" id="arShort-tab" data-toggle="tab" href="#arShort" role="tab" aria-controls="arShort" aria-selected="false">{{__('admin.ar')}}</a>
+                <a class="nav-link" id="arShort-tab" data-toggle="tab" href="#arShort" role="tab" aria-controls="arShort" aria-selected="false">{{ __('admin.ar') }}</a>
               </li>
             </ul>
             <div class="tab-content">
@@ -82,13 +82,13 @@
 
           {{-- Keywords --}}
           <div class="form-group">
-            <label for="keywords">{{ __('admin.keywords')}}</label>
+            <label for="keywords">{{ __('admin.keywords') }}</label>
             <ul class="nav nav-tabs" id="KeyTab" role="tablist">
               <li class="nav-item">
-                <a class="nav-link active" id="enKey-tab" data-toggle="tab" href="#enKey" role="tab" aria-controls="enKey" aria-selected="true">{{__('admin.en')}}</a>
+                <a class="nav-link active" id="enKey-tab" data-toggle="tab" href="#enKey" role="tab" aria-controls="enKey" aria-selected="true">{{ __('admin.en') }}</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" id="arKey-tab" data-toggle="tab" href="#arKey" role="tab" aria-controls="arKey" aria-selected="false">{{__('admin.ar')}}</a>
+                <a class="nav-link" id="arKey-tab" data-toggle="tab" href="#arKey" role="tab" aria-controls="arKey" aria-selected="false">{{ __('admin.ar') }}</a>
               </li>
             </ul>
             <div class="tab-content">
@@ -104,22 +104,22 @@
 
           {{-- Content --}}
           <div class="form-group">
-            <label for="content">{{ __('admin.content')}}</label>
+            <label for="content">{{ __('admin.content') }}</label>
             <span class="asterix">*</span>
             <ul class="nav nav-tabs" id="contentTab" role="tablist">
               <li class="nav-item">
-                <a class="nav-link active" id="enContent-tab" data-toggle="tab" href="#enContent" role="tab" aria-controls="enContent" aria-selected="true">{{__('admin.en')}}</a>
+                <a class="nav-link active" id="enContent-tab" data-toggle="tab" href="#enContent" role="tab" aria-controls="enContent" aria-selected="true">{{ __('admin.en') }}</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" id="arContent-tab" data-toggle="tab" href="#arContent" role="tab" aria-controls="arContent" aria-selected="false">{{__('admin.ar')}}</a>
+                <a class="nav-link" id="arContent-tab" data-toggle="tab" href="#arContent" role="tab" aria-controls="arContent" aria-selected="false">{{ __('admin.ar') }}</a>
               </li>
             </ul>
             <div class="tab-content">
               <div class="tab-pane fade show active" id="enContent" role="tabpanel" aria-labelledby="enContent-tab">
-                <textarea id="content"  name="content" rows="5">{{ isset($estate) ? $estate->content : ""}}</textarea>
+                <textarea id="content"  name="content" rows="5">{{ isset($estate) ? $estate->content : "" }}</textarea>
               </div>
               <div class="tab-pane fade" id="arContent" role="tabpanel" aria-labelledby="arContent-tab">
-                <textarea id="content_ar"  name="content_ar" rows="5">{{ isset($estate) ? $estate->content_ar : ""}}</textarea>
+                <textarea id="content_ar"  name="content_ar" rows="5">{{ isset($estate) ? $estate->content_ar : "" }}</textarea>
               </div>
             </div>
           </div>
@@ -129,12 +129,12 @@
           <div class="row">
             <div class="col-md-6">
               <div class="form-group-inline d-flex">
-                <input id="min" class="form-control" type="number" name="min" placeholder="MIN  20000" value="@isset($estate){{$estate->min}}@endisset"><span class="currency">$</span>
+                <input id="min" class="form-control" type="number" name="min" placeholder="MIN  20000" value="@isset($estate){{ $estate->min }}@endisset"><span class="currency">$</span>
               </div>
             </div>
             <div class="col-md-6">
               <div class="form-group d-flex">
-                <input id="max" class="form-control" type="number" name="max" placeholder="MAX 150000" value="@isset($estate){{$estate->max}}@endisset"><span class="currency">$</span>
+                <input id="max" class="form-control" type="number" name="max" placeholder="MAX 150000" value="@isset($estate){{ $estate->max }}@endisset"><span class="currency">$</span>
               </div>
             </div>
           </div>
@@ -146,16 +146,16 @@
               <div class="form-group-inline d-flex">
                 <select id="city" class="form-control" name="city">
                   @foreach ($cities as $key=>$city)
-                      <option value="{{$key}}" @isset($estate) @if ($city == $cities[$estate->city])
+                      <option value="{{ $key }}" @isset($estate) @if ($city == $cities[$estate->city])
                           selected
-                      @endif @endisset>{{$city}}</option>
+                      @endif @endisset>{{ $city }}</option>
                   @endforeach
                 </select>
               </div>
             </div>
             <div class="col-md-6">
               <div class="form-group d-flex">
-                <input type="hidden" class="town-id" value="@isset($estate){{$estate->town}}@endisset">
+                <input type="hidden" class="town-id" value="@isset($estate){{ $estate->town }}@endisset">
                 <select id="town" class="form-control" name="town">
                       <option value="1">Not selected</option>
                 </select>
@@ -164,13 +164,13 @@
           </div>
 
           <div class="form-group">
-            <label for="type">{{ __('admin.type')}}</label>
+            <label for="type">{{ __('admin.type') }}</label>
             <span class="asterix">*</span>
             <select id="type" class="form-control" name="type">
               @foreach ($types as $key=>$type)
-                  <option value="{{$key}}" @isset($estate) @if ($type == $types[$estate->type])
+                  <option value="{{ $key }}" @isset($estate) @if ($type == $types[$estate->type])
                       selected
-                  @endif @endisset>{{$type}}</option>
+                  @endif @endisset>{{ $type }}</option>
               @endforeach
             </select>
           </div>
@@ -188,13 +188,13 @@
           {{-- Images --}}
           <div class="row">
             <div class="col-md-12">
-              <label for="images">{{ __('admin.image')}}</label>
+              <label for="images">{{ __('admin.image') }}</label>
               <div class="slider">
-                @isset ($images)
+                @isset($images)
                   @foreach ($images as $img)
                     <div class="slider-item">
-                      <img src="{{asset('/storage/'.$img)}}" alt="">
-                      <span class="imgsrc d-none" data-src="{{$img}}"></span>
+                      <img src="{{ asset('/storage/'.$img) }}" alt="">
+                      <span class="imgsrc d-none" data-src="{{ $img }}"></span>
                       <a class="del-btn" href="#">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-dash-lg" viewBox="0 0 16 16">
                           <path fill-rule="evenodd" d="M2 8a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11A.5.5 0 0 1 2 8Z"/>
@@ -279,7 +279,7 @@
       if(value) {
         $.ajax({
           type: "POST",
-          url: "/del_estateimg",
+          url: "/delete-estate-image",
           data: {_token: CSRF_TOKEN, img:image,estate:id},
           dataType: "json",
           success: function (response) {

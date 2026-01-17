@@ -1,5 +1,7 @@
 {
     "preset": "laravel",
-    "disabled": [],
+    "disabled": [
+        "ApplyMiddlewareInRoutes"
+    ],
     "excluded": []
 }

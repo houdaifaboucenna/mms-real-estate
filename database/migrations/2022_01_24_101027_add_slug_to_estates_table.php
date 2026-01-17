@@ -14,7 +14,7 @@ class AddSlugToEstatesTable extends Migration
     public function up()
     {
         Schema::table('estates', function (Blueprint $table) {
-          $table->string("slug")->after("keywords_ar")->nullable()->unique();
+            $table->string('slug')->after('keywords_ar')->nullable()->unique();
         });
     }
 
@@ -26,7 +26,7 @@ class AddSlugToEstatesTable extends Migration
     public function down()
     {
         Schema::table('estates', function (Blueprint $table) {
-          $table->dropColumn('slug');
+            $table->dropColumn('slug');
         });
     }
 }

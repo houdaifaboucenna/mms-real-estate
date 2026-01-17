@@ -10,7 +10,7 @@
 
   <title>@yield('pageTitle')</title>
 
-  <link rel="shortcut icon" href="{{asset('images/app-logo.svg')}}" type="image/x-icon">
+  <link rel="shortcut icon" href="{{ asset('images/app-logo.svg') }}" type="image/x-icon">
 
   <!-- Fonts -->
   <link rel="dns-prefetch" href="//fonts.gstatic.com" />
@@ -69,7 +69,7 @@
               <div class="app-utilities col-auto">
 
                 <div class="app-utility-item">
-                  <a href="{{route('settings.index')}}" title="Settings">
+                  <a href="{{ route('settings.index') }}" title="Settings">
                     <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-gear icon" fill="currentColor"
                       xmlns="http://www.w3.org/2000/svg">
                       <path fill-rule="evenodd"
@@ -84,14 +84,14 @@
                 <div class="app-utility-item app-user-dropdown dropdown">
                   <a class="dropdown-toggle" id="user-dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
                     aria-expanded="false"><img
-                      src="{{ isset(auth()->user()->profile->image) ? '/storage/' . auth()->user()->profile->image : auth()->user()->getGravatar()}}"
+                      src="{{ isset(auth()->user()->profile->image) ? '/storage/' . auth()->user()->profile->image : auth()->user()->getGravatar() }}"
                       alt="user profile" /></a>
                   <ul class="dropdown-menu" aria-labelledby="user-dropdown-toggle">
                     <li>
-                      <a class="dropdown-item" href="{{route('profile.index')}}">Account</a>
+                      <a class="dropdown-item" href="{{ route('profile.index') }}">Account</a>
                     </li>
                     <li>
-                      <a class="dropdown-item" href="{{route('settings.index')}}">Settings</a>
+                      <a class="dropdown-item" href="{{ route('settings.index') }}">Settings</a>
                     </li>
                     <li>
                       <hr class="dropdown-divider" />
@@ -124,12 +124,12 @@
 
           <div class="app-branding">
             <a class="app-logo d-flex" href="{{ url('/') }}" target="_blank">
-              <img class="logo-icon me-2" src="{{asset('images/logo.jpg')}}" alt="logo">
+              <img class="logo-icon me-2" src="{{ asset('images/logo.jpg') }}" alt="logo">
               <div>
                 <span class="logo-text">
                   {{ config('app.name', 'Laravel') }}
                 </span>
-                <span class="logo-redi">{{__('admin.view_website')}}</span>
+                <span class="logo-redi">{{ __('admin.view_website') }}</span>
               </div>
 
             </a>
@@ -140,8 +140,8 @@
             <ul class="app-menu list-unstyled accordion" id="menu-accordion">
 
               <li class="nav-item">
-                <a class="nav-link @if(Route::current()->getName() == 'dashboard') active @endif"
-                  href="{{route('dashboard')}}">
+                <a class="nav-link @if (Route::current()->getName() == 'dashboard') active @endif"
+                  href="{{ route('dashboard') }}">
                   <span class="nav-icon">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                       class="bi bi-boxes" viewBox="0 0 16 16">
@@ -156,8 +156,8 @@
               <!--//nav-item-->
               <li class="nav-item">
                 <!--//Bootstrap Icons: https://icons.getbootstrap.com/ -->
-                <a class="nav-link @if(Route::current()->getName() == 'posts.index') active @endif"
-                  href="{{route("posts.index")}}">
+                <a class="nav-link @if (Route::current()->getName() == 'posts.index') active @endif"
+                  href="{{ route("posts.index") }}">
                   <span class="nav-icon">
                     <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-card-list" fill="currentColor"
                       xmlns="http://www.w3.org/2000/svg">
@@ -177,8 +177,8 @@
               <!--//nav-item-->
               <li class="nav-item">
                 <!--//Bootstrap Icons: https://icons.getbootstrap.com/ -->
-                <a class="nav-link @if(Route::current()->getName() == 'comments.index') active @endif"
-                  href="{{route("comments.index")}}">
+                <a class="nav-link @if (Route::current()->getName() == 'comments.index') active @endif"
+                  href="{{ route("comments.index") }}">
                   <span class="nav-icon">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-chat-left-dots"
                       viewBox="0 0 16 16">
@@ -195,8 +195,8 @@
               <!--//nav-item-->
               <li class="nav-item">
                 <!--//Bootstrap Icons: https://icons.getbootstrap.com/ -->
-                <a class="nav-link  @if(Route::current()->getName() == 'estates.index') active @endif"
-                  href="{{route("estates.index")}}">
+                <a class="nav-link  @if (Route::current()->getName() == 'estates.index') active @endif"
+                  href="{{ route("estates.index") }}">
                   <span class="nav-icon">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                       class="bi bi-house-door" viewBox="0 0 16 16">
@@ -211,8 +211,8 @@
               <!--//nav-item-->
               <li class="nav-item">
                 <!--//Bootstrap Icons: https://icons.getbootstrap.com/ -->
-                <a class="nav-link  @if(Route::current()->getName() == 'contacts.index') active @endif"
-                  href="{{route("contacts.index")}}">
+                <a class="nav-link  @if (Route::current()->getName() == 'contacts.index') active @endif"
+                  href="{{ route("contacts.index") }}">
                   <span class="nav-icon">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                       class="bi bi-inboxes" viewBox="0 0 16 16">
@@ -227,8 +227,8 @@
               <!--//nav-item-->
               <li class="nav-item">
                 <!--//Bootstrap Icons: https://icons.getbootstrap.com/ -->
-                <a class="nav-link  @if(Route::current()->getName() == 'faq.index') active @endif"
-                  href="{{route("faq.index")}}">
+                <a class="nav-link  @if (Route::current()->getName() == 'faq.index') active @endif"
+                  href="{{ route("faq.index") }}">
                   <span class="nav-icon">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                       class="bi bi-inboxes" viewBox="0 0 16 16">
@@ -249,7 +249,7 @@
               <ul class="app-menu footer-menu list-unstyled">
                 <li class="nav-item">
                   <!--//Bootstrap Icons: https://icons.getbootstrap.com/ -->
-                  <a class="nav-link" href="{{route('settings.index')}}">
+                  <a class="nav-link" href="{{ route('settings.index') }}">
                     <span class="nav-icon">
                       <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-gear" fill="currentColor"
                         xmlns="http://www.w3.org/2000/svg">
@@ -266,7 +266,7 @@
 
                 <li class="nav-item">
                   <!--//Bootstrap Icons: https://icons.getbootstrap.com/ -->
-                  <a class="nav-link" href="{{route('profile.index')}}">
+                  <a class="nav-link" href="{{ route('profile.index') }}">
                     <span class="nav-icon">
                       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                         class="bi bi-person" viewBox="0 0 16 16">
@@ -298,14 +298,14 @@
 
 
   <!-- Javascript -->
-  <script src="{{asset('plugins/popper.min.js')}}"></script>
-  <script src="{{asset('plugins/bootstrap/js/bootstrap.min.js')}}"></script>
+  <script src="{{ asset('plugins/popper.min.js') }}"></script>
+  <script src="{{ asset('plugins/bootstrap/js/bootstrap.min.js') }}"></script>
 
   <!-- Charts JS -->
-  <script src="{{asset('plugins/chart.js/chart.min.js')}}"></script>
+  <script src="{{ asset('plugins/chart.js/chart.min.js') }}"></script>
 
   <!-- Page Specific JS -->
-  <script src="{{asset('js/app1.js')}}"></script>
+  <script src="{{ asset('js/app1.js') }}"></script>
 
   {{-- Sweet Alert --}}
   <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>

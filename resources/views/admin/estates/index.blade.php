@@ -10,7 +10,7 @@
         {{-- Show success message --}}
           @if (session('success'))
           <div class="alert alert-success" role="alert">
-            {{session('success')}}
+            {{ session('success') }}
           </div>
         @endif
 
@@ -36,7 +36,7 @@
                 </div><!--//col--> --}}
 
                 <div class="col-auto">
-                  <a class="btn app-btn-secondary" href="{{route('estates.create')}}">
+                  <a class="btn app-btn-secondary" href="{{ route('estates.create') }}">
                     <i class="fa fa-plus mx-1" aria-hidden="true"></i>
                     {{ __('admin.add_estate') }}
                   </a>
@@ -50,7 +50,7 @@
         <nav id="estates-table-tab" class="orders-table-tab app-nav-tabs nav shadow-sm flex-column flex-sm-row mb-4">
           <a class="flex-sm-fill text-sm-center nav-link active" id="estate-all-tab" data-bs-toggle="tab" href="#estate-all" role="tab" aria-controls="estate-all" aria-selected="true">All</a>
           @foreach ($types as $type)
-            <a class="flex-sm-fill text-sm-center nav-link"  id="estate-{{$type}}-tab" data-bs-toggle="tab" href="#estate-{{$type}}" role="tab" aria-controls="estate-{{$type}}" aria-selected="false">{{$type}}</a>
+            <a class="flex-sm-fill text-sm-center nav-link"  id="estate-{{ $type }}-tab" data-bs-toggle="tab" href="#estate-{{ $type }}" role="tab" aria-controls="estate-{{ $type }}" aria-selected="false">{{ $type }}</a>
           @endforeach
         </nav>
 
@@ -77,16 +77,16 @@
                         <tbody>
                           @foreach ($estates as $key => $estate)
                             <tr>
-                              <td class="cell">#{{$estate->id}}</td>
-                              <td class="cell"><span class="truncate">{{$estate->title}}</span></td>
-                              <td class="cell">{{$estate->getType()}}</td>
-                              <td class="cell">{{$estate->getCity()}}</td>
-                              <td class="cell town">{{$estate->getTown()}}</td>
-                              <td class="cell">{{$estate->min}} $</td>
-                              <td class="cell">{{$estate->max}} $</td>
+                              <td class="cell">#{{ $estate->id }}</td>
+                              <td class="cell"><span class="truncate">{{ $estate->title }}</span></td>
+                              <td class="cell">{{ $estate->getType() }}</td>
+                              <td class="cell">{{ $estate->getCity() }}</td>
+                              <td class="cell town">{{ $estate->getTown() }}</td>
+                              <td class="cell">{{ $estate->min }} $</td>
+                              <td class="cell">{{ $estate->max }} $</td>
                               <td class="cell images">
                                 @foreach (json_decode($estate->image) as $image)
-                                  <img src="{{asset('/storage/'.$image)}}" alt="">
+                                  <img src="{{ asset('/storage/'.$image) }}" alt="">
                                 @endforeach
                               </td>
                               <td class="cell">
@@ -94,7 +94,7 @@
                                   <form method="post" action="{{ route('estates.destroy',$estate->id) }}">
                                       @csrf
                                       @method('DELETE')
-                                      <button class="delete-btn btn-sm app-btn-secondary" data-toggle="tooltip" title="{{__('admin.delete')}}">
+                                      <button class="delete-btn btn-sm app-btn-secondary" data-toggle="tooltip" title="{{ __('admin.delete') }}">
                                         <i class="fa fa-trash" aria-hidden="true"></i>
                                       </button>
                                   </form>
@@ -102,20 +102,20 @@
                                 <span class="float-right mr-1">
                                   <form method="get" action="{{ route('estates.edit', $estate) }}">
                                       @csrf
-                                      <button class="btn-sm app-btn-secondary edit-btn" data-toggle="tooltip" title="{{__('admin.edit')}}">
+                                      <button class="btn-sm app-btn-secondary edit-btn" data-toggle="tooltip" title="{{ __('admin.edit') }}">
                                         <i class="fas fa-edit"></i>
                                       </button>
                                   </form>
                                 </span>
                                 <span class="float-right mr-1">
-                                  <a class="btn-sm app-btn-secondary show-btn" href="#show{{$key+1}}" data-toggle="modal" title="{{__('admin.preview')}}">
+                                  <a class="btn-sm app-btn-secondary show-btn" href="#show{{ $key+1 }}" data-toggle="modal" title="{{ __('admin.preview') }}">
                                     <i class="fa fa-eye" aria-hidden="true"></i>
                                   </a>
-                                  <div id="show{{$key+1}}" class="modal fade md-estate" tabindex="-1" role="dialog" aria-labelledby="my-modal-title" aria-hidden="true">
+                                  <div id="show{{ $key+1 }}" class="modal fade md-estate" tabindex="-1" role="dialog" aria-labelledby="my-modal-title" aria-hidden="true">
                                     <div class="modal-dialog" role="document">
                                       <div class="modal-content">
                                         <div class="modal-header">
-                                          <h5 class="modal-title" id="my-modal-title">{{__('admin.estate')}} #{{$key+1}}</h5>
+                                          <h5 class="modal-title" id="my-modal-title">{{ __('admin.estate') }} #{{ $key+1 }}</h5>
                                           <button class="close" data-dismiss="modal" aria-label="Close">
                                             <span aria-hidden="true">&times;</span>
                                           </button>
@@ -123,44 +123,44 @@
                                         <div class="modal-body">
                                           <div class="row">
                                             <div class="col-md-12">
-                                              <p><b>{{__('admin.title')}}:</b> <span>{{$estate->title}}</span></p>
+                                              <p><b>{{ __('admin.title') }}:</b> <span>{{ $estate->title }}</span></p>
                                             </div>
                                             <div class="col-md-6">
-                                              <p><b>{{__('admin.price')}}:</b> <span>{{$estate->min}} $ - {{$estate->max}} $</span></p>
+                                              <p><b>{{ __('admin.price') }}:</b> <span>{{ $estate->min }} $ - {{ $estate->max }} $</span></p>
                                             </div>
                                             <div class="col-md-6">
-                                              <p><b>{{__('admin.type')}}:</b> <span>{{$estate->getType()}}</span></p>
+                                              <p><b>{{ __('admin.type') }}:</b> <span>{{ $estate->getType() }}</span></p>
                                             </div>
                                             <div class="col-md-6">
-                                              <p><b>{{__('admin.city')}}:</b> <span>{{$estate->getCity()}}</span></p>
+                                              <p><b>{{ __('admin.city') }}:</b> <span>{{ $estate->getCity() }}</span></p>
                                             </div>
                                             <div class="col-md-6">
-                                              <p class=""><b>{{__('admin.town')}}:</b> <span>{{$estate->getTown()}}</span></p>
+                                              <p class=""><b>{{ __('admin.town') }}:</b> <span>{{ $estate->getTown() }}</span></p>
                                             </div>
                                             <div class="col-md-12">
-                                              <p><b>{{__('admin.image')}}:</b></p>
-                                              <div id="estate{{$key+1}}" class="carousel slide" data-ride="carousel">
+                                              <p><b>{{ __('admin.image') }}:</b></p>
+                                              <div id="estate{{ $key+1 }}" class="carousel slide" data-ride="carousel">
                                                 <div class="carousel-inner">
                                                   @isset($estate->image)
                                                       @foreach (json_decode($estate->image) as $i => $image)
-                                                        <div class="carousel-item @if($i==0) active @endif">
+                                                        <div class="carousel-item @if ($i==0) active @endif">
                                                           <img class="d-block w-100" src="{{ asset('/storage/'.$image) }}" alt="">
                                                         </div>
                                                       @endforeach
                                                   @endisset
                                                 </div>
-                                                <a class="carousel-control-prev" href="#estate{{$key+1}}" data-slide="prev" role="button">
+                                                <a class="carousel-control-prev" href="#estate{{ $key+1 }}" data-slide="prev" role="button">
                                                   <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                                                   <span class="sr-only">Previous</span>
                                                 </a>
-                                                <a class="carousel-control-next" href="#estate{{$key+1}}" data-slide="next" role="button">
+                                                <a class="carousel-control-next" href="#estate{{ $key+1 }}" data-slide="next" role="button">
                                                   <span class="carousel-control-next-icon" aria-hidden="true"></span>
                                                   <span class="sr-only">Next</span>
                                                 </a>
                                               </div>
                                             </div>
                                             <div class="col-md-12 mt-4">
-                                              <p><b>{{__('admin.content')}}:</b> <span>{!!$estate->content!!}</span></p>
+                                              <p><b>{{ __('admin.content') }}:</b> <span>{!! $estate->content !!}</span></p>
                                             </div>
                                           </div>
                                         </div>
@@ -179,7 +179,7 @@
               </div><!--//tab-pane-->
 
               @foreach ($types as $type)
-                <div class="tab-pane fade" id="estate-{{$type}}" role="tabpanel" aria-labelledby="estate-{{$type}}-tab">
+                <div class="tab-pane fade" id="estate-{{ $type }}" role="tabpanel" aria-labelledby="estate-{{ $type }}-tab">
                   <div class="app-card app-card-orders-table mb-5">
                     <div class="app-card-body">
                       <div class="table-responsive">
@@ -200,14 +200,14 @@
                             @foreach ($estates as $key => $estate)
                               @if ($types[$estate->type] == $type)
                                 <tr>
-                                  <td class="cell">#{{$estate->id}}</td>
-                                  <td class="cell"><span class="truncate">{{$estate->title}}</span></td>
-                                  <td class="cell">{{$types[$estate->type]}}</td>
-                                  <td class="cell">{{$estate->min}} $</td>
-                                  <td class="cell">{{$estate->max}} $</td>
+                                  <td class="cell">#{{ $estate->id }}</td>
+                                  <td class="cell"><span class="truncate">{{ $estate->title }}</span></td>
+                                  <td class="cell">{{ $types[$estate->type] }}</td>
+                                  <td class="cell">{{ $estate->min }} $</td>
+                                  <td class="cell">{{ $estate->max }} $</td>
                                   <td class="cell images">
                                     @foreach (json_decode($estate->image) as $image)
-                                      <img src="{{asset('/storage/'.$image)}}" alt="">
+                                      <img src="{{ asset('/storage/'.$image) }}" alt="">
                                     @endforeach
                                   </td>
                                   <td class="cell">
@@ -215,7 +215,7 @@
                                       <form method="post" action="{{ route('estates.destroy',$estate->id) }}">
                                           @csrf
                                           @method('DELETE')
-                                          <button class="delete-btn btn-sm app-btn-secondary" data-toggle="tooltip" title="{{__('admin.delete')}}">
+                                          <button class="delete-btn btn-sm app-btn-secondary" data-toggle="tooltip" title="{{ __('admin.delete') }}">
                                             <i class="fa fa-trash" aria-hidden="true"></i>
                                           </button>
                                       </form>
@@ -223,20 +223,20 @@
                                     <span class="float-right mr-1">
                                       <form method="get" action="{{ route('estates.edit', $estate) }}">
                                           @csrf
-                                          <button class="btn-sm app-btn-secondary edit-btn" data-toggle="tooltip" title="{{__('admin.edit')}}">
+                                          <button class="btn-sm app-btn-secondary edit-btn" data-toggle="tooltip" title="{{ __('admin.edit') }}">
                                             <i class="fas fa-edit"></i>
                                           </button>
                                       </form>
                                     </span>
                                     <span class="float-right mr-1">
-                                      <a class="btn-sm app-btn-secondary  show-btn" href="#show{{$key+1}}" data-toggle="modal" title="{{__('admin.preview')}}">
+                                      <a class="btn-sm app-btn-secondary  show-btn" href="#show{{ $key+1 }}" data-toggle="modal" title="{{ __('admin.preview') }}">
                                         <i class="fa fa-eye" aria-hidden="true"></i>
                                       </a>
-                                      <div id="show{{$key+1}}" class="modal fade md-estate" tabindex="-1" role="dialog" aria-labelledby="my-modal-title" aria-hidden="true">
+                                      <div id="show{{ $key+1 }}" class="modal fade md-estate" tabindex="-1" role="dialog" aria-labelledby="my-modal-title" aria-hidden="true">
                                         <div class="modal-dialog" role="document">
                                           <div class="modal-content">
                                             <div class="modal-header">
-                                              <h5 class="modal-title" id="my-modal-title">{{__('admin.estate')}} #{{$key+1}}</h5>
+                                              <h5 class="modal-title" id="my-modal-title">{{ __('admin.estate') }} #{{ $key+1 }}</h5>
                                               <button class="close" data-dismiss="modal" aria-label="Close">
                                                 <span aria-hidden="true">&times;</span>
                                               </button>
@@ -244,38 +244,38 @@
                                             <div class="modal-body">
                                               <div class="row">
                                                 <div class="col-md-12">
-                                                  <p><b>{{__('admin.title')}}:</b> <span>{{$estate->title}}</span></p>
+                                                  <p><b>{{ __('admin.title') }}:</b> <span>{{ $estate->title }}</span></p>
                                                 </div>
                                                 <div class="col-md-6">
-                                                  <p><b>{{__('admin.price')}}:</b> <span>{{$estate->min}} $ - {{$estate->max}} $</span></p>
+                                                  <p><b>{{ __('admin.price') }}:</b> <span>{{ $estate->min }} $ - {{ $estate->max }} $</span></p>
                                                 </div>
                                                 <div class="col-md-6">
-                                                  <p><b>{{__('admin.type')}}:</b> <span>{{$types[$estate->type]}}</span></p>
+                                                  <p><b>{{ __('admin.type') }}:</b> <span>{{ $types[$estate->type] }}</span></p>
                                                 </div>
                                                 <div class="col-md-12">
-                                                  <p><b>{{__('admin.image')}}:</b></p>
-                                                  <div id="estate{{$key+1}}" class="carousel slide" data-ride="carousel">
+                                                  <p><b>{{ __('admin.image') }}:</b></p>
+                                                  <div id="estate{{ $key+1 }}" class="carousel slide" data-ride="carousel">
                                                     <div class="carousel-inner">
                                                       @isset($estate->image)
                                                           @foreach (json_decode($estate->image) as $i => $image)
-                                                            <div class="carousel-item @if($i==0) active @endif">
+                                                            <div class="carousel-item @if ($i==0) active @endif">
                                                               <img class="d-block w-100" src="{{ asset('/storage/'.$image) }}" alt="">
                                                             </div>
                                                           @endforeach
                                                       @endisset
                                                     </div>
-                                                    <a class="carousel-control-prev" href="#estate{{$key+1}}" data-slide="prev" role="button">
+                                                    <a class="carousel-control-prev" href="#estate{{ $key+1 }}" data-slide="prev" role="button">
                                                       <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                                                       <span class="sr-only">Previous</span>
                                                     </a>
-                                                    <a class="carousel-control-next" href="#estate{{$key+1}}" data-slide="next" role="button">
+                                                    <a class="carousel-control-next" href="#estate{{ $key+1 }}" data-slide="next" role="button">
                                                       <span class="carousel-control-next-icon" aria-hidden="true"></span>
                                                       <span class="sr-only">Next</span>
                                                     </a>
                                                   </div>
                                                 </div>
                                                 <div class="col-md-12 mt-4">
-                                                  <p><b>{{__('admin.content')}}:</b> <span>{!!$estate->content!!}</span></p>
+                                                  <p><b>{{ __('admin.content') }}:</b> <span>{!! $estate->content !!}</span></p>
                                                 </div>
                                               </div>
                                             </div>

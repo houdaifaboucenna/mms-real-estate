@@ -13,7 +13,7 @@
           {{-- Show success message --}}
           @if (session('success'))
             <div class="alert alert-success" role="alert">
-              {{session('success')}}
+              {{ session('success') }}
             </div>
           @endif
 
@@ -29,7 +29,7 @@
           @endif
 
           <h2 class="text-center mb-4">
-            {{__('admin.edit_profile')}}
+            {{ __('admin.edit_profile') }}
           </h2>
 
           <form method="post" action="{{ route('profile.update',$profile) }}" enctype="multipart/form-data">
@@ -40,36 +40,36 @@
 
               <div class="col-md-6">
                 <div class="form-group">
-                  <label for="name">{{ __('admin.name')}}</label>
+                  <label for="name">{{ __('admin.name') }}</label>
                   <span class="asterix">*</span>
-                  <input id="name" class="form-control" type="text" name="name" value="{{$user->name}}" disabled>
+                  <input id="name" class="form-control" type="text" name="name" value="{{ $user->name }}" disabled>
                 </div>
               </div>
 
               <div class="col-md-6">
                 <div class="form-group">
-                  <label for="email">{{ __('admin.email')}}</label>
+                  <label for="email">{{ __('admin.email') }}</label>
                   <span class="asterix">*</span>
-                  <input id="email" class="form-control" type="text" name="email" value="{{$user->email}}" disabled>
+                  <input id="email" class="form-control" type="text" name="email" value="{{ $user->email }}" disabled>
                 </div>
               </div>
 
             </div>
 
             <div class="form-group">
-              <label for="username">{{ __('admin.username')}}</label>
+              <label for="username">{{ __('admin.username') }}</label>
               <span class="asterix">*</span>
-              <input id="username" class="form-control" type="text" name="username" value="{{ $profile->username  }}" required>
+              <input id="username" class="form-control" type="text" name="username" value="{{ $profile->username }}" required>
             </div>
 
             <div class="form-group">
-              <label for="bio">{{ __('admin.bio')}}</label>
-              <textarea id="bio" class="form-control" name="bio" rows="5">{{  $profile->bio }}</textarea>
+              <label for="bio">{{ __('admin.bio') }}</label>
+              <textarea id="bio" class="form-control" name="bio" rows="5">{{ $profile->bio }}</textarea>
             </div>
 
             <div class="form-group">
-              <label for="image">{{ __('admin.image')}}</label>
-              <img class="profile-img" src="{{  asset('/storage/'.$profile->image) }}" alt="">
+              <label for="image">{{ __('admin.image') }}</label>
+              <img class="profile-img" src="{{ asset('/storage/'.$profile->image) }}" alt="">
               <input id="image" class="form-control-file" type="file" name="image">
             </div>
 

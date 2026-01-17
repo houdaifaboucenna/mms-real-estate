@@ -10,7 +10,7 @@
         <div class="app-auth-body mx-auto">
 
           <div class="app-auth-branding mb-4">
-            <a class="app-logo" href="index.html"><img class="logo-icon me-2" src="{{asset('images/app-logo.svg') }}" alt="logo"></a>
+            <a class="app-logo" href="index.html"><img class="logo-icon me-2" src="{{ asset('images/app-logo.svg') }}" alt="logo"></a>
           </div>
 
           <h2 class="auth-heading text-center mb-4">{{ __('Register') }}</h2>
@@ -61,7 +61,7 @@
 
             </form>
 
-            <div class="auth-option text-center pt-5">Already have an account? <a class="text-link" href="{{route('login')}}" >{{ __('Login') }}</a></div>
+            <div class="auth-option text-center pt-5">Already have an account? <a class="text-link" href="{{ route('login') }}" >{{ __('Login') }}</a></div>
 
           </div>
 

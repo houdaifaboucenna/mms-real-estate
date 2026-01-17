@@ -10,7 +10,7 @@
       {{-- Show success message --}}
       @if (session('success'))
         <div class="alert alert-success" role="alert">
-          {{session('success')}}
+          {{ session('success') }}
         </div>
       @endif
 
@@ -41,30 +41,30 @@
                   <tbody>
                     @foreach ($contacts as $key => $contact)
                       <tr>
-                        <td class="cell">{{$key+1}}</td>
-                        <td class="cell">{{$contact->name}}</td>
-                        <td class="cell">{{$contact->email}}</td>
-                        <td class="cell">{{$contact->phone}}</td>
-                        <td class="cell">{{$contact->created_at->format('d/m/Y')}}</td>
+                        <td class="cell">{{ $key+1 }}</td>
+                        <td class="cell">{{ $contact->name }}</td>
+                        <td class="cell">{{ $contact->email }}</td>
+                        <td class="cell">{{ $contact->phone }}</td>
+                        <td class="cell">{{ $contact->created_at->format('d/m/Y') }}</td>
                         <td class="cell">
                           <span class="float-right">
                             <form method="post" action="{{ route('contacts.destroy',$contact->id) }}">
                                 @csrf
                                 @method('DELETE')
-                                <button class="delete-btn btn-sm app-btn-secondary" data-toggle="tooltip" title="{{__('admin.delete')}}">
+                                <button class="delete-btn btn-sm app-btn-secondary" data-toggle="tooltip" title="{{ __('admin.delete') }}">
                                   <i class="fa fa-trash" aria-hidden="true"></i>
                                 </button>
                             </form>
                           </span>
                           <span class="float-right mr-1">
-                            <a class="btn-sm app-btn-secondary show-btn" href="#show{{$key+1}}" data-toggle="modal" title="{{__('admin.preview')}}">
+                            <a class="btn-sm app-btn-secondary show-btn" href="#show{{ $key+1 }}" data-toggle="modal" title="{{ __('admin.preview') }}">
                               <i class="fa fa-eye" aria-hidden="true"></i>
                             </a>
-                            <div id="show{{$key+1}}" class="modal fade md-estate md-contact" tabindex="-1" role="dialog aria-hidden="true">
+                            <div id="show{{ $key+1 }}" class="modal fade md-estate md-contact" tabindex="-1" role="dialog aria-hidden="true">
                               <div class="modal-dialog" role="document">
                                 <div class="modal-content">
                                   <div class="modal-header">
-                                    <h5 class="modal-title" id="my-modal-title">{{__('admin.contact')}} #{{$key+1}}</h5>
+                                    <h5 class="modal-title" id="my-modal-title">{{ __('admin.contact') }} #{{ $key+1 }}</h5>
                                     <button class="close" data-dismiss="modal" aria-label="Close">
                                       <span aria-hidden="true">&times;</span>
                                     </button>
@@ -72,19 +72,19 @@
                                   <div class="modal-body">
                                     <div class="row">
                                       <div class="col-md-6">
-                                        <p><b>{{__('admin.name')}}:</b> <span>{{$contact->name}}</span></p>
+                                        <p><b>{{ __('admin.name') }}:</b> <span>{{ $contact->name }}</span></p>
                                       </div>
                                       <div class="col-md-6">
-                                        <p><b>{{__('admin.email')}}:</b> <span>{{$contact->email}}</span></p>
+                                        <p><b>{{ __('admin.email') }}:</b> <span>{{ $contact->email }}</span></p>
                                       </div>
                                       <div class="col-md-6">
-                                        <p><b>{{__('admin.phone')}}:</b> <span>{{$contact->phone}}</span></p>
+                                        <p><b>{{ __('admin.phone') }}:</b> <span>{{ $contact->phone }}</span></p>
                                       </div>
                                       <div class="col-md-6">
-                                        <p><b>{{__('admin.date')}}:</b> <span>{{$contact->created_at->format('d/m/Y')}}</span></p>
+                                        <p><b>{{ __('admin.date') }}:</b> <span>{{ $contact->created_at->format('d/m/Y') }}</span></p>
                                       </div>
                                       <div class="col-md-12 mt-4">
-                                        <p><b>{{__('admin.message')}}:</b> <div>{{$contact->message}}</div></p>
+                                        <p><b>{{ __('admin.message') }}:</b> <div>{{ $contact->message }}</div></p>
                                       </div>
                                     </div>
                                   </div>

@@ -14,10 +14,10 @@ class AddMetaToPostsTable extends Migration
     public function up()
     {
         Schema::table('posts', function (Blueprint $table) {
-          $table->string("keywords")->after("content_ar")->nullable();
-          $table->string("keywords_ar")->after("keywords")->nullable();
-          $table->string("short")->after("keywords_ar")->nullable();
-          $table->string("short_ar")->after("short")->nullable();
+            $table->string('keywords')->after('content_ar')->nullable();
+            $table->string('keywords_ar')->after('keywords')->nullable();
+            $table->string('short')->after('keywords_ar')->nullable();
+            $table->string('short_ar')->after('short')->nullable();
         });
     }
 
@@ -29,10 +29,10 @@ class AddMetaToPostsTable extends Migration
     public function down()
     {
         Schema::table('posts', function (Blueprint $table) {
-          $table->dropColumn('keywords');
-          $table->dropColumn('keywords_ar');
-          $table->dropColumn("short");
-          $table->dropColumn("short_ar");
+            $table->dropColumn('keywords');
+            $table->dropColumn('keywords_ar');
+            $table->dropColumn('short');
+            $table->dropColumn('short_ar');
         });
     }
 }

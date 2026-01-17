@@ -14,7 +14,7 @@ class AddSlugToPostsTable extends Migration
     public function up()
     {
         Schema::table('posts', function (Blueprint $table) {
-          $table->string("slug")->after("short_ar")->nullable()->unique();
+            $table->string('slug')->after('short_ar')->nullable()->unique();
         });
     }
 
@@ -26,7 +26,7 @@ class AddSlugToPostsTable extends Migration
     public function down()
     {
         Schema::table('posts', function (Blueprint $table) {
-          $table->dropColumn('slug');
+            $table->dropColumn('slug');
         });
     }
 }

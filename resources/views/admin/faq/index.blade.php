@@ -10,7 +10,7 @@
       {{-- Show success message --}}
       @if (session('success'))
         <div class="alert alert-success" role="alert">
-          {{session('success')}}
+          {{ session('success') }}
         </div>
       @endif
 
@@ -25,7 +25,7 @@
             <div class="row g-2 justify-content-start justify-content-md-end align-items-center">
 
               <div class="col-auto">
-                <a class="btn app-btn-secondary" href="{{route('faq.create')}}">
+                <a class="btn app-btn-secondary" href="{{ route('faq.create') }}">
                   <i class="fa fa-plus mx-1" aria-hidden="true"></i>
                   {{ __('admin.add_question') }}
                 </a>
@@ -55,14 +55,14 @@
                       <tbody>
                         @foreach ($faqs as $key => $faq)
                           <tr>
-                            <td class="cell">{{$key+1}}</td>
-                            <td class="cell">{{$faq->question}}</td>
-                            <td class="cell">{!!$faq->answer!!}</td>
+                            <td class="cell">{{ $key+1 }}</td>
+                            <td class="cell">{{ $faq->question }}</td>
+                            <td class="cell">{!! $faq->answer !!}</td>
                             <td class="cell">
                               @if ($faq->show_home)
-                                {{__('admin.enabled')}}
+                                {{ __('admin.enabled') }}
                               @else
-                                {{__('admin.disabled')}}
+                                {{ __('admin.disabled') }}
                               @endif
                             </td>
                             <td class="cell">
@@ -70,7 +70,7 @@
                                   <form method="post" action="{{ route('faq.destroy',$faq->id) }}">
                                       @csrf
                                       @method('DELETE')
-                                      <button class="delete-btn btn-sm app-btn-secondary" data-toggle="tooltip" title="{{__('admin.delete')}}">
+                                      <button class="delete-btn btn-sm app-btn-secondary" data-toggle="tooltip" title="{{ __('admin.delete') }}">
                                         <i class="fa fa-trash" aria-hidden="true"></i>
                                       </button>
                                   </form>
@@ -78,7 +78,7 @@
                                 <span class="float-right mr-1">
                                   <form method="get" action="{{ route('faq.edit', $faq) }}">
                                       @csrf
-                                      <button class="btn-sm app-btn-secondary edit-btn" data-toggle="tooltip" title="{{__('admin.edit')}}">
+                                      <button class="btn-sm app-btn-secondary edit-btn" data-toggle="tooltip" title="{{ __('admin.edit') }}">
                                         <i class="fas fa-edit"></i>
                                       </button>
                                   </form>

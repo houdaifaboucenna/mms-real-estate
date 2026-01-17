@@ -32,14 +32,14 @@
 
           {{-- Question --}}
           <div class="form-group">
-            <label for="title">{{ __('admin.question')}}</label>
+            <label for="title">{{ __('admin.question') }}</label>
             <span class="asterix">*</span>
             <ul class="nav nav-tabs" id="questionTab" role="tablist">
               <li class="nav-item">
-                <a class="nav-link active" id="enQst-tab" data-toggle="tab" href="#enQst" role="tab" aria-controls="enQst" aria-selected="true">{{__('admin.en')}}</a>
+                <a class="nav-link active" id="enQst-tab" data-toggle="tab" href="#enQst" role="tab" aria-controls="enQst" aria-selected="true">{{ __('admin.en') }}</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" id="arQst-tab" data-toggle="tab" href="#arQst" role="tab" aria-controls="arQst" aria-selected="false">{{__('admin.ar')}}</a>
+                <a class="nav-link" id="arQst-tab" data-toggle="tab" href="#arQst" role="tab" aria-controls="arQst" aria-selected="false">{{ __('admin.ar') }}</a>
               </li>
             </ul>
             <div class="tab-content">
@@ -55,31 +55,31 @@
 
           {{-- Content --}}
           <div class="form-group">
-            <label for="content">{{ __('admin.answer')}}</label>
+            <label for="content">{{ __('admin.answer') }}</label>
             <span class="asterix">*</span>
             <ul class="nav nav-tabs" id="answerTab" role="tablist">
               <li class="nav-item">
-                <a class="nav-link active" id="enAns-tab" data-toggle="tab" href="#enAns" role="tab" aria-controls="enAns" aria-selected="true">{{__('admin.en')}}</a>
+                <a class="nav-link active" id="enAns-tab" data-toggle="tab" href="#enAns" role="tab" aria-controls="enAns" aria-selected="true">{{ __('admin.en') }}</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" id="arAns-tab" data-toggle="tab" href="#arAns" role="tab" aria-controls="arAns" aria-selected="false">{{__('admin.ar')}}</a>
+                <a class="nav-link" id="arAns-tab" data-toggle="tab" href="#arAns" role="tab" aria-controls="arAns" aria-selected="false">{{ __('admin.ar') }}</a>
               </li>
             </ul>
             <div class="tab-content">
               <div class="tab-pane fade show active" id="enAns" role="tabpanel" aria-labelledby="enAns-tab">
-                <textarea id="content"  name="answer" rows="5">{{ isset($faq) ? $faq->answer : ""}}</textarea>
+                <textarea id="content"  name="answer" rows="5">{{ isset($faq) ? $faq->answer : "" }}</textarea>
               </div>
               <div class="tab-pane fade" id="arAns" role="tabpanel" aria-labelledby="arAns-tab">
-                <textarea id="content_ar"  name="answer_ar" rows="5">{{ isset($faq) ? $faq->answer_ar : ""}}</textarea>
+                <textarea id="content_ar"  name="answer_ar" rows="5">{{ isset($faq) ? $faq->answer_ar : "" }}</textarea>
               </div>
             </div>
           </div>
 
           <div class="form-group">
-            <label for="show_home">{{__('admin.show_home')}}</label>
+            <label for="show_home">{{ __('admin.show_home') }}</label>
             <select class="custom-select" name="show_home" id="show_home">
-              <option value="0" selected>{{__('admin.disabled')}}</option>
-              <option value="1">{{__('admin.enabled')}}</option>
+              <option value="0" selected>{{ __('admin.disabled') }}</option>
+              <option value="1">{{ __('admin.enabled') }}</option>
             </select>
           </div>
 

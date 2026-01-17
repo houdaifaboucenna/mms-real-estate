@@ -8,15 +8,15 @@
   <div class="app-content pt-3 p-md-3 p-lg-4">
     <div class="container-xl">
 
-      <h1 class="app-page-title">{{__('admin.overview')}}</h1>
+      <h1 class="app-page-title">{{ __('admin.overview') }}</h1>
 
       {{-- Stats --}}
       <div class="row g-4 mb-4">
         <div class="col-6 col-lg-3">
           <div class="app-card app-card-stat shadow-sm h-100">
             <div class="app-card-body p-3 p-lg-4">
-              <h4 class="stats-type mb-1">{{__('home.articles')}}</h4>
-              <div class="stats-figure">{{$posts->count()}}</div>
+              <h4 class="stats-type mb-1">{{ __('home.articles') }}</h4>
+              <div class="stats-figure">{{ $posts->count() }}</div>
               <div class="stats-meta">
                 published
               </div>
@@ -28,8 +28,8 @@
         <div class="col-6 col-lg-3">
           <div class="app-card app-card-stat shadow-sm h-100">
             <div class="app-card-body p-3 p-lg-4">
-              <h4 class="stats-type mb-1">{{__('home.comments')}}</h4>
-              <div class="stats-figure">{{$comments->count()}}</div>
+              <h4 class="stats-type mb-1">{{ __('home.comments') }}</h4>
+              <div class="stats-figure">{{ $comments->count() }}</div>
               <div class="stats-meta">
                 received
               </div>
@@ -41,8 +41,8 @@
         <div class="col-6 col-lg-3">
           <div class="app-card app-card-stat shadow-sm h-100">
             <div class="app-card-body p-3 p-lg-4">
-              <h4 class="stats-type mb-1">{{__('home.estates')}}</h4>
-              <div class="stats-figure">{{$estates->count()}}</div>
+              <h4 class="stats-type mb-1">{{ __('home.estates') }}</h4>
+              <div class="stats-figure">{{ $estates->count() }}</div>
               <div class="stats-meta">
                 open</div>
             </div><!--//app-card-body-->
@@ -53,8 +53,8 @@
         <div class="col-6 col-lg-3">
           <div class="app-card app-card-stat shadow-sm h-100">
             <div class="app-card-body p-3 p-lg-4">
-              <h4 class="stats-type mb-1">{{__('home.messages')}}</h4>
-              <div class="stats-figure">{{$contacts->count()}}</div>
+              <h4 class="stats-type mb-1">{{ __('home.messages') }}</h4>
+              <div class="stats-figure">{{ $contacts->count() }}</div>
               <div class="stats-meta">received</div>
             </div><!--//app-card-body-->
             <a class="app-card-link-mask" href="#"></a>
@@ -70,7 +70,7 @@
               <div class="app-card-header p-3">
                 <div class="row justify-content-between align-items-center">
                   <div class="col-auto">
-                        <h4 class="app-card-title">{{__('admin.estatescities')}}</h4>
+                        <h4 class="app-card-title">{{ __('admin.estatescities') }}</h4>
                   </div><!--//col-->
                 </div><!--//row-->
               </div><!--//app-card-header-->
@@ -87,7 +87,7 @@
                 <div class="app-card-header p-3">
                   <div class="row justify-content-between align-items-center">
                     <div class="col-auto">
-                          <h4 class="app-card-title">{{__('admin.estatestypes')}}</h4>
+                          <h4 class="app-card-title">{{ __('admin.estatestypes') }}</h4>
                     </div><!--//col-->
                   </div><!--//row-->
                 </div><!--//app-card-header-->
@@ -137,17 +137,17 @@
         data: {
           datasets: [{
             data: [
-              {{$estates->where("city",1)->count()}},
-              {{$estates->where("city",2)->count()}},
-              {{$estates->where("city",3)->count()}},
-              {{$estates->where("city",4)->count()}},
-              {{$estates->where("city",5)->count()}},
-              {{$estates->where("city",6)->count()}},
-              {{$estates->where("city",7)->count()}},
-              {{$estates->where("city",8)->count()}},
-              {{$estates->where("city",9)->count()}},
-              {{$estates->where("city",10)->count()}},
-              {{$estates->where("city",11)->count()}},
+              {{ $estates->where("city",1)->count() }},
+              {{ $estates->where("city",2)->count() }},
+              {{ $estates->where("city",3)->count() }},
+              {{ $estates->where("city",4)->count() }},
+              {{ $estates->where("city",5)->count() }},
+              {{ $estates->where("city",6)->count() }},
+              {{ $estates->where("city",7)->count() }},
+              {{ $estates->where("city",8)->count() }},
+              {{ $estates->where("city",9)->count() }},
+              {{ $estates->where("city",10)->count() }},
+              {{ $estates->where("city",11)->count() }},
             ],
             backgroundColor: [
               window.chartColors.green,
@@ -164,8 +164,8 @@
             label: 'Dataset 1'
           }],
           labels: [
-            @foreach(App\Models\Estate::cities() as $city)
-              '{{$city}}',
+            @foreach (App\Models\Estate::cities() as $city)
+              '{{ $city }}',
             @endforeach
           ]
         },
@@ -229,12 +229,12 @@
             maxBarThickness: 16,
 
             data: [
-              {{$estates->where("type",1)->count()}},
-              {{$estates->where("type",2)->count()}},
-              {{$estates->where("type",3)->count()}},
-              {{$estates->where("type",4)->count()}},
-              {{$estates->where("type",5)->count()}},
-              {{$estates->where("type",6)->count()}},
+              {{ $estates->where("type",1)->count() }},
+              {{ $estates->where("type",2)->count() }},
+              {{ $estates->where("type",3)->count() }},
+              {{ $estates->where("type",4)->count() }},
+              {{ $estates->where("type",5)->count() }},
+              {{ $estates->where("type",6)->count() }},
             ]
           }]
         },

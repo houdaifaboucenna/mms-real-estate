@@ -10,7 +10,7 @@
       {{-- Show success message --}}
       @if (session('success'))
         <div class="alert alert-success" role="alert">
-          {{session('success')}}
+          {{ session('success') }}
         </div>
       @endif
 
@@ -25,7 +25,7 @@
             <div class="row g-2 justify-content-start justify-content-md-end align-items-center">
 
               <div class="col-auto">
-                <a class="btn app-btn-secondary" href="{{route('posts.create')}}">
+                <a class="btn app-btn-secondary" href="{{ route('posts.create') }}">
                   <i class="fa fa-plus mx-1" aria-hidden="true"></i>
                   {{ __('admin.add_article') }}
                 </a>
@@ -56,17 +56,17 @@
                       <tbody>
                         @foreach ($posts as $key => $post)
                           <tr>
-                            <td class="cell">{{$key+1}}</td>
-                            <td class="cell">{{$post->title}}</td>
-                            <td class="cell image"><img src="{{asset('/storage/'.$post->image)}}" alt="" width="150"></td>
-                            <td class="cell">{{$post->user->name}}</td>
-                            <td class="cell">{{$post->created_at->format('d/m/Y')}}</td>
+                            <td class="cell">{{ $key+1 }}</td>
+                            <td class="cell">{{ $post->title }}</td>
+                            <td class="cell image"><img src="{{ asset('/storage/'.$post->image) }}" alt="" width="150"></td>
+                            <td class="cell">{{ $post->user->name }}</td>
+                            <td class="cell">{{ $post->created_at->format('d/m/Y') }}</td>
                             <td class="cell">
                                 <span class="float-right">
                                   <form method="post" action="{{ route('posts.destroy',$post->id) }}">
                                       @csrf
                                       @method('DELETE')
-                                      <button class="delete-btn btn-sm app-btn-secondary" data-toggle="tooltip" title="{{__('admin.delete')}}">
+                                      <button class="delete-btn btn-sm app-btn-secondary" data-toggle="tooltip" title="{{ __('admin.delete') }}">
                                         <i class="fa fa-trash" aria-hidden="true"></i>
                                       </button>
                                   </form>
@@ -74,20 +74,20 @@
                                 <span class="float-right mr-1">
                                   <form method="get" action="{{ route('posts.edit', $post) }}">
                                       @csrf
-                                      <button class="btn-sm app-btn-secondary edit-btn" data-toggle="tooltip" title="{{__('admin.edit')}}">
+                                      <button class="btn-sm app-btn-secondary edit-btn" data-toggle="tooltip" title="{{ __('admin.edit') }}">
                                         <i class="fas fa-edit"></i>
                                       </button>
                                   </form>
                                 </span>
                                 <span class="float-right mr-1">
-                                  <a class="btn-sm app-btn-secondary show-btn" href="#show{{$key+1}}" data-toggle="modal" title="{{__('admin.preview')}}">
+                                  <a class="btn-sm app-btn-secondary show-btn" href="#show{{ $key+1 }}" data-toggle="modal" title="{{ __('admin.preview') }}">
                                     <i class="fa fa-eye" aria-hidden="true"></i>
                                   </a>
-                                  <div id="show{{$key+1}}" class="modal fade md-estate md-post" tabindex="-1" role="dialog" aria-labelledby="my-modal-title" aria-hidden="true">
+                                  <div id="show{{ $key+1 }}" class="modal fade md-estate md-post" tabindex="-1" role="dialog" aria-labelledby="my-modal-title" aria-hidden="true">
                                     <div class="modal-dialog" role="document">
                                       <div class="modal-content">
                                         <div class="modal-header">
-                                          <h5 class="modal-title" id="my-modal-title">{{__('admin.article')}} #{{$key+1}}</h5>
+                                          <h5 class="modal-title" id="my-modal-title">{{ __('admin.article') }} #{{ $key+1 }}</h5>
                                           <button class="close" data-dismiss="modal" aria-label="Close">
                                             <span aria-hidden="true">&times;</span>
                                           </button>
@@ -95,17 +95,17 @@
                                         <div class="modal-body">
                                           <div class="row">
                                             <div class="col-md-12">
-                                              <p><b>{{__('admin.title')}}:</b> <span>{{$post->title}}</span></p>
+                                              <p><b>{{ __('admin.title') }}:</b> <span>{{ $post->title }}</span></p>
                                             </div>
                                             <div class="col-md-6">
-                                              <p><b>{{__('admin.writer')}}:</b> <span>{{$post->user->name}}</span></p>
+                                              <p><b>{{ __('admin.writer') }}:</b> <span>{{ $post->user->name }}</span></p>
                                             </div>
                                             <div class="col-md-6">
-                                              <p><b>{{__('admin.date')}}:</b> <span>{{$post->created_at->format('d/m/Y')}}</span></p>
+                                              <p><b>{{ __('admin.date') }}:</b> <span>{{ $post->created_at->format('d/m/Y') }}</span></p>
                                             </div>
                                             <div class="col-md-12">
-                                              <p><b>{{__('admin.image')}}:</b></p>
-                                              <div id="post{{$key+1}}" class="carousel slide" data-ride="carousel">
+                                              <p><b>{{ __('admin.image') }}:</b></p>
+                                              <div id="post{{ $key+1 }}" class="carousel slide" data-ride="carousel">
                                                 <div class="carousel-inner">
                                                     <div class="carousel-item active">
                                                       <img class="d-block w-100" src="{{ asset('/storage/'.$post->image) }}" alt="">
@@ -114,7 +114,7 @@
                                               </div>
                                             </div>
                                             <div class="col-md-12 mt-4">
-                                              <p><b>{{__('admin.content')}}:</b> <span>{!!$post->content!!}</span></p>
+                                              <p><b>{{ __('admin.content') }}:</b> <span>{!! $post->content !!}</span></p>
                                             </div>
                                           </div>
                                         </div>

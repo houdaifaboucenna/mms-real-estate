@@ -2,7 +2,7 @@
 
 return [
 
-    # Lang
+    // Lang
     'en' => 'English',
     'ar' => 'Arabic',
 
@@ -49,10 +49,10 @@ return [
     'enabled' => 'Enabled',
     'disabled' => 'Disabled',
 
-    # others
+    // others
     'view_website' => 'View Website',
 
-    # settings
+    // settings
     'homeslider' => 'Homepage Slider',
     'sociallinks' => 'Social Links',
     'contact_info' => 'Contact Information',
@@ -64,11 +64,11 @@ return [
     'youtube' => 'Youtube',
     'whatsapp' => 'Whatsapp',
 
-    # overview
+    // overview
     'estatestypes' => 'Estates Types',
     'estatescities' => 'Estates Cities',
 
-    # messages
+    // messages
     'comment_received' => 'We received your comment, published successfully',
     'comment_deleted' => 'Comment deleted successfully',
     'contact_received' => 'Thank you for contacting us, we will be in touch with you soon.',
@@ -81,13 +81,12 @@ return [
     'profile_updated' => 'Profile updated successfully',
     'settings_updated' => 'Settings updated successfully',
 
-    # create pages
+    // create pages
     'edit_article' => 'Edit Article',
     'edit_estate' => 'Edit Estate',
     'edit_profile' => 'Edit Profile',
 
-
-    # pagetitles
+    // pagetitles
     'articles' => 'Articles',
     'article' => 'Article',
     'comments' => 'Comments',
@@ -100,7 +99,7 @@ return [
     'settings' => 'Settings',
     'overview' => 'Overview',
 
-    # Estates types
+    // Estates types
     'appartement' => 'Appartement',
     'residence' => 'Residence',
     'commercial' => 'Commercial',
@@ -108,8 +107,7 @@ return [
     'hotel' => 'Hotel',
     'offices' => 'Offices',
 
-
-    # Estate Cities
+    // Estate Cities
     'turkey' => 'Turkey',
     'antalya' => 'Antalya',
     'bursa' => 'Bursa',
@@ -122,7 +120,7 @@ return [
     'mugla' => 'Mugla',
     'ordu' => 'Ordu',
 
-    # Estate towns
+    // Estate towns
     'aksu' => 'aksu',
     'alanya' => 'alanya',
     'dosemealti' => 'dosemealti',
@@ -130,77 +128,77 @@ return [
     'konyaalti' => 'konyaalti',
     'muratpasa' => 'muratpasa',
     'serik' => 'serik',
-    'inegol'=> 'inegol',
-    'mudanya'=> 'mudanya',
-    'nilufer'=> 'nilufer',
-    'osmangazi'=> 'osmangazi',
-    'europeanside'=> 'europeanside',
-    'asianside'=> 'asianside',
-    'adalar'=> 'adalar',
-    'arnavutkoy'=> 'arnavutkoy',
-    'atasehir'=> 'atasehir',
-    'avcilar'=> 'avcilar',
-    'bagcilar'=> 'bagcilar',
-    'bahcelievler'=> 'bahcelievler',
-    'bakirkoy'=> 'bakirkoy',
-    'basaksehir'=> 'basaksehir',
-    'beykoz'=> 'beykoz',
-    'beylikduzu'=> 'beylikduzu',
-    'beyoglu'=> 'beyoglu',
-    'buyukcekmece'=> 'buyukcekmece',
-    'cekmekoy'=> 'cekmekoy',
-    'esenyurt'=> 'esenyurt',
-    'eyup'=> 'eyup',
-    'fatih'=> 'fatih',
-    'gaziosmanpasa'=> 'gaziosmanpasa',
-    'gungoren'=> 'gungoren',
-    'kadikoy'=> 'kadikoy',
-    'kagithane'=> 'kagithane',
-    'kartal'=> 'kartal',
-    'kucukcekmece'=> 'kucukcekmece',
-    'maltepe'=> 'maltepe',
-    'pendik'=> 'pendik',
-    'sancaktepe'=> 'sancaktepe',
-    'sariyer'=> 'sariyer',
-    'silivri'=> 'silivri',
-    'sultangazi'=> 'sultangazi',
-    'sile'=> 'sile',
-    'sisle'=> 'sisle',
-    'umraniye'=> 'umraniye',
-    'uskudar'=> 'uskudar',
-    'zeytinburnu'=> 'zeytinburnu',
-    'basiskele'=> 'basiskele',
-    'cayirova'=> 'cayirova',
-    'izmit'=> 'izmit',
-    'kandira'=> 'kandira',
-    'karamursel'=> 'karamursel',
-    'kartepe'=> 'kartepe',
-    'adapazari'=> 'adapazari',
-    'akyazi'=> 'akyazi',
-    'karasu'=> 'karasu',
-    'sapanca'=> 'sapanca',
-    'serdivan'=> 'serdivan',
-    'akcaabat'=> 'akcaabat',
-    'arakli'=> 'arakli',
-    'arsin'=> 'arsin',
-    'macka'=> 'macka',
-    'ortahisar'=> 'ortahisar',
-    'yomra'=> 'yomra',
-    'altinova'=> 'altinova',
-    'armutlu'=> 'armutlu',
-    'cinarcik'=> 'cinarcik',
-    'termal'=> 'termal',
-    'cankaya'=> 'cankaya',
-    'yenimahalle'=> 'Yeni Mahalle',
-    'bodrum'=> 'bodrum',
-    'gulyali'=> 'gulyali',
+    'inegol' => 'inegol',
+    'mudanya' => 'mudanya',
+    'nilufer' => 'nilufer',
+    'osmangazi' => 'osmangazi',
+    'europeanside' => 'europeanside',
+    'asianside' => 'asianside',
+    'adalar' => 'adalar',
+    'arnavutkoy' => 'arnavutkoy',
+    'atasehir' => 'atasehir',
+    'avcilar' => 'avcilar',
+    'bagcilar' => 'bagcilar',
+    'bahcelievler' => 'bahcelievler',
+    'bakirkoy' => 'bakirkoy',
+    'basaksehir' => 'basaksehir',
+    'beykoz' => 'beykoz',
+    'beylikduzu' => 'beylikduzu',
+    'beyoglu' => 'beyoglu',
+    'buyukcekmece' => 'buyukcekmece',
+    'cekmekoy' => 'cekmekoy',
+    'esenyurt' => 'esenyurt',
+    'eyup' => 'eyup',
+    'fatih' => 'fatih',
+    'gaziosmanpasa' => 'gaziosmanpasa',
+    'gungoren' => 'gungoren',
+    'kadikoy' => 'kadikoy',
+    'kagithane' => 'kagithane',
+    'kartal' => 'kartal',
+    'kucukcekmece' => 'kucukcekmece',
+    'maltepe' => 'maltepe',
+    'pendik' => 'pendik',
+    'sancaktepe' => 'sancaktepe',
+    'sariyer' => 'sariyer',
+    'silivri' => 'silivri',
+    'sultangazi' => 'sultangazi',
+    'sile' => 'sile',
+    'sisle' => 'sisle',
+    'umraniye' => 'umraniye',
+    'uskudar' => 'uskudar',
+    'zeytinburnu' => 'zeytinburnu',
+    'basiskele' => 'basiskele',
+    'cayirova' => 'cayirova',
+    'izmit' => 'izmit',
+    'kandira' => 'kandira',
+    'karamursel' => 'karamursel',
+    'kartepe' => 'kartepe',
+    'adapazari' => 'adapazari',
+    'akyazi' => 'akyazi',
+    'karasu' => 'karasu',
+    'sapanca' => 'sapanca',
+    'serdivan' => 'serdivan',
+    'akcaabat' => 'akcaabat',
+    'arakli' => 'arakli',
+    'arsin' => 'arsin',
+    'macka' => 'macka',
+    'ortahisar' => 'ortahisar',
+    'yomra' => 'yomra',
+    'altinova' => 'altinova',
+    'armutlu' => 'armutlu',
+    'cinarcik' => 'cinarcik',
+    'termal' => 'termal',
+    'cankaya' => 'cankaya',
+    'yenimahalle' => 'Yeni Mahalle',
+    'bodrum' => 'bodrum',
+    'gulyali' => 'gulyali',
 
-    # faq
-    "add_question" => "Add Question",
-    "edit_question" => "Edit Question",
-    "faq" => "FAQ",
-    "question" => "Question",
-    "answer" => "Answer",
-    "show_home" => "Show on homepage",
+    // faq
+    'add_question' => 'Add Question',
+    'edit_question' => 'Edit Question',
+    'faq' => 'FAQ',
+    'question' => 'Question',
+    'answer' => 'Answer',
+    'show_home' => 'Show on homepage',
 
 ];
