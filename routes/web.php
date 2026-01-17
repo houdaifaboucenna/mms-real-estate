@@ -32,7 +32,7 @@ Route::prefix('mms-admin')->group(function () {
 
 // Ajax Requests Routes
 Route::post('/towns', [App\Http\Controllers\EstateController::class, 'towns']);
-Route::post('/delete_img', [App\Http\Controllers\SettingsController::class, 'delete_img']);
+Route::post('/delete_img', [App\Http\Controllers\SettingController::class, 'delete_img']);
 Route::post('/del_estateimg', [App\Http\Controllers\EstateController::class, 'del_estateimg']);
 
 // Admin Routes
@@ -43,6 +43,6 @@ Route::middleware(['auth'])->prefix('mms-admin')->group(function () {
   Route::resource('estates', App\Http\Controllers\EstateController::class);
   Route::resource('contacts', App\Http\Controllers\ContactController::class)->only(['index', 'destroy']);
   Route::resource('profile', App\Http\Controllers\ProfileController::class)->only(['index', 'update']);
-  Route::resource('settings', App\Http\Controllers\SettingsController::class)->only(['index', 'update']);
+  Route::resource('settings', App\Http\Controllers\SettingController::class)->only(['index', 'update']);
   Route::resource('faq', App\Http\Controllers\FaqController::class);
 });

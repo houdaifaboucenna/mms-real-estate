@@ -2,7 +2,7 @@
 
 namespace App\Providers;
 
-use App\Models\Settings;
+use App\Models\Setting;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Session;
@@ -29,12 +29,6 @@ class AppServiceProvider extends ServiceProvider
   {
     if (!Session::get('applocale')) Session::put('applocale', 'ar');
 
-    $settings = Settings::first();
-
-    // Sharing is caring
-    View::share([
-      'settings' => $settings,
-    ]);
     Paginator::useBootstrap();
   }
 }

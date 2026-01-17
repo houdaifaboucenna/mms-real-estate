@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSettingsTable extends Migration
+class CreateSettingTable extends Migration
 {
     /**
      * Run the migrations.
@@ -15,15 +15,8 @@ class CreateSettingsTable extends Migration
     {
         Schema::create('settings', function (Blueprint $table) {
             $table->id();
-            $table->text("home_imgs")->nullable();
-            $table->string("facebook")->nullable();
-            $table->string("instagram")->nullable();
-            $table->string("youtube")->nullable();
-            $table->string("telegram")->nullable();
-            $table->string("whatsapp")->nullable();
-            $table->string("phone")->nullable();
-            $table->string("email")->nullable();
-            $table->string("twitter")->nullable();
+            $table->string("name")->unique();
+            $table->text("value")->nullable();
             $table->timestamps();
         });
     }
