@@ -21,8 +21,8 @@ class HomeController extends Controller
   public function index()
   {
     $s = Setting::find(1);
-    $d = Session::get('applocale') == 'en' ? $s->desc : $s->desc_ar;
-    $k = Session::get('applocale') == 'en' ? $s->keywords : $s->keywords_ar;
+    $d = isLang('en') ? $s->desc : $s->desc_ar;
+    $k = isLang('en') ? $s->keywords : $s->keywords_ar;
 
     SEOMeta::setDescription($d);
     SEOMeta::setCanonical('https://mmsestate.online/home');
@@ -64,9 +64,9 @@ class HomeController extends Controller
   public function post($slug)
   {
     $post = Post::where('slug', $slug)->first();
-    $t = Session::get('applocale') == 'en' ? $post->title : $post->title_ar;
-    $d = Session::get('applocale') == 'en' ? $post->short : $post->short_ar;
-    $k = Session::get('applocale') == 'en' ? $post->keywords : $post->keywords_ar;
+    $t = isLang('en') ? $post->title : $post->title_ar;
+    $d = isLang('en') ? $post->short : $post->short_ar;
+    $k = isLang('en') ? $post->keywords : $post->keywords_ar;
 
     SEOMeta::setDescription($d);
     SEOMeta::setCanonical('https://mmsestate.online/home');
@@ -106,9 +106,9 @@ class HomeController extends Controller
   public function estate($slug)
   {
     $estate = Estate::where('slug', $slug)->first();
-    $t = Session::get('applocale') == 'en' ? $estate->title : $estate->title_ar;
-    $d = Session::get('applocale') == 'en' ? $estate->short : $estate->short_ar;
-    $k = Session::get('applocale') == 'en' ? $estate->keywords : $estate->keywords_ar;
+    $t = isLang('en') ? $estate->title : $estate->title_ar;
+    $d = isLang('en') ? $estate->short : $estate->short_ar;
+    $k = isLang('en') ? $estate->keywords : $estate->keywords_ar;
 
     SEOMeta::setDescription($d);
     SEOMeta::setCanonical('https://mmsestate.online/home');
@@ -246,25 +246,29 @@ class HomeController extends Controller
   }
 
 
-  public function switch_lang()
+  public function switchLang()
   {
-    if (!Session::get('applocale')) Session::put('applocale', 'ar');
-    Session::get('applocale') == 'en' ? Session::put('applocale', 'ar') : Session::put('applocale', 'en');
+    $lang = isLang('en') ? 'ar' : 'en';
+    session(['lang' => $lang]);
+    App::setLocale($lang);
 
     return redirect()->back();
   }
 
-  public function Search(Request $request)
+  public function search(Request $request)
   {
     $query = $request["q"];
 
-    $posts = Session::get('applocale') == 'en' ? Post::where('title', 'LIKE', '%' . $query . '%')->get()
+    $posts = isLang('en')
+      ? Post::where('title', 'LIKE', '%' . $query . '%')->get()
       : Post::where('title_ar', 'LIKE', '%' . $query . '%')->get();
 
-    $estates = Session::get('applocale') == 'en' ? Estate::where('title', 'LIKE', '%' . $query . '%')->get()
+    $estates = isLang('en')
+      ? Estate::where('title', 'LIKE', '%' . $query . '%')->get()
       : Estate::where('title_ar', 'LIKE', '%' . $query . '%')->get();
 
-    $faqs = Session::get('applocale') == 'en' ? Faq::where('question', 'LIKE', '%' . $query . '%')->orWhere('answer', 'LIKE', '%' . $query . '%')->get()
+    $faqs = isLang('en')
+      ? Faq::where('question', 'LIKE', '%' . $query . '%')->orWhere('answer', 'LIKE', '%' . $query . '%')->get()
       : Faq::where('question_ar', 'LIKE', '%' . $query . '%')->orWhere('answer_ar', 'LIKE', '%' . $query . '%')->get();
 
     return view('home.search', [

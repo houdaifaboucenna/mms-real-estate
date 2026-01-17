@@ -301,13 +301,8 @@
   <script src="{{asset('plugins/popper.min.js')}}"></script>
   <script src="{{asset('plugins/bootstrap/js/bootstrap.min.js')}}"></script>
 
-
   <!-- Charts JS -->
   <script src="{{asset('plugins/chart.js/chart.min.js')}}"></script>
-  {{--
-  <script src="{{asset('js/index-charts.js')}}"></script> --}}
-
-
 
   <!-- Page Specific JS -->
   <script src="{{asset('js/app1.js')}}"></script>

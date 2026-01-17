@@ -46,7 +46,7 @@
   @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 
   <!-- Styles -->
-  @if (Session::get('applocale') == 'ar')
+  @if (Session::get('lang') == 'ar')
     @vite(['resources/sass/app_ar.scss'])
   @endif
 
@@ -69,11 +69,7 @@
 
         <div class="d-sm-none d-block lang-m">
           <a class="lang" href="{{ route('app.switch_lang')}}">
-            @if (Session::get('applocale') == 'en')
-              <span>Ar</span>
-            @else
-              <span>En</span>
-            @endif
+            <span>{{ isLang('en') ? 'Ar' : 'En' }}</span>
           </a>
         </div>
 
@@ -136,7 +132,7 @@
               </li>
               <li class="nav-item">
                 <a class="nav-link lang d-sm-block d-none" href="{{ route('app.switch_lang')}}">
-                  @if (Session::get('applocale') == 'en')
+                  @if (isLang('en'))
                     <span>Ar</span>
                   @else
                     <span>En</span>
@@ -164,7 +160,7 @@
             @foreach (App\Models\Post::latest()->limit(3)->get() as $post)
               <a href="{{route('app.post', $post->slug)}}">
                 <li>
-                  @if (Session::get('applocale') == 'en')
+                  @if (isLang('en'))
                     {{$post->title}}
                   @else
                     {{$post->title_ar}}

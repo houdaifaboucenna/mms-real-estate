@@ -27,7 +27,7 @@ class AppServiceProvider extends ServiceProvider
    */
   public function boot()
   {
-    if (!Session::get('applocale')) Session::put('applocale', 'ar');
+    if (!Session::get('lang')) Session::put('lang', 'ar');
 
     Paginator::useBootstrap();
   }

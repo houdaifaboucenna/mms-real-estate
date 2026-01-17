@@ -59,7 +59,8 @@
             <div class="form-group text-center">
               <label for="">{{__('home.price')}}</label>
               <input type="text" class="js-range-slider" name="price_range" value="" id="price_range" data-type="double"
-                data-min="0" data-max="{{$maxPrice + (0.1 * $maxPrice)}}" data-from="{{$minPrice}}" data-to="{{$maxPrice}}" />
+                data-min="0" data-max="{{$maxPrice + (0.1 * $maxPrice)}}" data-from="{{$minPrice}}"
+                data-to="{{$maxPrice}}" />
               <input type="hidden" name="from" id="from" value="">
               <input type="hidden" name="to" id="to" value="">
             </div>
@@ -146,7 +147,7 @@
                   <div class="details">
                     <a href="{{route('app.estate', $estate->slug)}}">
                       <h4 class="title">
-                        @if (Session::get('applocale') == 'en')
+                        @if (isLang('en'))
                           {{$estate->title}}
                         @else
                           {{$estate->title_ar}}
@@ -160,7 +161,7 @@
                         href="{{route('app.estate_town', [$estate->getCity(), ($estate->town - 1)])}}"><span>{{$estate->getTown()}}</span></a>
                     </div>
                     <p class="short">
-                      @if (Session::get('applocale') == 'en')
+                      @if (isLang('en'))
                         {{$estate->short}}
                       @else
                         {{$estate->short_ar}}
@@ -198,7 +199,7 @@
                   <span class="ar">{{__('home.article')}}</span>
                   <div>
                     <p class="title">
-                      @if (Session::get('applocale') == 'en')
+                      @if (isLang('en'))
                         {{$post->title}}
                       @else
                         {{$post->title_ar}}
@@ -234,7 +235,7 @@
                         <a data-toggle="collapse" data-parent="#faqAcc" href="#faq-{{$key + 1}}" aria-expanded="false"
                           aria-controls="faq-{{$key + 1}}" class="collapsed">
                           <span class="iconify" data-icon="bi:bookmark-plus"></span>
-                          @if (Session::get('applocale') == 'en')
+                          @if (isLang('en'))
                             {{$faq->question}}
                           @else
                             {{$faq->question_ar}}
@@ -244,7 +245,7 @@
                     </div>
                     <div id="faq-{{$key + 1}}" class="collapse in" role="tabpanel">
                       <div class="card-body">
-                        @if (Session::get('applocale') == 'en')
+                        @if (isLang('en'))
                           {!!$faq->answer!!}
                         @else
                           {!!$faq->answer_ar!!}
