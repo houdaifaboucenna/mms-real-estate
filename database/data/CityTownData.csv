@@ -1,0 +1,38 @@
+id,name,name_ar,city_id
+1,istanbul,إسطنبول,1
+2,ankara,أنقرة,1
+3,izmir,إزمير,1
+4,adana,أضنة,1
+5,mersin,مرسين,1
+6,kaleici,كاليجي,2
+7,kundu,كوندو,2
+8,lara,لارا,2
+9,kemer,كمر,2
+10,mahmutlar,محمطلار,3
+11,oba,أوبا,3
+12,avsallar,أفسلار,3
+13,incekum,إنجيكوم,3
+14,dosemealti-center,مركز دوزيمالتي,4
+15,karatay,قرطاي,4
+16,kestel,كستل,4
+17,tepebasi,تبه باشي,5
+18,esentepe,إسنتبه,5
+19,duaci,دوجي,5
+20,konyaalti-beach,شاطئ كونيالتي,6
+21,uncali,أونجال,6
+22,aksu,أكسو,6
+23,muratpasa-center,مركز موراتباشا,7
+24,genclik,جينجليك,7
+25,memurevleri,مموريفلري,7
+26,serik-center,مركز سيريك,8
+27,kocayatak,كوجاياتاك,8
+28,gozsu,غوزسو,8
+29,side,سيده,9
+30,selekler,سيلكلر,9
+31,tasagil,طاشاغيل,9
+32,gumushane-center,مركز غوموشهانه,10
+33,kose,كوسه,10
+34,kelkit,كلكيت,10
+35,ordu-center,مركز أوردو,11
+36,unye,أونيه,11
+37,fatsa,فاتسا,11

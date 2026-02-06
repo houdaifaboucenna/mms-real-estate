@@ -17,9 +17,14 @@ class CreatePostsTable extends Migration
             $table->id();
             $table->bigInteger('user_id')->unsigned();
             $table->string('title')->unique();
+            $table->string('slug')->unique();
             $table->text('content');
             $table->string('title_ar')->unique();
             $table->text('content_ar');
+            $table->string('keywords')->nullable();
+            $table->string('keywords_ar')->nullable();
+            $table->string('short')->nullable();
+            $table->string('short_ar')->nullable();
             $table->string('image')->nullable();
             $table->timestamps();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
