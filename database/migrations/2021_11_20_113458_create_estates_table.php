@@ -25,7 +25,7 @@ class CreateEstatesTable extends Migration
             $table->string('short_ar');
             $table->string('keywords')->nullable();
             $table->string('keywords_ar')->nullable();
-            $table->integer('type');
+            $table->string('type');
             $table->foreignIdFor(CityTown::class, 'town_id')->constrained()->cascadeOnDelete();
             $table->float('min')->nullable()->default(0);
             $table->float('max')->nullable()->default(0);

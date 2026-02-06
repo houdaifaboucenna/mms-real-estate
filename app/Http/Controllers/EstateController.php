@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\EstateTypeEnum;
+use App\Models\City;
 use App\Models\Estate;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -11,12 +13,18 @@ class EstateController extends Controller
 {
     public function index()
     {
-        return view('admin.estates.index', ['estates' => Estate::all(), 'types' => Estate::types()]);
+        return view('admin.estates.index', [
+            'estates' => Estate::all(),
+            'types' => EstateTypeEnum::labels(),
+        ]);
     }
 
     public function create()
     {
-        return view('admin.estates.create', ['types' => Estate::types(), 'cities' => Estate::cities()]);
+        return view('admin.estates.create', [
+            'types' => EstateTypeEnum::labels(),
+            'cities' => City::all(),
+        ]);
     }
 
     public function store(Request $request)
@@ -67,9 +75,8 @@ class EstateController extends Controller
     {
         return view('admin.estates.create', [
             'estate' => $estate,
-            'images' => json_decode($estate->image),
-            'types' => Estate::types(),
-            'cities' => Estate::cities(),
+            'types' => EstateTypeEnum::labels(),
+            'cities' => City::all(),
         ]);
     }
 

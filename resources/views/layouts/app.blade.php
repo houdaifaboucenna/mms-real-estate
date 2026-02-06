@@ -184,10 +184,10 @@
                 <div class="col-md-3">
                     <h3>{{ __('home.prp_types') }}</h3>
                     <ul>
-                        @foreach (App\Models\Estate::types() as $i => $type)
-                            <a href="{{ route('app.estate_type', $i) }}">
-                                <li>{{ $type }}
-                                    <span>({{ App\Models\Estate::where('type', $i)->count() }})</span>
+                        @foreach (App\Enums\EstateTypeEnum::labels() as $type => $value)
+                            <a href="{{ route('app.estate_type', $type) }}">
+                                <li>{{ $value }}
+                                    <span>({{ App\Models\Estate::where('type', $type)->count() }})</span>
                                 </li>
                             </a>
                         @endforeach

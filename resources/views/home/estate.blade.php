@@ -60,17 +60,17 @@
                             <span class="iconify" data-icon="healthicons:city-outline" data-width="48"
                                 data-height="48"></span>
                             <span class="lb">{{ __('home.city') }}</span>
-                            <span>{{ $estate->getCity() }}</span>
+                            <span>{{ $estate->city->name }}</span>
                         </div>
                         <div class="e-box">
                             <span class="iconify" data-icon="maki:town-hall" data-width="48" data-height="48"></span>
                             <span class="lb">{{ __('home.town') }}</span>
-                            <span>{{ $estate->getTown() }}</span>
+                            <span>{{ $estate->town->name }}</span>
                         </div>
                         <div class="e-box">
                             <span class="iconify" data-icon="mdi:home-city-outline" data-width="48" data-height="48"></span>
                             <span class="lb">{{ __('home.type') }}</span>
-                            <span>{{ $estate->getType() }}</span>
+                            <span>{{ $estate->type }}</span>
                         </div>
                         <div class="e-box">
                             <span class="iconify" data-icon="dashicons:money-alt" data-width="48" data-height="48"></span>
@@ -103,7 +103,7 @@
                                         <img src="{{ asset('/storage/' . $img) }}" alt="" class="d-block w-100">
                                     @endif
                                 @endforeach
-                                <span class="ar">{{ $estate->getType() }}</span>
+                                <span class="ar">{{ $estate->type }}</span>
                                 <div class="details">
                                     <a href="{{ route('app.estate', $estate->slug) }}">
                                         <h4 class="title">
@@ -117,9 +117,9 @@
                                     <div class="location">
                                         <span class="iconify" data-icon="carbon:location-filled"></span>
                                         <a
-                                            href="{{ route('app.estate_city', $estate->city) }}"><span>{{ $estate->getCity() }}</span></a>,
+                                            href="{{ route('app.estate_city', $estate->city) }}"><span>{{ $estate->city->name }}</span></a>,
                                         <a
-                                            href="{{ route('app.estate_town', [$estate->getCity(), $estate->town - 1]) }}"><span>{{ $estate->getTown() }}</span></a>
+                                            href="{{ route('app.estate_town', [$estate->city->name, $estate->town_id]) }}"><span>{{ $estate->town->name }}</span></a>
                                     </div>
                                     <p class="short">
                                         @if (isLang('en'))

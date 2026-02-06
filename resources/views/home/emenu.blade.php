@@ -87,14 +87,14 @@
                         <div class="col-md-4 mb-2">
                             <div class="estate">
                                 <div class="estate-img">
-                                    @foreach (json_decode($estate->image) as $key => $img)
+                                    {{-- @foreach (json_decode($estate->image) as $key => $img)
                                         @if ($key == 0)
                                             <img src="{{ asset('/storage/' . $img) }}" alt=""
                                                 class="d-block w-100">
                                         @endif
-                                    @endforeach
+                                    @endforeach --}}
                                 </div>
-                                <span class="ar">{{ $estate->getType() }}</span>
+                                <span class="ar">{{ $estate->type }}</span>
                                 <div class="details">
                                     <a href="{{ route('app.estate', $estate->slug) }}">
                                         <h4 class="title">
@@ -108,9 +108,9 @@
                                     <div class="location">
                                         <span class="iconify" data-icon="carbon:location-filled"></span>
                                         <a
-                                            href="{{ route('app.estate_city', $estate->city) }}"><span>{{ $estate->getCity() }}</span></a>,
+                                            href="{{ route('app.estate_city', $estate->city) }}"><span>{{ $estate->city->name }}</span></a>,
                                         <a
-                                            href="{{ route('app.estate_town', [$estate->getCity(), $estate->town - 1]) }}"><span>{{ $estate->getTown() }}</span></a>
+                                            href="{{ route('app.estate_town', [$estate->city->name, $estate->town_id]) }}"><span>{{ $estate->town->name }}</span></a>
                                     </div>
                                     <p class="short">
                                         @if (isLang('en'))
