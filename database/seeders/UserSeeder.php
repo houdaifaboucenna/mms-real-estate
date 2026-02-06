@@ -24,7 +24,7 @@ class UserSeeder extends Seeder
         $profile = Profile::create([
             'user_id' => $user->id,
             'username' => $user->name,
-            'picture' => $user->getGravatar(),
+            'picture' => getGravatar($user->email),
         ]);
     }
 }

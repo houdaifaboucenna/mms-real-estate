@@ -17,13 +17,6 @@ class User extends Authenticatable
 
     protected $casts = ['email_verified_at' => 'datetime'];
 
-    public function getGravatar()
-    {
-        $hash = md5(strtolower(trim($this->attributes['email'])));
-
-        return "http://gravatar.com/avatar/{$hash}";
-    }
-
     public function profile()
     {
         return $this->hasOne(Profile::class);

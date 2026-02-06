@@ -17,3 +17,12 @@ if (! function_exists('isLang')) {
         return Session::get('lang') == $lang;
     }
 }
+
+if (! function_exists('getGravatar')) {
+    function getGravatar($email, $size = 200)
+    {
+        $hash = md5(strtolower(trim($email)));
+
+        return "https://www.gravatar.com/avatar/{$hash}?s={$size}&d=mp";
+    }
+}

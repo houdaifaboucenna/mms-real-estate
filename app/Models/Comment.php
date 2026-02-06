@@ -12,11 +12,4 @@ class Comment extends Model
     {
         return $this->belongsTo(Post::class);
     }
-
-    public function getGravatar()
-    {
-        $hash = md5(strtolower(trim($this->attributes['email'])));
-
-        return "http://gravatar.com/avatar/{$hash}";
-    }
 }
