@@ -85,9 +85,8 @@
 
                                 <div class="app-utility-item app-user-dropdown dropdown">
                                     <a class="dropdown-toggle" id="user-dropdown-toggle" data-bs-toggle="dropdown"
-                                        href="#" role="button" aria-expanded="false"><img
-                                            src="{{ isset(auth()->user()->profile->picture) ? '/storage/' . auth()->user()->profile->picture : getGravatar(auth()->user()->email) }}"
-                                            alt="user profile" /></a>
+                                        href="#" role="button" aria-expanded="false">
+                                        <img src="{{ auth()->user()->profile->imageUrl }}" alt="user profile" /></a>
                                     <ul class="dropdown-menu" aria-labelledby="user-dropdown-toggle">
                                         <li>
                                             <a class="dropdown-item" href="{{ route('profile.index') }}">Account</a>
