@@ -17,7 +17,7 @@
                         </div>
                     @endif
 
-                    {{-- Show error --}}
+                    {{-- Show errors --}}
                     @if ($errors->any())
                         <div class="alert alert-danger">
                             <ul>
@@ -47,13 +47,13 @@
                                     </div>
 
                                 </div>
-                            </div><!--//table-utilities-->
-                        </div><!--//col-auto-->
+                            </div>
+                        </div>
                     </div>
 
                     <hr>
 
-                    <form method="post" action="{{ route('settings.update', $settings) }}" enctype="multipart/form-data"
+                    <form method="post" action="{{ route('settings.update') }}" enctype="multipart/form-data"
                         id="form1">
                         @csrf
                         @method('PUT')
@@ -267,14 +267,14 @@
             var image = $(this).siblings('.imgsrc').attr('data-src');
             var current = $(this)
             swal({
-                title: 'Confirm deleting ?',
-                icon: 'warning',
-                buttons: ["No", "Yes"],
+                title: "{{ __('admin.confirm_delete') }}",
+                icon: "warning",
+                buttons: ["{{ __('admin.no') }}", "{{ __('admin.yes') }}"],
             }).then(function(value) {
                 if (value) {
                     $.ajax({
-                        type: "POST",
-                        url: "/delete-setting-image",
+                        type: "DELETE",
+                        url: "{{ route('settings.deleteImage') }}",
                         data: {
                             _token: CSRF_TOKEN,
                             img: image

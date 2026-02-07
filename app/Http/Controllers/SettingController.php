@@ -3,77 +3,89 @@
 namespace App\Http\Controllers;
 
 use App\Models\Setting;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\View\View;
 
 class SettingController extends Controller
 {
-    public function index()
+    public function index(): View
     {
-        return view('admin.settings.index', ['settings' => Setting::find(1)]);
+        return view('admin.settings.index');
     }
 
-    public function update(Request $request)
+    public function update(Request $request): RedirectResponse
     {
-        $settings = Setting::find(1);
-
         $data = $request->validate([
-            'facebook' => 'nullable',
-            'instagram' => 'nullable',
-            'twitter' => 'nullable',
-            'youtube' => 'nullable',
-            'telegram' => 'nullable',
-            'whatsapp' => 'nullable',
-            'phone' => 'nullable',
-            'email' => 'nullable',
-            'desc' => 'nullable',
-            'desc_ar' => 'nullable',
-            'keywords' => 'nullable',
-            'keywords_ar' => 'nullable',
+            'facebook' => ['nullable', 'url', 'max:255'],
+            'instagram' => ['nullable', 'url', 'max:255'],
+            'twitter' => ['nullable', 'url', 'max:255'],
+            'youtube' => ['nullable', 'url', 'max:255'],
+            'telegram' => ['nullable', 'url', 'max:255'],
+            'whatsapp' => ['nullable', 'string', 'max:255'],
+            'phone' => ['nullable', 'string', 'max:50'],
+            'email' => ['nullable', 'email', 'max:255'],
+            'desc' => ['nullable', 'string', 'max:1000'],
+            'desc_ar' => ['nullable', 'string', 'max:1000'],
+            'keywords' => ['nullable', 'string', 'max:500'],
+            'keywords_ar' => ['nullable', 'string', 'max:500'],
+            'home_imgs' => ['nullable', 'array'],
+            'home_imgs.*' => ['image', 'max:2048'],
         ]);
 
-        $imgs = json_decode(setting('home_imgs'));
+        // Handle home images upload
+        $existingImages = json_decode(setting('home_imgs'), true) ?? [];
 
         if ($request->hasFile('home_imgs')) {
             foreach ($request->file('home_imgs') as $image) {
-                $image = $image->store('images\slider', 'public');
-                $imgs[] = $image;
+                $path = $image->store('images/slider', 'public');
+                $existingImages[] = $path;
             }
         }
 
-        $data['home_imgs'] = $imgs == null ? '' : json_encode($imgs);
+        $data['home_imgs'] = json_encode($existingImages);
 
-        $settings->update($data);
+        foreach ($data as $key => $value) {
+            Setting::updateOrCreate(
+                ['name' => $key],
+                ['value' => $value]
+            );
+            Cache::forget('app_setting_' . $key);
+        }
+
         session()->flash('success', __('admin.settings_updated'));
 
         return redirect()->route('settings.index');
     }
 
-    public function deleteImage(Request $request)
+    public function deleteImage(Request $request): JsonResponse
     {
-        $s = Setting::find(1);
-
-        $data = $request->validate([
-            'home_imgs' => 'nullable',
+        $request->validate([
+            'img' => ['required', 'string'],
         ]);
 
-        $imgs = json_decode($s->home_imgs);
-        $new = [];
-        foreach ($imgs as $img) {
-            if ($img != $request['img']) {
-                $new[] = $img;
-            } else {
-                Storage::disk('public')->delete($request['img']);
-            }
+        $imageToDelete = $request->input('img');
+        $existingImages = json_decode(setting('home_imgs'), true) ?? [];
+
+        // Filter out the image to delete
+        $updatedImages = array_values(array_filter(
+            $existingImages,
+            fn ($img) => $img !== $imageToDelete
+        ));
+
+        // Delete the file from storage
+        if (Storage::disk('public')->exists($imageToDelete)) {
+            Storage::disk('public')->delete($imageToDelete);
         }
-        $data['home_imgs'] = json_encode($new);
 
-        $s->update($data);
+        // Update the setting
+        Setting::where('name', 'home_imgs')->update(['value' => json_encode($updatedImages)]);
 
-        $response = [
-            'status' => 'success',
-        ];
+        Cache::forget('app_setting_home_imgs');
 
-        return response()->json($response);
+        return response()->json(['status' => 'success']);
     }
 }

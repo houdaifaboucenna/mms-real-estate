@@ -40,7 +40,10 @@ Route::prefix('admin')->group(function () {
         Route::resource('estates', Controllers\EstateController::class);
         Route::resource('contacts', Controllers\ContactController::class)->only(['index', 'destroy']);
         Route::resource('profile', Controllers\ProfileController::class)->only(['index', 'update']);
-        Route::resource('settings', Controllers\SettingController::class)->only(['index', 'update']);
         Route::resource('faq', Controllers\FaqController::class);
+
+        Route::get('settings', [Controllers\SettingController::class, 'index'])->name('settings.index');
+        Route::put('settings/update', [Controllers\SettingController::class, 'update'])->name('settings.update');
+        Route::delete('settings/delete-image', [Controllers\SettingController::class, 'deleteImage'])->name('settings.deleteImage');
     });
 });
