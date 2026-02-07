@@ -34,7 +34,7 @@ Route::prefix('admin')->group(function () {
     Auth::routes();
 
     Route::middleware(['auth'])->group(function () {
-        Route::get('index', [Controllers\AdminController::class, 'index'])->name('dashboard');
+        Route::get('/', [Controllers\AdminController::class, 'index'])->name('dashboard');
         Route::resource('posts', Controllers\PostController::class);
         Route::resource('comments', Controllers\CommentController::class)->only(['index', 'destroy']);
         Route::resource('estates', Controllers\EstateController::class);
