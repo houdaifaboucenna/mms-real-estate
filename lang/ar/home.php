@@ -52,7 +52,6 @@ return [
     'city' => 'المدينة',
     'town' => 'المنطقة',
     'message' => 'الرسالة',
-    'price' => 'السعر',
 
     // footer
     'lts_articles' => 'أحدث المقالات',

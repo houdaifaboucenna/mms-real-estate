@@ -38,7 +38,6 @@ return [
     'ch_city' => 'Choose a city',
     'ch_town' => 'Choose town',
     'ch_type' => 'Choose type',
-    'price' => 'Price',
     'search' => 'Search',
 
     // Box text
