@@ -1,0 +1,53 @@
+name: Deploy Laravel to VPS
+
+on:
+  push:
+    branches: [ main, master ]  # whatever branch used
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Deploy to VPS
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.VPS_HOST }}
+        username: ${{ secrets.VPS_USERNAME }}
+        key: ${{ secrets.VPS_SSH_KEY }}
+        port: ${{ secrets.VPS_PORT || 22 }}
+        script: |
+          cd /var/www/laravel-app
+          
+          # Pull latest changes
+          git pull origin main
+          
+          # Install composer dependencies
+          composer install --no-dev --optimize-autoloader
+          
+          # Install npm dependencies (if needed)
+          npm install
+          npm run build
+          
+          # Run migrations
+          php artisan migrate --force
+          
+          # Clear caches
+          php artisan config:clear
+          php artisan cache:clear
+          php artisan view:clear
+          php artisan route:clear
+          
+          # Optimize
+          php artisan optimize
+          
+          # Set permissions
+          sudo chown -R $USER:www-data /var/www/laravel-app
+          sudo chmod -R 775 storage bootstrap/cache
+          
+          # Reload PHP-FPM and Nginx
+          sudo systemctl reload php8.3-fpm
+          sudo systemctl reload nginx
