@@ -2,17 +2,64 @@ name: Deploy Laravel to VPS
 
 on:
   push:
-    branches: [ main, master ]  # whatever branch used
+    branches: [ main ]
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    
-    steps:
-    - name: Checkout code
-      uses: actions/checkout@v3
 
-    - name: Deploy to VPS
+    steps:
+    # 1️⃣ Checkout Code
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    # 2️⃣ Setup PHP (for Composer)
+    - name: Setup PHP
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: 8.4
+        extensions: mbstring, xml, ctype, iconv, intl, pdo_mysql
+
+    # 3️⃣ Install Backend Dependencies
+    - name: Install Composer dependencies
+      run: |
+        composer install --no-dev --prefer-dist --optimize-autoloader
+
+    # 4️⃣ Build Frontend Assets
+    - name: Setup Node & Build
+      uses: actions/setup-node@v4
+      with:
+        node-version: 20
+    - run: |
+        npm ci
+        npm run build
+
+    # 5️⃣ Prepare Files for Transfer
+    - name: Archive application
+      run: |
+        # 1. Create archive in /tmp (OUTSIDE the project) to prevent "file changed" error
+        tar --exclude='./storage' \
+            --exclude='./.git' \
+            --exclude='./node_modules' \
+            --exclude='./tests' \
+            -czf /tmp/release.tar.gz .
+
+        # 2. Move it back to the workspace so the next step can find it
+        mv /tmp/release.tar.gz .
+
+    # 6️⃣ Upload to Server
+    - name: Upload artifact via SCP
+      uses: appleboy/scp-action@master
+      with:
+        host: ${{ secrets.VPS_HOST }}
+        username: ${{ secrets.VPS_USERNAME }}
+        key: ${{ secrets.VPS_SSH_KEY }}
+        port: ${{ secrets.VPS_PORT || 22 }}
+        source: "release.tar.gz"
+        target: "/var/www/laravel-app"
+
+    # 7️⃣ Deploy on Server
+    - name: Execute Remote SSH Commands
       uses: appleboy/ssh-action@master
       with:
         host: ${{ secrets.VPS_HOST }}
@@ -20,34 +67,42 @@ jobs:
         key: ${{ secrets.VPS_SSH_KEY }}
         port: ${{ secrets.VPS_PORT || 22 }}
         script: |
-          cd /var/www/laravel-app
+          set -e
+
+          APP_DIR="/var/www/laravel-app"
+          RELEASE_ID=$(date +%Y%m%d%H%M%S)
+          RELEASE_PATH="$APP_DIR/releases/$RELEASE_ID"
+
+          # 1. Create new release directory
+          mkdir -p $RELEASE_PATH
+
+          # 2. Extract files
+          tar -xzf $APP_DIR/release.tar.gz -C $RELEASE_PATH
+          rm $APP_DIR/release.tar.gz
+
+          # 3. Link Shared Resources
+          ln -sfn $APP_DIR/shared/.env $RELEASE_PATH/.env
+          ln -sfn $APP_DIR/shared/storage $RELEASE_PATH/storage
+
+          # 4. Set Permissions (Approach A: User Owner, Web Group)
+          sudo chown -R $USER:www-data $RELEASE_PATH
           
-          # Pull latest changes
-          git pull origin main
-          
-          # Install composer dependencies
-          composer install --no-dev --optimize-autoloader
-          
-          # Install npm dependencies (if needed)
-          npm install
-          npm run build
-          
-          # Run migrations
+          # Ensure group write access for cache (so Nginx/FPM can write to it)
+          sudo chmod -R 775 $RELEASE_PATH/bootstrap/cache
+
+          # 5. Run Migrations & Optimize
+          cd $RELEASE_PATH
           php artisan migrate --force
-          
-          # Clear caches
-          php artisan config:clear
-          php artisan cache:clear
-          php artisan view:clear
-          php artisan route:clear
-          
-          # Optimize
           php artisan optimize
-          
-          # Set permissions
-          sudo chown -R $USER:www-data /var/www/laravel-app
-          sudo chmod -R 775 storage bootstrap/cache
-          
-          # Reload PHP-FPM and Nginx
-          sudo systemctl reload php8.3-fpm
-          sudo systemctl reload nginx
+
+          # 6. Atomic Switch (Zero Downtime)
+          ln -sfn $RELEASE_PATH $APP_DIR/current
+
+          # 7. Reload PHP-FPM (Ensure this matches your server version!)
+          sudo systemctl reload php8.4-fpm
+
+          # 8. Cleanup old releases
+          cd $APP_DIR/releases
+          ls -t | tail -n +6 | xargs -r rm -rf
+
+          echo "🚀 Deployment $RELEASE_ID success!"
