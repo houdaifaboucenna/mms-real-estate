@@ -31,9 +31,13 @@ class HomeController extends Controller
 
     public function posts()
     {
-        $posts = Post::paginate(9);
-
-        return view('home.pmenu', ['posts' => $posts]);
+        return Inertia::render('Posts', [
+            'posts' => Post::paginate(9),
+            'translations' => [
+                'posts' => __('home.posts'),
+                'all_articles' => __('home.all_articles'),
+            ],
+        ]);
     }
 
     public function post($slug)
@@ -69,7 +73,19 @@ class HomeController extends Controller
 
     public function faq()
     {
-        return view('home.faq', ['faqs' => Faq::all()]);
+        return Inertia::render('Faq', [
+            'faqs' => Faq::all(),
+            'translations' => [
+                'faq' => __('home.faq'),
+                'getin' => __('home.getin'),
+                'fillin' => __('home.fillin'),
+                'contactus' => __('home.contactus'),
+                'name' => __('home.name'),
+                'email' => __('home.email'),
+                'phone' => __('home.phone'),
+                'message' => __('home.message'),
+            ],
+        ]);
     }
 
     public function contact()
@@ -79,7 +95,17 @@ class HomeController extends Controller
 
     public function about()
     {
-        return view('home.about');
+        return Inertia::render('About', [
+            'translations' => [
+                'about' => __('home.about'),
+                'who' => __('home.who'),
+                'who_txt' => __('home.who_txt'),
+                'vision' => __('home.vision'),
+                'vision_txt' => __('home.vision_txt'),
+                'mission' => __('home.mission'),
+                'mission_txt' => __('home.mission_txt'),
+            ],
+        ]);
     }
 
     public function filterEstate(Request $request)
