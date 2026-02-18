@@ -13,7 +13,17 @@ export default {
     theme: {
         extend: {
             fontFamily: {
-                sans: ['Figtree', ...defaultTheme.fontFamily.sans],
+                sans: ['Poppins', ...defaultTheme.fontFamily.sans],
+            },
+            colors: {
+                brand: {
+                    maroon: '#450706',
+                    'maroon-dark': '#2b0303',
+                    gold: '#d1b57a',
+                    beige: '#e4cfa0',
+                    red: '#b33939',
+                    whatsapp: '#25d366',
+                },
             },
         },
     },
