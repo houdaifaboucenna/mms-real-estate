@@ -2,39 +2,62 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
+use App\Http\Requests\ProfileUpdateRequest;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
+use Inertia\Inertia;
+use Inertia\Response;
 
 class ProfileController extends Controller
 {
-    public function index()
+    /**
+     * Display the user's profile form.
+     */
+    public function edit(Request $request): Response
     {
-        $user = auth()->user();
-        $profile = $user->profile;
-
-        return view('admin.profile.index', ['user' => $user, 'profile' => $profile]);
+        return Inertia::render('Profile/Edit', [
+            'mustVerifyEmail' => $request->user() instanceof MustVerifyEmail,
+            'status' => session('status'),
+        ]);
     }
 
-    public function update(Request $request, User $user)
+    /**
+     * Update the user's profile information.
+     */
+    public function update(ProfileUpdateRequest $request): RedirectResponse
     {
-        $user = auth()->user();
-        $profile = $user->profile;
-        $data = $request->validate([
-            'bio' => 'nullable',
-            'username' => 'required|unique:profiles,username,' . $profile->id,
-        ]);
+        $request->user()->fill($request->validated());
 
-        if ($request->hasFile('image')) {
-            $image = $request['image']->store('images\profiles', 'public');
-            Storage::disk('public')->delete($profile->image);
-            $data['image'] = $image;
+        if ($request->user()->isDirty('email')) {
+            $request->user()->email_verified_at = null;
         }
 
-        $profile->update($data);
+        $request->user()->save();
 
-        session()->flash('success', __('admin.profile_updated'));
+        return Redirect::route('profile.edit');
+    }
 
-        return redirect()->route('profile.index');
+    /**
+     * Delete the user's account.
+     */
+    public function destroy(Request $request): RedirectResponse
+    {
+        $request->validate([
+            'password' => ['required', 'current_password'],
+        ]);
+
+        $user = $request->user();
+
+        Auth::logout();
+
+        $user->delete();
+
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
+        return Redirect::to('/');
     }
 }

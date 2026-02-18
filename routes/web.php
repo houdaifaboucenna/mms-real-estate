@@ -1,12 +1,15 @@
 <?php
 
 use App\Http\Controllers;
-use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use Inertia\Inertia;
 
-// Home Routes
+// ─── Public Routes (Inertia) ───────────────────────────────────────
 Route::get('/', [Controllers\HomeController::class, 'index']);
 Route::get('home', [Controllers\HomeController::class, 'index'])->name('app.home');
+
+// ─── Public Routes (Still Blade — to be converted) ────────────────
 Route::get('posts', [Controllers\HomeController::class, 'posts'])->name('app.posts');
 Route::get('post/{post}', [Controllers\HomeController::class, 'post'])->name('app.post');
 Route::get('estates', [Controllers\HomeController::class, 'estates'])->name('app.estates');
@@ -24,22 +27,29 @@ Route::get('search', [Controllers\HomeController::class, 'search'])->name('app.s
 Route::resource('contacts', Controllers\ContactController::class)->only(['store']);
 Route::resource('comments', Controllers\CommentController::class)->only(['store']);
 
-// Ajax Requests Routes
+// ─── Ajax Routes ───────────────────────────────────────────────────
 Route::post('towns', [Controllers\EstateController::class, 'towns']);
 Route::post('delete-setting-image', [Controllers\SettingController::class, 'deleteImage']);
 Route::post('delete-estate-image', [Controllers\EstateController::class, 'deleteImage']);
 
-// Admin Routes
-Route::prefix('admin')->group(function () {
-    Auth::routes();
+// ─── Admin Routes (Auth via Breeze) ────────────────────────────────
+Route::get('dashboard', function () {
+    return Inertia::render('Dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
 
-    Route::middleware(['auth'])->group(function () {
-        Route::get('/', [Controllers\AdminController::class, 'index'])->name('dashboard');
+Route::middleware('auth')->group(function () {
+    // Breeze Profile (Vue)
+    Route::get('profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+    // Admin resources (still Blade — to be converted)
+    Route::prefix('admin')->group(function () {
+        Route::get('/', [Controllers\AdminController::class, 'index'])->name('admin.dashboard');
         Route::resource('posts', Controllers\PostController::class);
         Route::resource('comments', Controllers\CommentController::class)->only(['index', 'destroy']);
         Route::resource('estates', Controllers\EstateController::class);
         Route::resource('contacts', Controllers\ContactController::class)->only(['index', 'destroy']);
-        Route::resource('profile', Controllers\ProfileController::class)->only(['index', 'update']);
         Route::resource('faq', Controllers\FaqController::class);
 
         Route::get('settings', [Controllers\SettingController::class, 'index'])->name('settings.index');
@@ -47,3 +57,5 @@ Route::prefix('admin')->group(function () {
         Route::delete('settings/delete-image', [Controllers\SettingController::class, 'deleteImage'])->name('settings.deleteImage');
     });
 });
+
+require __DIR__ . '/auth.php';

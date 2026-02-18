@@ -9,22 +9,23 @@ use App\Models\Faq;
 use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
+use Inertia\Inertia;
 
 class HomeController extends Controller
 {
     public function index()
     {
-        return view('home.index', [
+        return Inertia::render('Home', [
             'types' => EstateTypeEnum::labels(),
             'cities' => City::all(),
             'maxPrice' => Estate::max('max'),
             'minPrice' => Estate::min('min'),
             'posts' => Post::orderBy('id')->limit(4)->get(),
-            'p_count' => Post::all()->count(),
+            'postCount' => Post::count(),
             'faqs' => Faq::where('show_home', 1)->get(),
-            'f_count' => Faq::all()->count(),
+            'faqCount' => Faq::count(),
             'estates' => Estate::orderBy('id')->limit(6)->get(),
-            'e_count' => Estate::all()->count(),
+            'estateCount' => Estate::count(),
         ]);
     }
 
