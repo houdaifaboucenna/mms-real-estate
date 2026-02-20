@@ -31,6 +31,7 @@ class Estate extends Model
 
     protected $casts = [
         'type' => EstateTypeEnum::class,
+        'image' => 'array',
     ];
 
     public function town(): BelongsTo

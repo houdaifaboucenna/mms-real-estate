@@ -52,7 +52,7 @@ const props = defineProps({
                                 </svg>
                             </div>
                             <h3 class="text-xl font-bold text-brand-maroon mb-4">{{ isEn ? 'Get in Touch' : 'تواصل معنا'
-                                }}</h3>
+                            }}</h3>
                             <ul class="space-y-4">
                                 <li>
                                     <a :href="'tel:' + settings.phone"
@@ -99,7 +99,7 @@ const props = defineProps({
                 <!-- Contact Form Sidebar -->
                 <aside class="lg:col-span-1">
                     <div class="sticky top-28 rounded-2xl bg-white p-8 shadow-xl ring-1 ring-black/5">
-                        <ContactForm :translations="translations" />
+                        <ContactForm :translations="translations.contact_form" />
                     </div>
                 </aside>
 

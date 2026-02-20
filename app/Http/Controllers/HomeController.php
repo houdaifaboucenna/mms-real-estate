@@ -76,12 +76,25 @@ class HomeController extends Controller
 
     public function estate($slug)
     {
-        $estate = Estate::where('slug', $slug)->first();
-        $others = Estate::where('id', '!=', $estate->id)->inRandomOrder()->limit(4)->get();
+        $estate = Estate::with('city', 'town')->where('slug', $slug)->first();
 
-        return view('home.estate', [
+        return Inertia::render('EstateShow', [
             'estate' => $estate,
-            'others' => $others,
+            'others' => Estate::with('city', 'town')->where('id', '!=', $estate->id)->inRandomOrder()->limit(4)->get(),
+            'translations' => [
+                'estate' => __('home.estate'),
+                'similar' => __('home.similar'),
+                'contact_form' => __('home.contact_form'),
+                'city' => __('home.city'),
+                'town' => __('home.town'),
+                'type' => __('home.type'),
+                'price' => __('home.price'),
+                'interested_in_this_property' => __('home.Interested in this property?'),
+                'all_details_and_legal_consultation' => __('home.Our investment experts are ready to provide you with all details and legal consultation.'),
+                'whatsapp_consultation' => __('home.WhatsApp Consultation'),
+                'overview_and_details' => __('home.Overview & Details'),
+                'view_details' => __('home.View Details'),
+            ],
         ]);
     }
 

@@ -78,7 +78,7 @@ const accordion = ref(null);
                 <!-- Contact Form Sidebar -->
                 <aside class="lg:col-span-1">
                     <div class="sticky top-28 rounded-2xl bg-white p-8 shadow-xl ring-1 ring-black/5">
-                        <ContactForm :translations="translations" />
+                        <ContactForm :translations="translations.contact_form" />
                     </div>
                 </aside>
             </div>

@@ -140,7 +140,7 @@ function getGravatar(email) {
                 <aside class="space-y-8 lg:col-span-1">
                     <div class="sticky top-28 overflow-hidden rounded-2xl bg-white shadow-xl ring-1 ring-black/5">
                         <div class="p-6 sm:p-8">
-                            <ContactForm :translations="translations" />
+                            <ContactForm :translations="translations.contact_form" />
                         </div>
                     </div>
                 </aside>

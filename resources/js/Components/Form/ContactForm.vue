@@ -38,13 +38,13 @@ const form = useForm({
             </Transition>
 
             <div class="mb-6">
-                <h3 class="text-2xl font-bold text-brand-maroon">{{ translations.contact_form.getin }}</h3>
-                <p class="mt-1 text-sm text-gray-500">{{ translations.contact_form.fillin }}</p>
+                <h3 class="text-2xl font-bold text-brand-maroon">{{ translations.getin }}</h3>
+                <p class="mt-1 text-sm text-gray-500">{{ translations.fillin }}</p>
             </div>
 
             <!-- Name Field -->
             <div class="space-y-1">
-                <input v-model="form.name" type="text" :placeholder="translations.contact_form.name"
+                <input v-model="form.name" type="text" :placeholder="translations.name"
                     class="block w-full rounded-lg border-gray-200 bg-white px-4 py-3 text-sm text-gray-900 shadow-sm transition-all focus:border-brand-gold focus:ring-brand-gold"
                     :class="{ 'border-red-300 focus:border-red-500 focus:ring-red-500': form.errors.name }">
                 <p v-if="form.errors.name" class="text-xs font-medium text-red-600">{{ form.errors.name }}</p>
@@ -52,7 +52,7 @@ const form = useForm({
 
             <!-- Email Field -->
             <div class="space-y-1">
-                <input v-model="form.email" type="email" :placeholder="translations.contact_form.email"
+                <input v-model="form.email" type="email" :placeholder="translations.email"
                     class="block w-full rounded-lg border-gray-200 bg-white px-4 py-3 text-sm text-gray-900 shadow-sm transition-all focus:border-brand-gold focus:ring-brand-gold"
                     :class="{ 'border-red-300 focus:border-red-500 focus:ring-red-500': form.errors.email }">
                 <p v-if="form.errors.email" class="text-xs font-medium text-red-600">{{ form.errors.email }}</p>
@@ -60,7 +60,7 @@ const form = useForm({
 
             <!-- Phone Field -->
             <div class="space-y-1">
-                <input v-model="form.phone" type="tel" :placeholder="translations.contact_form.phone"
+                <input v-model="form.phone" type="tel" :placeholder="translations.phone"
                     class="block w-full rounded-lg border-gray-200 bg-white px-4 py-3 text-sm text-gray-900 shadow-sm transition-all focus:border-brand-gold focus:ring-brand-gold"
                     :class="{ 'border-red-300 focus:border-red-500 focus:ring-red-500': form.errors.phone }">
                 <p v-if="form.errors.phone" class="text-xs font-medium text-red-600">{{ form.errors.phone }}</p>
@@ -68,7 +68,7 @@ const form = useForm({
 
             <!-- Message Field -->
             <div class="space-y-1">
-                <textarea v-model="form.message" rows="4" :placeholder="translations.contact_form.message"
+                <textarea v-model="form.message" rows="4" :placeholder="translations.message"
                     class="block w-full rounded-lg border-gray-200 bg-white px-4 py-3 text-sm text-gray-900 shadow-sm transition-all focus:border-brand-gold focus:ring-brand-gold"
                     :class="{ 'border-red-300 focus:border-red-500 focus:ring-red-500': form.errors.message }"></textarea>
                 <p v-if="form.errors.message" class="text-xs font-medium text-red-600">{{ form.errors.message }}</p>
@@ -76,7 +76,7 @@ const form = useForm({
 
             <button type="submit" :disabled="form.processing"
                 class="group relative flex w-full items-center justify-center gap-2 overflow-hidden rounded-lg bg-brand-maroon px-6 py-3.5 text-sm font-bold text-white shadow-xl transition-all hover:bg-brand-maroon-dark active:scale-[0.98] disabled:opacity-70">
-                <span class="relative z-10">{{ translations.contact_form.contactus }}</span>
+                <span class="relative z-10">{{ translations.contactus }}</span>
                 <svg v-if="form.processing" class="h-4 w-4 animate-spin text-white" viewBox="0 0 24 24">
                     <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
                     <path class="opacity-75" fill="currentColor"

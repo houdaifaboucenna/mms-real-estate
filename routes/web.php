@@ -12,11 +12,11 @@ Route::get('about', [Controllers\HomeController::class, 'about'])->name('app.abo
 Route::get('posts', [Controllers\HomeController::class, 'posts'])->name('app.posts');
 Route::get('faq', [Controllers\HomeController::class, 'faq'])->name('app.faq');
 Route::get('contact', [Controllers\HomeController::class, 'contact'])->name('app.contact');
+Route::get('post/{post}', [Controllers\HomeController::class, 'post'])->name('app.post');
+Route::get('estate/{estate}', [Controllers\HomeController::class, 'estate'])->name('app.estate');
 
 // ─── Public Routes (Still Blade — to be converted) ────────────────
-Route::get('post/{post}', [Controllers\HomeController::class, 'post'])->name('app.post');
 Route::get('estates', [Controllers\HomeController::class, 'estates'])->name('app.estates');
-Route::get('estate/{estate}', [Controllers\HomeController::class, 'estate'])->name('app.estate');
 Route::get('estate/type/{type}', [Controllers\HomeController::class, 'filterByType'])->name('app.estate_type');
 Route::get('estate/city/{city}', [Controllers\HomeController::class, 'filterByCity'])->name('app.estate_city');
 Route::get('estate/{city}/{town}', [Controllers\HomeController::class, 'filterByTown'])->name('app.estate_town');
