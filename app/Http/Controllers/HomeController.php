@@ -44,7 +44,21 @@ class HomeController extends Controller
     {
         $post = Post::where('slug', $slug)->first();
 
-        return view('home.post', ['post' => $post, 'comments' => $post->comments]);
+        return Inertia::render('PostShow', [
+            'post' => $post,
+            'comments' => $post->comments,
+            'translations' => [
+                'post' => __('home.post'),
+                'all_articles' => __('home.all_articles'),
+                'add_comment' => __('home.add_comment'),
+                'comments' => __('home.comments'),
+                'name' => __('home.name'),
+                'email' => __('home.email'),
+                'be_first_comment' => __('home.No comments yet. Be the first to comment!'),
+                'content' => __('home.content'),
+                'contact_form' => __('home.contact_form'),
+            ],
+        ]);
     }
 
     public function estates()
@@ -77,20 +91,21 @@ class HomeController extends Controller
             'faqs' => Faq::all(),
             'translations' => [
                 'faq' => __('home.faq'),
-                'getin' => __('home.getin'),
-                'fillin' => __('home.fillin'),
-                'contactus' => __('home.contactus'),
-                'name' => __('home.name'),
-                'email' => __('home.email'),
-                'phone' => __('home.phone'),
-                'message' => __('home.message'),
+                'faq_header' => __('home.Find answers to common questions about our real estate services.'),
+                'contact_form' => __('home.contact_form'),
             ],
         ]);
     }
 
     public function contact()
     {
-        return view('home.contact');
+        return Inertia::render('Contactus', [
+            'translations' => [
+                'address' => __('home.address'),
+                'adrs' => __('home.adrs'),
+                'contact_form' => __('home.contact_form'),
+            ],
+        ]);
     }
 
     public function about()

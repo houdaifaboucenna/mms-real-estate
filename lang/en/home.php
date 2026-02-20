@@ -47,6 +47,7 @@ return [
 
     // Articles
     'readmore' => 'Read More >>',
+    'No comments yet. Be the first to comment!' => 'No comments yet. Be the first to comment!',
 
     // homepage
     'featured' => 'Our Featured Projects',
@@ -74,6 +75,21 @@ return [
     'getin' => 'Get In Touch',
     'fillin' => 'Fill in the form, We wil call you back',
     'adrs' => 'Zafer Mahallesi, Sembol Residence, Haramidere Yolu Ceddesi. Esenyurt Istanbul C Block Floor 16 Apartment:336',
+
+    // Faq
+    'Find answers to common questions about our real estate services.' => 'Find answers to common questions about our real estate services.',
+
+    // Contact Form
+    'contact_form' => [
+        'getin' => 'Get In Touch',
+        'fillin' => 'Fill in the form, We wil call you back',
+        'name' => 'Name',
+        'email' => 'Email',
+        'phone' => 'Phone',
+        'message' => 'Message',
+        'submit' => 'Submit',
+        'contactus' => 'Contact Us',
+    ],
 
     // search
     'nofound' => 'No Result Found',
