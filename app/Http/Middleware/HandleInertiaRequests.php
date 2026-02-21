@@ -51,11 +51,19 @@ class HandleInertiaRequests extends Middleware
                 'success' => $request->session()->get('success'),
             ],
             'latestPosts' => Post::latest()->limit(3)->get(['id', 'title', 'title_ar', 'slug']),
-            'propertyTypes' => collect(EstateTypeEnum::labels())->map(fn ($label, $key) => [
+            'propertyTypes' => collect(EstateTypeEnum::labels())->map(fn($label, $key) => [
                 'key' => $key,
                 'label' => $label,
                 'count' => Estate::where('type', $key)->count(),
             ])->values(),
+            'translations' => [
+                'latest_articles' => __('home.latest_articles'),
+                'property_types' => __('home.property_types'),
+                'stay_connected' => __('home.stay_connected'),
+                'contact_us' => __('home.contact_us'),
+                'copyright' => __('home.copyright'),
+                'search' => __('home.search'),
+            ],
         ];
     }
 }

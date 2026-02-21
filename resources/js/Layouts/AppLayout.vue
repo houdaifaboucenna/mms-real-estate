@@ -1,5 +1,5 @@
 <script setup>
-import { Link, usePage } from '@inertiajs/vue3';
+import { Link, usePage, router } from '@inertiajs/vue3';
 import { computed, ref, onMounted, onUnmounted } from 'vue';
 
 const page = usePage();
@@ -8,10 +8,12 @@ const locale = computed(() => page.props.locale);
 const isEn = computed(() => locale.value === 'en');
 const latestPosts = computed(() => page.props.latestPosts ?? []);
 const propertyTypes = computed(() => page.props.propertyTypes ?? []);
+const translations = computed(() => page.props.translations);
 
 defineProps({
     title: { type: String, default: '' },
 });
+
 
 const navLinks = [
     { name: 'Home', nameAr: 'الرئيسية', route: 'app.home' },
@@ -40,7 +42,7 @@ onUnmounted(() => window.removeEventListener('scroll', onScroll));
 const searchQuery = ref('');
 function submitSearch() {
     if (searchQuery.value.trim()) {
-        window.location.href = route('app.search') + '?q=' + encodeURIComponent(searchQuery.value);
+        router.get(route('app.search'), { q: searchQuery.value }, { preserveState: true });
     }
 }
 </script>
@@ -95,8 +97,7 @@ function submitSearch() {
                                                 d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                                         </svg>
                                     </span>
-                                    <input v-model="searchQuery" type="text"
-                                        :placeholder="isEn ? 'Search...' : 'بحث...'"
+                                    <input v-model="searchQuery" type="text" :placeholder="translations.search + '... '"
                                         class="border border-l-0 border-gray-300/30 bg-white/40 px-3 py-1.5 text-sm text-gray-100 placeholder-gray-300 focus:outline-none" />
                                 </div>
                             </form>
@@ -233,7 +234,7 @@ function submitSearch() {
 
                 <!-- Col 2: Latest Articles -->
                 <div v-if="latestPosts.length">
-                    <h3 class="mb-3 text-lg font-medium">{{ isEn ? 'Latest Articles' : 'آخر المقالات' }}</h3>
+                    <h3 class="mb-3 text-lg font-medium">{{ translations.latest_articles }}</h3>
                     <ul class="list-none space-y-2 p-0">
                         <li v-for="post in latestPosts" :key="post.id">
                             <Link :href="route('app.post', post.slug)"
@@ -246,7 +247,7 @@ function submitSearch() {
 
                 <!-- Col 3: Property Types -->
                 <div v-if="propertyTypes.length">
-                    <h3 class="mb-3 text-lg font-medium">{{ isEn ? 'Property Types' : 'أنواع العقارات' }}</h3>
+                    <h3 class="mb-3 text-lg font-medium">{{ translations.property_types }}</h3>
                     <ul class="list-none space-y-2 p-0">
                         <li v-for="type in propertyTypes" :key="type.key">
                             <Link :href="route('app.estate_filter', { type: type.key })"
@@ -260,7 +261,7 @@ function submitSearch() {
 
                 <!-- Col 4: Social & Contact -->
                 <div>
-                    <h3 class="mb-3 text-lg font-medium">{{ isEn ? 'Stay Connected' : 'ابق على تواصل' }}</h3>
+                    <h3 class="mb-3 text-lg font-medium">{{ translations.stay_connected }}</h3>
                     <!-- Social -->
                     <ul class="mb-4 flex list-none flex-wrap gap-0.5 p-0">
                         <li v-if="settings.facebook">
@@ -311,7 +312,7 @@ function submitSearch() {
                     </ul>
 
                     <!-- Contact -->
-                    <h3 class="mb-2 mt-4 text-lg font-medium">{{ isEn ? 'Contact Us' : 'اتصل بنا' }}</h3>
+                    <h3 class="mb-2 mt-4 text-lg font-medium">{{ translations.contact_us }}</h3>
                     <ul class="list-none space-y-2 p-0">
                         <li v-if="settings.phone">
                             <a :href="`tel:${settings.phone}`"
@@ -339,7 +340,7 @@ function submitSearch() {
 
             <!-- Copyright bar (darker strip) -->
             <div class="bg-brand-maroon-dark/80 py-3 text-center text-sm text-gray-400">
-                © {{ new Date().getFullYear() }} MmsEstate. {{ isEn ? 'All rights reserved.' : 'جميع الحقوق محفوظة.' }}
+                © {{ new Date().getFullYear() }} MmsEstate. {{ translations.copyright }}
             </div>
         </footer>
 

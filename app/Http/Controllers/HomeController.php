@@ -118,7 +118,7 @@ class HomeController extends Controller
                 'all_details_and_legal_consultation' => __('home.Our investment experts are ready to provide you with all details and legal consultation.'),
                 'whatsapp_consultation' => __('home.WhatsApp Consultation'),
                 'overview_and_details' => __('home.Overview & Details'),
-                'view_details' => __('home.View Details'),
+                'view_details' => __('home.view_details'),
             ],
         ]);
     }
@@ -148,7 +148,7 @@ class HomeController extends Controller
                 'ch_town' => __('home.ch_town'),
                 'ch_type' => __('home.ch_type'),
                 'search' => __('home.search'),
-                'view_details' => __('home.View Details'),
+                'view_details' => __('home.view_details'),
             ],
         ]);
     }
@@ -199,7 +199,7 @@ class HomeController extends Controller
                 'ch_town' => __('home.ch_town'),
                 'ch_type' => __('home.ch_type'),
                 'search' => __('home.search'),
-                'view_details' => __('home.View Details'),
+                'view_details' => __('home.view_details'),
                 'max_price' => __('home.max_price'),
                 'min_price' => __('home.min_price'),
                 'reset_filters' => __('home.Reset all filters'),
@@ -226,17 +226,27 @@ class HomeController extends Controller
             : Post::where('title_ar', 'LIKE', '%' . $query . '%')->get();
 
         $estates = isLang('en')
-            ? Estate::where('title', 'LIKE', '%' . $query . '%')->get()
-            : Estate::where('title_ar', 'LIKE', '%' . $query . '%')->get();
+            ? Estate::with('city', 'town')->where('title', 'LIKE', '%' . $query . '%')->get()
+            : Estate::with('city', 'town')->where('title_ar', 'LIKE', '%' . $query . '%')->get();
 
         $faqs = isLang('en')
             ? Faq::where('question', 'LIKE', '%' . $query . '%')->orWhere('answer', 'LIKE', '%' . $query . '%')->get()
             : Faq::where('question_ar', 'LIKE', '%' . $query . '%')->orWhere('answer_ar', 'LIKE', '%' . $query . '%')->get();
 
-        return view('home.search', [
+        return Inertia::render('Search', [
             'posts' => $posts,
             'estates' => $estates,
             'faqs' => $faqs,
+            'translations' => [
+                'search_res' => __('home.search_res'),
+                'articles' => __('home.articles'),
+                'estates' => __('home.estates'),
+                'faq' => __('home.faq'),
+                'nofound' => __('home.nofound'),
+                'nofound_desc' => __('home.nofound_desc'),
+                'back_to_home' => __('home.back_to_home'),
+                'view_details' => __('home.view_details'),
+            ],
         ]);
     }
 }

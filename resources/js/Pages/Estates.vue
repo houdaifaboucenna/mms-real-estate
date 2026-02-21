@@ -4,10 +4,6 @@ import AppLayout from '@/Layouts/AppLayout.vue';
 import { Head, Link, usePage, useForm } from '@inertiajs/vue3';
 import { computed, watch } from 'vue';
 
-const page = usePage();
-const isEn = computed(() => page.props.locale === 'en');
-const query = computed(() => page.url.includes('?') ? new URLSearchParams(page.url.split('?')[1]) : new URLSearchParams())
-
 const props = defineProps({
     translations: Object,
     estates: Object,
@@ -17,6 +13,10 @@ const props = defineProps({
     minPrice: Number,
     title: String,
 });
+
+const page = usePage();
+const isEn = computed(() => page.props.locale === 'en');
+const query = computed(() => page.url.includes('?') ? new URLSearchParams(page.url.split('?')[1]) : new URLSearchParams())
 
 const filterForm = useForm({
     city: query.value.get('city') || '',
@@ -32,14 +32,6 @@ const availableTowns = computed(() => {
     const city = props.cities.find(c => c.id == filterForm.city);
     return city ? city.towns : [];
 });
-
-// watch(() => page.url, () => {
-//     filterForm.city = query.value.get('city') || '';
-//     filterForm.town = query.value.get('town') || '';
-//     filterForm.type = query.value.get('type') || '';
-//     filterForm.from = query.value.get('from') || null;
-//     filterForm.to = query.value.get('to') || null;
-// }, { immediate: true });
 
 // Reset town when city changes
 watch(() => filterForm.city, () => {

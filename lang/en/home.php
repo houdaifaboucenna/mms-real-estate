@@ -21,6 +21,7 @@ return [
     'about' => 'About Us',
     'blog' => 'Blog',
     'similar' => 'Similar Projects',
+    'contact_us' => 'Contact Us',
 
     // Fields
     'name' => 'Name',
@@ -55,9 +56,9 @@ return [
     'our_blog' => 'Our Blog',
 
     // footer
-    'lts_articles' => 'Latest Articles',
-    'prp_types' => 'Property Types',
-    'stay_connect' => 'Stay Connect',
+    'latest_articles' => 'Latest Articles',
+    'property_types' => 'Property Types',
+    'stay_connected' => 'Stay Connect',
     'copyright' => '© Copyright ' . date('Y') . ' All rights reserved by MMS Real Estate',
 
     // About
@@ -94,6 +95,8 @@ return [
     // search
     'nofound' => 'No Result Found',
     'search_res' => 'Search Result',
+    'nofound_desc' => 'We couldn\'t find anything matching your search. Please try different keywords or browse our categories.',
+    'back_to_home' => 'Back to Home',
 
     // SEO
     's_description' => 'MMS Real Estate Company In Turkey specialized in real estate consultancy and brokerage, based in Istanbul, with a good network in other cities within Turkey.',
@@ -103,10 +106,11 @@ return [
     'Our investment experts are ready to provide you with all details and legal consultation.' => 'Our investment experts are ready to provide you with all details and legal consultation.',
     'WhatsApp Consultation' => 'WhatsApp Consultation',
     'Overview & Details' => 'Overview & Details',
-    'View Details' => 'View Details',
+    'view_details' => 'View Details',
 
     'min_price' => 'Min Price',
     'max_price' => 'Max Price',
     'Reset all filters' => 'Reset all filters',
     'Try adjusting your filters to find what you looking for.' => 'Try adjusting your filters to find what you looking for.',
+
 ];
