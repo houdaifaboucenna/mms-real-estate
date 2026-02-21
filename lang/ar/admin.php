@@ -51,6 +51,7 @@ return [
     'no' => 'لا',
     'yes' => 'نعم',
     'confirm_delete' => 'هل انت متاكد من حذف هذا العنصر؟',
+    'logout' => 'تسجيل الخروج',
 
     // others
     'view_website' => 'View Website',

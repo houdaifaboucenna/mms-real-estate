@@ -34,8 +34,11 @@ class HandleInertiaRequests extends Middleware
     {
         return [
             ...parent::share($request),
+            'config' => [
+                'app_name' => config('app.name'),
+            ],
             'auth' => [
-                'user' => $request->user(),
+                'user' => $request->user()->with('profile')->first(),
             ],
             'locale' => session('lang', 'en'),
             'settings' => [
@@ -63,6 +66,16 @@ class HandleInertiaRequests extends Middleware
                 'contact_us' => __('home.contact_us'),
                 'copyright' => __('home.copyright'),
                 'search' => __('home.search'),
+                'view_website' => __('admin.view_website'),
+                'overview' => __('admin.overview'),
+                'articles' => __('admin.articles'),
+                'comments' => __('admin.comments'),
+                'estates' => __('admin.estates'),
+                'messages' => __('home.messages'),
+                'faq' => __('admin.faq'),
+                'settings' => __('admin.settings'),
+                'profile' => __('admin.profile'),
+                'logout' => __('admin.logout'),
             ],
         ];
     }

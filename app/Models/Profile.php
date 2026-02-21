@@ -17,6 +17,8 @@ class Profile extends Model
         'image',
     ];
 
+    protected $appends = ['image_url'];
+
     public function user()
     {
         return $this->belongsTo(User::class);
@@ -26,7 +28,7 @@ class Profile extends Model
     protected function imageUrl(): Attribute
     {
         return Attribute::make(
-            get: fn () => $this->image ? asset('storage/images/profile/' . $this->image) : getGravatar($this->user->email),
+            get: fn() => $this->image ? asset('storage/images/profile/' . $this->image) : getGravatar($this->user->email),
         );
     }
 }
