@@ -104,4 +104,9 @@ return [
     'WhatsApp Consultation' => 'WhatsApp Consultation',
     'Overview & Details' => 'Overview & Details',
     'View Details' => 'View Details',
+
+    'min_price' => 'Min Price',
+    'max_price' => 'Max Price',
+    'Reset all filters' => 'Reset all filters',
+    'Try adjusting your filters to find what you looking for.' => 'Try adjusting your filters to find what you looking for.',
 ];

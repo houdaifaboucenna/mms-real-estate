@@ -61,43 +61,6 @@ class HomeController extends Controller
         ]);
     }
 
-    public function estates()
-    {
-        $estates = Estate::paginate(9);
-
-        return view('home.emenu', [
-            'estates' => $estates,
-            'types' => EstateTypeEnum::labels(),
-            'cities' => City::all(),
-            'maxPrice' => Estate::max('max'),
-            'minPrice' => Estate::min('min'),
-        ]);
-    }
-
-    public function estate($slug)
-    {
-        $estate = Estate::with('city', 'town')->where('slug', $slug)->first();
-
-        return Inertia::render('EstateShow', [
-            'estate' => $estate,
-            'others' => Estate::with('city', 'town')->where('id', '!=', $estate->id)->inRandomOrder()->limit(4)->get(),
-            'translations' => [
-                'estate' => __('home.estate'),
-                'similar' => __('home.similar'),
-                'contact_form' => __('home.contact_form'),
-                'city' => __('home.city'),
-                'town' => __('home.town'),
-                'type' => __('home.type'),
-                'price' => __('home.price'),
-                'interested_in_this_property' => __('home.Interested in this property?'),
-                'all_details_and_legal_consultation' => __('home.Our investment experts are ready to provide you with all details and legal consultation.'),
-                'whatsapp_consultation' => __('home.WhatsApp Consultation'),
-                'overview_and_details' => __('home.Overview & Details'),
-                'view_details' => __('home.View Details'),
-            ],
-        ]);
-    }
-
     public function faq()
     {
         return Inertia::render('Faq', [
@@ -136,54 +99,112 @@ class HomeController extends Controller
         ]);
     }
 
+    public function estate($slug)
+    {
+        $estate = Estate::with('city', 'town')->where('slug', $slug)->first();
+
+        return Inertia::render('EstateShow', [
+            'estate' => $estate,
+            'others' => Estate::with('city', 'town')->where('id', '!=', $estate->id)->inRandomOrder()->limit(4)->get(),
+            'translations' => [
+                'estate' => __('home.estate'),
+                'similar' => __('home.similar'),
+                'contact_form' => __('home.contact_form'),
+                'city' => __('home.city'),
+                'town' => __('home.town'),
+                'type' => __('home.type'),
+                'price' => __('home.price'),
+                'interested_in_this_property' => __('home.Interested in this property?'),
+                'all_details_and_legal_consultation' => __('home.Our investment experts are ready to provide you with all details and legal consultation.'),
+                'whatsapp_consultation' => __('home.WhatsApp Consultation'),
+                'overview_and_details' => __('home.Overview & Details'),
+                'view_details' => __('home.View Details'),
+            ],
+        ]);
+    }
+
+    public function estates()
+    {
+        return Inertia::render('Estates', [
+            'estates' => Estate::with('city', 'town')->paginate(9),
+            'types' => EstateTypeEnum::labels(),
+            'cities' => City::with('towns')->get(),
+            'maxPrice' => Estate::max('max') ?? 1000,
+            'minPrice' => Estate::min('min') ?? 0,
+            'translations' => [
+                'estates' => __('home.estates'),
+                'all_estates' => __('home.all_estates'),
+                'nofound' => __('home.nofound'),
+                'home' => __('home.home'),
+                'min_price' => __('home.min_price'),
+                'max_price' => __('home.max_price'),
+                'reset_filters' => __('home.Reset all filters'),
+                'adjust_filters' => __('home.Try adjusting your filters to find what you looking for.'),
+                'city' => __('home.city'),
+                'town' => __('home.town'),
+                'type' => __('home.type'),
+                'price' => __('home.price'),
+                'ch_city' => __('home.ch_city'),
+                'ch_town' => __('home.ch_town'),
+                'ch_type' => __('home.ch_type'),
+                'search' => __('home.search'),
+                'view_details' => __('home.View Details'),
+            ],
+        ]);
+    }
+
     public function filterEstate(Request $request)
     {
-        $estates = Estate::where('min', '>=', $request->from)->where('min', '<=', $request->to);
-        $estates = ($request->type != 0) ? $estates->where('type', $request->type) : $estates;
-        $estates = ($request->city != 0) ? $estates->where('city', $request->city) : $estates;
-        $estates = ($request->town != 0) ? $estates->where('town', $request->town) : $estates;
-        $estates = $estates->paginate(9);
+        $request->validate([
+            'from' => 'nullable|numeric',
+            'to' => 'nullable|numeric',
+            'type' => 'nullable|string',
+            'city' => 'nullable|numeric',
+            'town' => 'nullable|numeric',
+        ]);
+        $estates = Estate::query()->with('city', 'town')
+            ->when($request->filled('from'), function ($query) use ($request) {
+                $query->where('min', '>=', $request->from);
+            })
+            ->when($request->filled('to'), function ($query) use ($request) {
+                $query->where('min', '<=', $request->to);
+            })
+            ->when($request->filled('type'), function ($query) use ($request) {
+                $query->where('type', $request->type);
+            })
+            ->when($request->filled('city'), function ($query) use ($request) {
+                $query->whereRelation('city', 'cities.id', $request->city);
+            })
+            ->when($request->filled('town'), function ($query) use ($request) {
+                $query->where('town_id', $request->town);
+            })
+            ->paginate(9);
 
-        return view('home.emenu', [
+        return Inertia::render('Estates', [
             'estates' => $estates,
             'title' => __('home.search_res') . '(' . $estates->count() . ')',
             'types' => EstateTypeEnum::labels(),
-            'cities' => City::all(),
-            'maxPrice' => Estate::max('max'),
-            'minPrice' => Estate::min('min'),
-        ]);
-    }
-
-    public function filterByType($type)
-    {
-        $estates = Estate::where('type', $type)->paginate(9);
-
-        return view('home.emenu', [
-            'estates' => $estates,
-            'title' => EstateTypeEnum::labels()[$type],
-            'nosearch' => 'no',
-        ]);
-    }
-
-    public function filterByCity($city)
-    {
-        $estates = Estate::where('city', $city)->paginate(9);
-
-        return view('home.emenu', [
-            'estates' => $estates,
-            'title' => City::find($city)->name,
-            'nosearch' => 'no',
-        ]);
-    }
-
-    public function filterByTown($city, $town)
-    {
-        $estates = Estate::where('town', $town + 1)->paginate(9);
-
-        return view('home.emenu', [
-            'estates' => $estates,
-            'title' => Estate::towns($city)[$town],
-            'nosearch' => 'no',
+            'cities' => City::with('towns')->get(),
+            'maxPrice' => Estate::max('max') ?? 1000,
+            'minPrice' => Estate::min('min') ?? 0,
+            'translations' => [
+                'estates' => __('home.estates'),
+                'all_estates' => __('home.all_estates'),
+                'nofound' => __('home.nofound'),
+                'city' => __('home.city'),
+                'town' => __('home.town'),
+                'type' => __('home.type'),
+                'price' => __('home.price'),
+                'ch_city' => __('home.ch_city'),
+                'ch_town' => __('home.ch_town'),
+                'ch_type' => __('home.ch_type'),
+                'search' => __('home.search'),
+                'view_details' => __('home.View Details'),
+                'max_price' => __('home.max_price'),
+                'min_price' => __('home.min_price'),
+                'reset_filters' => __('home.Reset all filters'),
+                'adjust_filters' => __('home.Try adjusting your filters to find what you looking for.'),
+            ],
         ]);
     }
 

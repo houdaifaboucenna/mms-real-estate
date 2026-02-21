@@ -21,6 +21,7 @@ const props = defineProps({
 </script>
 
 <template>
+
     <Head :title="isEn ? 'Home' : 'الرئيسية'" />
 
     <AppLayout>
@@ -28,7 +29,8 @@ const props = defineProps({
         <section class="hero">
             <div class="hero-content">
                 <h1>{{ isEn ? 'Find Your Dream Property' : 'ابحث عن عقارك المثالي' }}</h1>
-                <p>{{ isEn ? 'Browse through our wide selection of properties' : 'تصفح مجموعتنا الواسعة من العقارات' }}</p>
+                <p>{{ isEn ? 'Browse through our wide selection of properties' : 'تصفح مجموعتنا الواسعة من العقارات' }}
+                </p>
                 <Link :href="route('app.estates')" class="btn-primary">
                     {{ isEn ? 'View All Properties' : 'عرض جميع العقارات' }}
                     ({{ estateCount }})
@@ -40,9 +42,8 @@ const props = defineProps({
         <section class="section">
             <h2 class="section-title">{{ isEn ? 'Property Types' : 'أنواع العقارات' }}</h2>
             <div class="types-grid">
-                <Link v-for="(label, key) in types" :key="key"
-                      :href="route('app.estate_type', key)"
-                      class="type-card">
+                <Link v-for="(label, key) in types" :key="key" :href="route('app.estate_filter', { type: key })"
+                    class="type-card">
                     {{ label }}
                 </Link>
             </div>
@@ -52,18 +53,16 @@ const props = defineProps({
         <section class="section" v-if="estates.length">
             <div class="section-header">
                 <h2 class="section-title">{{ isEn ? 'Featured Properties' : 'عقارات مميزة' }}</h2>
-                <Link :href="route('app.estates')" class="see-all">
+                <a :href="route('app.estates')" class="see-all">
                     {{ isEn ? 'See All' : 'عرض الكل' }} →
-                </Link>
+                </a>
             </div>
             <div class="estates-grid">
-                <Link v-for="estate in estates" :key="estate.id"
-                      :href="route('app.estate', estate.slug)"
-                      class="estate-card">
+                <Link v-for="estate in estates" :key="estate.id" :href="route('app.estate', estate.slug)"
+                    class="estate-card">
                     <div class="estate-image">
-                        <img v-if="estate.image"
-                             :src="`/storage/${JSON.parse(estate.image)?.[0]}`"
-                             :alt="isEn ? estate.title : estate.title_ar" />
+                        <img v-if="estate.image" :src="`/storage/${JSON.parse(estate.image)?.[0]}`"
+                            :alt="isEn ? estate.title : estate.title_ar" />
                         <div v-else class="estate-image-placeholder">🏠</div>
                         <span class="estate-type">{{ types[estate.type] || estate.type }}</span>
                     </div>
@@ -87,9 +86,7 @@ const props = defineProps({
                 </Link>
             </div>
             <div class="posts-grid">
-                <Link v-for="post in posts" :key="post.id"
-                      :href="route('app.post', post.slug)"
-                      class="post-card">
+                <Link v-for="post in posts" :key="post.id" :href="route('app.post', post.slug)" class="post-card">
                     <div class="post-image" v-if="post.image">
                         <img :src="`/storage/${post.image}`" :alt="isEn ? post.title : post.title_ar" />
                     </div>

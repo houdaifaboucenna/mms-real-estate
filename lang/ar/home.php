@@ -101,4 +101,9 @@ return [
     'WhatsApp Consultation' => 'استشارة عبر واتساب',
     'Overview & Details' => 'نظرة عامة وتفاصيل',
     'View Details' => 'عرض التفاصيل',
+
+    'min_price' => 'السعر الأدنى',
+    'max_price' => 'السعر الأعلى',
+    'Reset all filters' => 'إعادة تعيين كافة الفلاتر',
+    'Try adjusting your filters to find what you looking for.' => 'حاول تعديل الفلاتر للعثور على ما تبحث عنه.',
 ];
