@@ -52,6 +52,8 @@ return [
     'yes' => 'نعم',
     'confirm_delete' => 'هل انت متاكد من حذف هذا العنصر؟',
     'logout' => 'تسجيل الخروج',
+    'published' => 'منشور',
+    'received' => 'مستلم',
 
     // others
     'view_website' => 'View Website',
@@ -69,8 +71,8 @@ return [
     'whatsapp' => 'Whatsapp',
 
     // overview
-    'estatestypes' => 'Estates Types',
-    'estatescities' => 'Estates Cities',
+    'estatestypes' => 'أنواع العقارات',
+    'estatescities' => 'توزيع المدن',
 
     // messages
     'comment_received' => 'We received your comment, published successfully',

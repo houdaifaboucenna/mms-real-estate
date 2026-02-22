@@ -38,7 +38,7 @@ class HandleInertiaRequests extends Middleware
                 'app_name' => config('app.name'),
             ],
             'auth' => [
-                'user' => $request->user()->with('profile')->first(),
+                'user' => $request->user()?->load('profile'),
             ],
             'locale' => session('lang', 'en'),
             'settings' => [
@@ -76,6 +76,10 @@ class HandleInertiaRequests extends Middleware
                 'settings' => __('admin.settings'),
                 'profile' => __('admin.profile'),
                 'logout' => __('admin.logout'),
+                'estatestypes' => __('admin.estatestypes'),
+                'estatescities' => __('admin.estatescities'),
+                'published' => __('admin.published'),
+                'received' => __('admin.received'),
             ],
         ];
     }

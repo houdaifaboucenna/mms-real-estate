@@ -52,6 +52,8 @@ return [
     'yes' => 'Yes',
     'confirm_delete' => 'Are you sure you want to delete this item?',
     'logout' => 'Logout',
+    'published' => 'Published',
+    'received' => 'Received',
 
     // others
     'view_website' => 'View Website',
