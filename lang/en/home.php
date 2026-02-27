@@ -101,7 +101,6 @@ return [
     // SEO
     's_description' => 'MMS Real Estate Company In Turkey specialized in real estate consultancy and brokerage, based in Istanbul, with a good network in other cities within Turkey.',
 
-
     'Interested in this property?' => 'Interested in this property?',
     'Our investment experts are ready to provide you with all details and legal consultation.' => 'Our investment experts are ready to provide you with all details and legal consultation.',
     'WhatsApp Consultation' => 'WhatsApp Consultation',

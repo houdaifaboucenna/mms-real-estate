@@ -28,7 +28,7 @@ class Profile extends Model
     protected function imageUrl(): Attribute
     {
         return Attribute::make(
-            get: fn() => $this->image ? asset('storage/images/profile/' . $this->image) : getGravatar($this->user->email),
+            get: fn () => $this->image ? asset('storage/images/profile/' . $this->image) : getGravatar($this->user->email),
         );
     }
 }

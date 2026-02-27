@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\EstateTypeEnum;
 use App\Models\Comment;
 use App\Models\Contact;
 use App\Models\Estate;
@@ -27,16 +28,16 @@ class AdminController extends Controller
             'estates_by_city' => Estate::with('city')
                 ->get()
                 ->groupBy('city_id')
-                ->map(fn($group) => [
+                ->map(fn ($group) => [
                     'name' => $group->first()->city->name ?? 'Unknown',
                     'name_ar' => $group->first()->city->name_ar ?? 'غير معروف',
                     'count' => $group->count(),
                 ])->values(),
             'estates_by_type' => Estate::all()
                 ->groupBy('type')
-                ->map(fn($group, $type) => [
+                ->map(fn ($group, $type) => [
                     'type' => $type,
-                    'label' => \App\Enums\EstateTypeEnum::labels()[$type] ?? $type,
+                    'label' => EstateTypeEnum::labels()[$type] ?? $type,
                     'count' => $group->count(),
                 ])->values(),
         ]);

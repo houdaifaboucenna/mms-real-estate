@@ -30,11 +30,8 @@ Route::post('delete-setting-image', [Controllers\SettingController::class, 'dele
 Route::post('delete-estate-image', [Controllers\EstateController::class, 'deleteImage']);
 
 // ─── Admin Routes (Auth via Breeze) ────────────────────────────────
-Route::get('dashboard', function () {
-    return Inertia::render('Dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
-
 Route::middleware('auth')->group(function () {
+
     // Breeze Profile (Vue)
     Route::get('profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('profile', [ProfileController::class, 'update'])->name('profile.update');

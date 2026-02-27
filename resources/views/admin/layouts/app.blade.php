@@ -54,7 +54,7 @@
                             </div>
 
 
-                            {{-- 
+                            {{--
                             <div class="search-mobile-trigger d-sm-none col">
                                 <i class="search-mobile-trigger-icon fas fa-search"></i>
                             </div>
@@ -67,7 +67,7 @@
                                     <i class="fas fa-search"></i>
                                 </button>
                                 </form>
-                            </div> 
+                            </div>
                             --}}
 
                             <div class="app-utilities col-auto">
