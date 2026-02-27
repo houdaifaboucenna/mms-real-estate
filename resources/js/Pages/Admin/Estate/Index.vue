@@ -53,7 +53,7 @@ const deleteEstate = (id) => {
                 <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                     <div>
                         <h1 class="text-3xl font-extrabold text-brand-maroon tracking-tight">{{ translations.all_estates
-                            }}</h1>
+                        }}</h1>
                         <p class="text-sm font-medium text-gray-500 mt-1">Manage your property portfolio with precision.
                         </p>
                     </div>
@@ -136,7 +136,7 @@ const deleteEstate = (id) => {
                                     </td>
                                     <td class="px-8 py-5 whitespace-nowrap">
                                         <span
-                                            class="inline-flex px-2.5 py-1 rounded-full text-[10px] font-black uppercase tracking-widest bg-brand-gold/10 text-brand-gold ring-1 ring-brand-gold/20">
+                                            class="inline-flex px-2.5 py-1 rounded-full text-[10px] font-black uppercase tracking-widest bg-brand-gold/10 text-brand-gold-dark ring-1 ring-brand-gold/20">
                                             {{ types[estate.type] || estate.type }}
                                         </span>
                                     </td>

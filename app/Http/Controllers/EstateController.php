@@ -37,9 +37,28 @@ class EstateController extends Controller
 
     public function create()
     {
-        return view('admin.estates.create', [
+        return Inertia::render('Admin/Estate/Create', [
             'types' => EstateTypeEnum::labels(),
             'cities' => City::all(),
+            'translations' => [
+                'add_estate' => __('admin.add_estate'),
+                'title' => __('admin.title'),
+                'en' => __('admin.en'),
+                'ar' => __('admin.ar'),
+                'slug' => __('admin.slug'),
+                'shortmeta' => __('admin.shortmeta'),
+                'keywords' => __('admin.keywords'),
+                'type' => __('admin.type'),
+                'min' => __('admin.min'),
+                'max' => __('admin.max'),
+                'city' => __('admin.city'),
+                'town' => __('admin.town'),
+                'price' => __('admin.price'),
+                'images' => __('admin.image'),
+                'content' => __('admin.content'),
+                'save' => __('admin.save'),
+                'create_estate' => __('admin.create_estate'),
+            ],
         ]);
     }
 
@@ -89,10 +108,31 @@ class EstateController extends Controller
 
     public function edit(Estate $estate)
     {
-        return view('admin.estates.create', [
+        return Inertia::render('Admin/Estate/Create', [
             'estate' => $estate,
             'types' => EstateTypeEnum::labels(),
             'cities' => City::all(),
+            'translations' => [
+                'add_estate' => __('admin.add_estate'),
+                'edit_estate' => __('admin.edit_estate'),
+                'title' => __('admin.title'),
+                'en' => __('admin.en'),
+                'ar' => __('admin.ar'),
+                'slug' => __('admin.slug'),
+                'shortmeta' => __('admin.shortmeta'),
+                'keywords' => __('admin.keywords'),
+                'type' => __('admin.type'),
+                'min' => __('admin.min'),
+                'max' => __('admin.max'),
+                'city' => __('admin.city'),
+                'town' => __('admin.town'),
+                'price' => __('admin.price'),
+                'images' => __('admin.image'),
+                'content' => __('admin.content'),
+                'save' => __('admin.save'),
+                'update' => __('admin.update'),
+                'add' => __('admin.add'),
+            ],
         ]);
     }
 
@@ -144,7 +184,7 @@ class EstateController extends Controller
 
     public function destroy(Estate $estate)
     {
-        foreach (json_decode($estate->image) as $image) {
+        foreach ($estate->image as $image) {
             Storage::disk('public')->delete($image);
         }
         $estate->delete();

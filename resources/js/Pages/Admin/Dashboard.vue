@@ -87,14 +87,14 @@ const typesDistribution = computed(() => formatDistribution(props.estates_by_typ
                         class="group overflow-hidden rounded-2xl bg-white p-6 shadow-sm ring-1 ring-gray-100 transition-all hover:shadow-md hover:ring-brand-gold/30">
                         <div class="flex items-center justify-between">
                             <div
-                                class="rounded-xl bg-brand-gold/10 p-3 text-brand-gold group-hover:bg-brand-gold group-hover:text-brand-maroon transition-colors">
+                                class="rounded-xl bg-brand-gold/10 p-3 text-brand-gold-dark group-hover:bg-brand-gold group-hover:text-brand-maroon transition-colors">
                                 <span class="iconify text-2xl" data-icon="carbon:home"></span>
                             </div>
-                            <span class="text-xs font-bold uppercase tracking-widest text-brand-gold">Active</span>
+                            <span class="text-xs font-bold uppercase tracking-widest text-brand-gold-dark">Active</span>
                         </div>
                         <div class="mt-4">
                             <h3 class="text-lg font-bold text-gray-400 uppercase tracking-wider">{{ translations.estates
-                                }}</h3>
+                            }}</h3>
                             <p class="text-4xl font-extrabold text-brand-maroon">{{ stats.estates_count }}</p>
                         </div>
                     </div>
@@ -131,7 +131,7 @@ const typesDistribution = computed(() => formatDistribution(props.estates_by_typ
                             <div v-for="city in citiesDistribution" :key="city.name" class="space-y-2">
                                 <div class="flex items-end justify-between">
                                     <span class="text-sm font-bold text-gray-700">{{ isEn ? city.name : city.name_ar
-                                        }}</span>
+                                    }}</span>
                                     <span
                                         class="text-xs font-extrabold text-brand-maroon bg-brand-gold/10 px-2 py-0.5 rounded-full">{{
                                             city.count }} {{ translations.estates }}</span>

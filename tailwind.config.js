@@ -19,7 +19,8 @@ export default {
                 brand: {
                     maroon: '#450706',
                     'maroon-dark': '#2b0303',
-                    gold: '#d1b57a',
+                    gold: '#c5a059',
+                    'gold-dark': '#a37c37',
                     beige: '#e4cfa0',
                     red: '#b33939',
                     whatsapp: '#25d366',

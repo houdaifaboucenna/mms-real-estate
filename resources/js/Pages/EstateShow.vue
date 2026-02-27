@@ -129,7 +129,7 @@ const setIndex = (index) => {
                                 <div
                                     class="rounded-xl border border-gray-100 bg-gray-50 p-6 text-center transition hover:shadow-md">
                                     <div
-                                        class="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-full bg-brand-gold/10 text-brand-gold">
+                                        class="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-full bg-brand-gold/10 text-brand-gold-dark">
                                         <span class="iconify" data-icon="maki:town-hall" data-width="24"></span>
                                     </div>
                                     <span class="block text-xs font-bold uppercase tracking-wider text-gray-400 mb-1">{{
@@ -151,7 +151,7 @@ const setIndex = (index) => {
                                 <div
                                     class="rounded-xl border border-gray-100 bg-brand-maroon p-6 text-center text-white shadow-lg ring-1 ring-white/10">
                                     <div
-                                        class="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-full bg-white/10 text-brand-gold">
+                                        class="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-full bg-white/10 text-brand-gold-dark">
                                         <span class="iconify" data-icon="dashicons:money-alt" data-width="28"></span>
                                     </div>
                                     <span class="block text-xs font-bold uppercase tracking-wider text-white/60 mb-1">{{
@@ -195,16 +195,16 @@ const setIndex = (index) => {
                                     </div>
                                     <div class="p-6">
                                         <div
-                                            class="flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-brand-gold mb-3">
+                                            class="flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-brand-gold-dark mb-3">
                                             <span class="rounded-full bg-brand-gold/10 px-2.5 py-1">{{ other.type
-                                            }}</span>
+                                                }}</span>
                                         </div>
                                         <h4
                                             class="text-xl font-bold text-brand-maroon transition-colors group-hover:text-brand-red mb-3">
                                             {{ isEn ? other.title : other.title_ar }}
                                         </h4>
                                         <div class="flex items-center gap-2 text-sm text-gray-500 mb-4">
-                                            <svg class="h-4 w-4 text-brand-gold" fill="currentColor"
+                                            <svg class="h-4 w-4 text-brand-gold-dark" fill="currentColor"
                                                 viewBox="0 0 20 20">
                                                 <path fill-rule="evenodd"
                                                     d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z"
@@ -219,7 +219,7 @@ const setIndex = (index) => {
                                                     other.max }}$
                                             </span>
                                             <span
-                                                class="text-brand-gold font-bold text-sm group-hover:translate-x-1 transition-transform">
+                                                class="text-brand-gold-dark font-bold text-sm group-hover:translate-x-1 transition-transform">
                                                 {{ translations.view_details }} →
                                             </span>
                                         </div>

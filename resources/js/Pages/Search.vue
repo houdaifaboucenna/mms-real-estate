@@ -40,7 +40,7 @@ const parseImages = (imageStr) => {
 
                 <div class="absolute inset-0 flex items-center px-4 sm:px-6 lg:px-8">
                     <div class="mx-auto max-w-7xl w-full">
-                        <nav class="mb-4 flex text-sm font-medium text-brand-gold/90" aria-label="Breadcrumb">
+                        <nav class="mb-4 flex text-sm font-medium text-brand-gold-dark" aria-label="Breadcrumb">
                             <Link :href="route('app.home')" class="hover:text-white transition-colors">
                                 {{ translations.home }}
                             </Link>
@@ -60,7 +60,7 @@ const parseImages = (imageStr) => {
                 <section v-if="estates && estates.length > 0" class="space-y-8">
                     <div class="flex items-center justify-between border-b border-gray-100 pb-4">
                         <h2 class="text-2xl font-bold text-brand-maroon flex items-center gap-3">
-                            <span class="iconify text-brand-gold" data-icon="carbon:home"></span>
+                            <span class="iconify text-brand-gold-dark" data-icon="carbon:home"></span>
                             {{ translations.estates }}
                             <span
                                 class="ml-2 rounded-full bg-brand-maroon/5 px-3 py-1 text-sm font-bold text-brand-maroon">
@@ -95,7 +95,7 @@ const parseImages = (imageStr) => {
                                     </h4>
 
                                     <div class="flex items-center gap-2 text-sm text-gray-500 mb-4">
-                                        <span class="iconify text-brand-gold flex-shrink-0"
+                                        <span class="iconify text-brand-gold-dark flex-shrink-0"
                                             data-icon="carbon:location-filled"></span>
                                         <span class="truncate">{{ isEn ? estate.city.name : estate.city.name_ar }}, {{
                                             isEn ? estate.town.name : estate.town.name_ar }}</span>
@@ -105,7 +105,7 @@ const parseImages = (imageStr) => {
                                         <span class="text-base font-extrabold text-brand-maroon">
                                             {{ estate.min }}$ - {{ estate.max }}$
                                         </span>
-                                        <span class="text-brand-gold font-bold text-sm">
+                                        <span class="text-brand-gold-dark font-bold text-sm">
                                             {{ translations.view_details }}</span>
                                     </div>
                                 </div>
@@ -136,7 +136,7 @@ const parseImages = (imageStr) => {
                 <section v-if="faqs && faqs.length > 0" class="space-y-8">
                     <div class="flex items-center justify-between border-b border-gray-100 pb-4">
                         <h2 class="text-2xl font-bold text-brand-maroon flex items-center gap-3">
-                            <span class="iconify text-brand-gold" data-icon="carbon:help"></span>
+                            <span class="iconify text-brand-gold-dark" data-icon="carbon:help"></span>
                             {{ translations.faq }}
                             <span
                                 class="ml-2 rounded-full bg-brand-maroon/5 px-3 py-1 text-sm font-bold text-brand-maroon">

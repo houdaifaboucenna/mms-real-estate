@@ -38,7 +38,7 @@ const props = defineProps({
                     </span>
 
                     <Link :href="route('app.post', { post: post.slug })"
-                        class="text-sm font-bold text-brand-gold hover:text-brand-maroon transition-colors">
+                        class="text-sm font-bold text-brand-gold-dark hover:text-brand-maroon transition-colors">
                         {{ isEn ? 'Read More' : 'اقرأ المزيد' }} →
                     </Link>
                 </div>
