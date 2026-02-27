@@ -22,3 +22,11 @@
 Homestead.json
 Homestead.yaml
 Thumbs.db
+
+# AI
+/opencode.json
+/gemini
+/boost.json
+/.agents
+/GEMINI.md
+/AGENTS.md
