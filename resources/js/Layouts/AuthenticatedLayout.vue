@@ -7,7 +7,7 @@ const isSidebarOpen = ref(false);
 const page = usePage();
 const appName = computed(() => page.props.config.app_name);
 const auth = computed(() => page.props.auth);
-const translations = computed(() => page.props.translations);
+const translations = computed(() => page.props.globalTranslations);
 
 const toggleSidebar = () => {
     isSidebarOpen.value = !isSidebarOpen.value;

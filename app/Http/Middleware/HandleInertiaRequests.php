@@ -59,7 +59,7 @@ class HandleInertiaRequests extends Middleware
                 'label' => $label,
                 'count' => Estate::where('type', $key)->count(),
             ])->values(),
-            'translations' => [
+            'globalTranslations' => [
                 'latest_articles' => __('home.latest_articles'),
                 'property_types' => __('home.property_types'),
                 'stay_connected' => __('home.stay_connected'),

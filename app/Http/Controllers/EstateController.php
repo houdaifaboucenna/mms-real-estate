@@ -8,14 +8,30 @@ use App\Models\Estate;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use Inertia\Inertia;
 
 class EstateController extends Controller
 {
     public function index()
     {
-        return view('admin.estates.index', [
-            'estates' => Estate::all(),
+        return Inertia::render('Admin/Estate/Index', [
+            'estates' => Estate::with('city', 'town')->get(),
             'types' => EstateTypeEnum::labels(),
+            'translations' => [
+                'all_estates' => __('admin.all_estates'),
+                'add_estate' => __('admin.add_estate'),
+                'preview' => __('admin.preview'),
+                'delete' => __('admin.delete'),
+                'edit' => __('admin.edit'),
+                'title' => __('admin.title'),
+                'type' => __('admin.type'),
+                'city' => __('admin.city'),
+                'town' => __('admin.town'),
+                'price' => __('admin.price'),
+                'id' => __('admin.id'),
+                'confirm_delete' => __('admin.confirm_delete'),
+                'actions' => __('admin.actions'),
+            ],
         ]);
     }
 

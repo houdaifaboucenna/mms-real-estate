@@ -5,7 +5,7 @@ import { computed } from 'vue';
 
 const page = usePage();
 const isEn = computed(() => page.props.locale === 'en');
-const translations = computed(() => page.props.translations);
+const translations = computed(() => page.props.globalTranslations);
 
 const props = defineProps({
     stats: Object,
@@ -134,7 +134,7 @@ const typesDistribution = computed(() => formatDistribution(props.estates_by_typ
                                         }}</span>
                                     <span
                                         class="text-xs font-extrabold text-brand-maroon bg-brand-gold/10 px-2 py-0.5 rounded-full">{{
-                                        city.count }} {{ translations.estates }}</span>
+                                            city.count }} {{ translations.estates }}</span>
                                 </div>
                                 <div class="h-2 w-full overflow-hidden rounded-full bg-gray-100">
                                     <div class="h-full bg-brand-maroon transition-all duration-1000 ease-out"
@@ -161,7 +161,7 @@ const typesDistribution = computed(() => formatDistribution(props.estates_by_typ
                                     <span class="text-sm font-bold text-gray-700">{{ type.label }}</span>
                                     <span
                                         class="text-xs font-extrabold text-brand-maroon bg-brand-gold/10 px-2 py-0.5 rounded-full">{{
-                                        type.count }}</span>
+                                            type.count }}</span>
                                 </div>
                                 <div class="h-2 w-full overflow-hidden rounded-full bg-gray-100">
                                     <div class="h-full bg-brand-gold transition-all duration-1000 ease-out"
