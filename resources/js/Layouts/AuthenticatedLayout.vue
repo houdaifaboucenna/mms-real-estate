@@ -122,8 +122,9 @@ const toggleSidebar = () => {
                     </button>
                     <!-- Quick Breadcrumb/Title placeholder -->
                     <div class="hidden sm:block">
-                        <h2 class="text-xl font-extrabold text-brand-maroon tracking-tight">{{ title ||
-                            translations.overview }}</h2>
+                        <h2 class="text-xl font-extrabold text-brand-maroon tracking-tight">
+                            {{ translations.overview }}
+                        </h2>
                     </div>
                 </div>
 

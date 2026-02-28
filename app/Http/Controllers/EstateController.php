@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Enums\EstateTypeEnum;
 use App\Models\City;
+use App\Models\CityTown;
 use App\Models\Estate;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
@@ -64,7 +66,7 @@ class EstateController extends Controller
 
     public function store(Request $request)
     {
-        $validated = $request->validate([
+        $valid = $request->validate([
             'title' => 'required|unique:estates',
             'content' => 'required',
             'title_ar' => 'required|unique:estates',
@@ -74,42 +76,31 @@ class EstateController extends Controller
             'keywords' => 'nullable',
             'keywords_ar' => 'nullable',
             'type' => 'required',
-            'min' => 'nullable',
-            'max' => 'nullable',
-            'city' => 'required',
-            'town' => 'required',
+            'min' => 'nullable|numeric',
+            'max' => 'nullable|numeric',
+            'town_id' => 'required',
             'slug' => 'required|unique:estates',
+            'images' => 'nullable|array',
         ]);
 
-        $validated['slug'] = Str::slug($request->slug);
+        $valid['slug'] = Str::slug($valid['slug']);
 
-        if ($validated['min'] == '') {
-            $validated['min'] = 0;
-        }
-        if ($validated['max'] == '') {
-            $validated['max'] = 0;
-        }
-
-        if ($request->hasFile('images')) {
-
-            foreach ($request->file('images') as $image) {
-                $image = $image->store('images\estates', 'public');
-                $data[] = $image;
+        foreach ($valid['images'] ?? [] as $key => $image) {
+            if ($request->hasFile('images.' . $key)) {
+                $image = $image->store('estates', 'public');
+                $valid['image'][] = $image;
             }
         }
 
-        $validated['image'] = json_encode($data);
-        $estate = Estate::create($validated);
+        Estate::create($valid);
 
-        session()->flash('success', __('admin.estate_created'));
-
-        return redirect()->route('estates.index');
+        return redirect()->route('estates.index')->with('success', __('admin.estate_created'));
     }
 
     public function edit(Estate $estate)
     {
         return Inertia::render('Admin/Estate/Create', [
-            'estate' => $estate,
+            'estate' => $estate->load('city'),
             'types' => EstateTypeEnum::labels(),
             'cities' => City::all(),
             'translations' => [
@@ -138,7 +129,7 @@ class EstateController extends Controller
 
     public function update(Request $request, Estate $estate)
     {
-        $data = $request->validate([
+        $valid = $request->validate([
             'title' => 'required|unique:estates,title,' . $estate->id,
             'content' => 'required',
             'title_ar' => 'required|unique:estates,title_ar,' . $estate->id,
@@ -148,38 +139,25 @@ class EstateController extends Controller
             'keywords' => 'nullable',
             'keywords_ar' => 'nullable',
             'type' => 'required',
-            'min' => 'nullable',
-            'max' => 'nullable',
-            'city' => 'required',
-            'town' => 'required',
+            'min' => 'nullable|numeric',
+            'max' => 'nullable|numeric',
+            'town_id' => 'required',
             'slug' => 'required|unique:estates,slug,' . $estate->id,
+            'images' => 'nullable|array',
         ]);
 
-        $data['slug'] = Str::slug($request->slug);
+        $valid['slug'] = Str::slug($valid['slug']);
+        $valid['image'] = $estate->image;
 
-        if ($data['min'] == '') {
-            $data['min'] = 0;
-        }
-        if ($data['max'] == '') {
-            $data['max'] = 0;
-        }
-
-        $imgs = json_decode($estate->image);
-
-        if ($request->hasFile('images')) {
-
-            foreach ($request->file('images') as $image) {
-                $image = $image->store('images\estates', 'public');
-                $imgs[] = $image;
+        foreach ($valid['images'] ?? [] as $key => $image) {
+            if ($request->hasFile('images.' . $key)) {
+                $valid['image'][] = $image->store('estates', 'public');
             }
         }
 
-        $data['image'] = json_encode($imgs);
-        $estate->update($data);
+        $estate->update($valid);
 
-        session()->flash('success', __('admin.estate_updated'));
-
-        return redirect()->route('estates.index');
+        return back()->with('success', __('admin.estate_updated'));
     }
 
     public function destroy(Estate $estate)
@@ -189,46 +167,37 @@ class EstateController extends Controller
         }
         $estate->delete();
 
-        return redirect()->route('estates.index');
+        return to_route('estates.index')->with('success', __('admin.estate_deleted'));
     }
 
-    public function towns(Request $request)
+    public function fetchTownsByCityId(Request $request)
     {
-        foreach (Estate::towns($request['city']) as $town) {
-            $towns[] = ucfirst($town);
-        }
-        $response = [
-            'status' => 'success',
-            'towns' => $towns,
-        ];
+        $response = CityTown::where('city_id', $request['city'])->get();
 
         return response()->json($response);
     }
 
-    public function deleteImage(Request $request)
+    public function deleteImage(Request $request, Estate $estate)
     {
-        $e = Estate::find($request['estate']);
-        $data = $request->validate([
-            'image' => 'nullable',
+        $request->validate([
+            'image' => 'required',
         ]);
 
-        $imgs = json_decode($e->image);
-        $new = [];
-        foreach ($imgs as $img) {
-            if ($img != $request['img']) {
-                $new[] = $img;
-            } else {
-                Storage::disk('public')->delete($request['img']);
-            }
+        try {
+            Storage::disk('public')->delete($request->get('image'));
+
+            $estate->image = array_filter($estate->image, fn ($img) => $img != $request->get('image'));
+            $estate->save();
+        } catch (Exception $e) {
+            return response()->json([
+                'status' => 'error',
+                'message' => $e->getMessage(),
+            ]);
         }
-        $data['image'] = json_encode($new);
 
-        $e->update($data);
-
-        $response = [
+        return response()->json([
             'status' => 'success',
-        ];
-
-        return response()->json($response);
+            'message' => __('admin.image_deleted'),
+        ]);
     }
 }

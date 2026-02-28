@@ -8,7 +8,7 @@ const locale = computed(() => page.props.locale);
 const isEn = computed(() => locale.value === 'en');
 const latestPosts = computed(() => page.props.latestPosts ?? []);
 const propertyTypes = computed(() => page.props.propertyTypes ?? []);
-const translations = computed(() => page.props.translations);
+const translations = computed(() => page.props.globalTranslations);
 
 defineProps({
     title: { type: String, default: '' },

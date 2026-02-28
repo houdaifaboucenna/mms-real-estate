@@ -25,9 +25,9 @@ Route::resource('contacts', Controllers\ContactController::class)->only(['store'
 Route::resource('comments', Controllers\CommentController::class)->only(['store']);
 
 // ─── Ajax Routes ───────────────────────────────────────────────────
-Route::post('towns', [Controllers\EstateController::class, 'towns']);
+Route::post('towns', [Controllers\EstateController::class, 'fetchTownsByCityId']);
 Route::post('delete-setting-image', [Controllers\SettingController::class, 'deleteImage']);
-Route::post('delete-estate-image', [Controllers\EstateController::class, 'deleteImage']);
+Route::post('delete-estate-image/{estate}', [Controllers\EstateController::class, 'deleteImage']);
 
 // ─── Admin Routes (Auth via Breeze) ────────────────────────────────
 Route::middleware('auth')->group(function () {

@@ -114,14 +114,17 @@ const deleteEstate = (id) => {
                                 <tr v-for="estate in filteredEstates" :key="estate.id"
                                     class="group hover:bg-gray-50/50 transition-colors">
                                     <td class="px-8 py-5 whitespace-nowrap">
-                                        <span class="text-sm font-black text-gray-300">#{{ estate.id }}</span>
+                                        <span class="text-sm font-black text-gray-600">#{{ estate.id }}</span>
                                     </td>
                                     <td class="px-8 py-5">
                                         <div class="flex items-center">
                                             <div
                                                 class="h-12 w-16 flex-shrink-0 overflow-hidden rounded-lg bg-gray-100 ring-1 ring-gray-200">
-                                                <img :src="'/storage/' + (typeof estate.image === 'string' ? JSON.parse(estate.image)[0] : estate.image[0])"
+
+                                                <img v-if="estate.image !== null" :src="'/storage/' + estate.image[0]"
                                                     class="h-full w-full object-cover group-hover:scale-110 transition-transform duration-500">
+                                                <div v-else class="h-full w-full flex items-center justify-center">No
+                                                    image</div>
                                             </div>
                                             <div class="ml-4">
                                                 <div class="text-sm font-bold text-brand-maroon truncate max-w-[200px]">

@@ -38,6 +38,7 @@ return [
     'price' => 'Price Range',
     'message' => 'Message',
     'status' => 'Status',
+    'slug' => 'Slug',
     'actions' => 'Actions',
     'add' => 'Add',
     'edit' => 'Edit',
@@ -54,6 +55,7 @@ return [
     'logout' => 'Logout',
     'published' => 'Published',
     'received' => 'Received',
+    'save' => 'Save',
 
     // others
     'view_website' => 'View Website',
@@ -86,10 +88,15 @@ return [
     'estate_updated' => 'Estate updated successfully',
     'profile_updated' => 'Profile updated successfully',
     'settings_updated' => 'Settings updated successfully',
+    'image_deleted' => 'Image deleted successfully',
+    'estate_deleted' => 'Estate deleted successfully',
 
     // create pages
-    'edit_article' => 'Edit Article',
+    'create_estate' => 'Create Estate',
     'edit_estate' => 'Edit Estate',
+    'create_article' => 'Create Article',
+    'edit_article' => 'Edit Article',
+    'create_profile' => 'Create Profile',
     'edit_profile' => 'Edit Profile',
 
     // pagetitles
