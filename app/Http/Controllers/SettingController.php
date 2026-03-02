@@ -8,13 +8,18 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\View\View;
+use Inertia\Inertia;
 
 class SettingController extends Controller
 {
-    public function index(): View
+    public function index()
     {
-        return view('admin.settings.index');
+        return Inertia::render('Admin/Settings', [
+            'settings' => Setting::all()->keyBy('name'),
+            'translations' => [
+                'settings_updated' => __('admin.settings_updated'),
+            ],
+        ]);
     }
 
     public function update(Request $request): RedirectResponse
