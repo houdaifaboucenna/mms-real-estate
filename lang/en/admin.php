@@ -89,6 +89,7 @@ return [
     'profile_updated' => 'Profile updated successfully',
     'settings_updated' => 'Settings updated successfully',
     'image_deleted' => 'Image deleted successfully',
+    'post_deleted' => 'Post deleted successfully',
     'estate_deleted' => 'Estate deleted successfully',
 
     // create pages

@@ -4,20 +4,55 @@ namespace App\Http\Controllers;
 
 use App\Models\Post;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use Inertia\Inertia;
 
 class PostController extends Controller
 {
     public function index(post $post)
     {
-        return view('admin.posts.index', ['posts' => Post::all()]);
+        return Inertia::render('Admin/Post/Index', [
+            'posts' => Post::with('user')->get(),
+            'translations' => [
+                'all_articles' => __('admin.all_articles'),
+                'add_article' => __('admin.add_article'),
+                'preview' => __('admin.preview'),
+                'delete' => __('admin.delete'),
+                'edit' => __('admin.edit'),
+                'title' => __('admin.title'),
+                'content' => __('admin.content'),
+                'id' => __('admin.id'),
+                'confirm_delete' => __('admin.confirm_delete'),
+                'actions' => __('admin.actions'),
+                'number' => __('admin.number'),
+                'image' => __('admin.image'),
+                'writer' => __('admin.writer'),
+                'date' => __('admin.date'),
+                'article' => __('admin.article'),
+            ],
+        ]);
     }
 
     public function create()
     {
-        return view('admin.posts.create');
+        return Inertia::render('Admin/Post/Create', [
+            'translations' => [
+                'add_article' => __('admin.add_article'),
+                'edit_article' => __('admin.edit_article'),
+                'title' => __('admin.title'),
+                'en' => __('admin.en'),
+                'ar' => __('admin.ar'),
+                'slug' => __('admin.slug'),
+                'shortmeta' => __('admin.shortmeta'),
+                'keywords' => __('admin.keywords'),
+                'images' => __('admin.image'),
+                'content' => __('admin.content'),
+                'save' => __('admin.save'),
+                'update' => __('admin.update'),
+                'add' => __('admin.add'),
+            ],
+        ]);
     }
 
     public function store(Request $request)
@@ -33,25 +68,41 @@ class PostController extends Controller
             'keywords_ar' => 'nullable',
             'user_id' => 'required',
             'slug' => 'required',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
         $validated['slug'] = Str::slug($request->slug);
 
         if ($request->hasFile('image')) {
-            $image = $request['image']->store('images\posts', 'public');
+            $image = $request->file('image')->store('images/posts', 'public');
             $validated['image'] = $image;
         }
 
-        session()->flash('success', __('admin.post_created'));
+        Post::create($validated);
 
-        $posts = Post::create($validated);
-
-        return redirect()->route('posts.index');
+        return redirect()->route('posts.index')->with('success', __('admin.post_created'));
     }
 
     public function edit(post $post)
     {
-        return view('admin.posts.create', ['post' => $post]);
+        return Inertia::render('Admin/Post/Create', [
+            'post' => $post,
+            'translations' => [
+                'add_article' => __('admin.add_article'),
+                'edit_article' => __('admin.edit_article'),
+                'title' => __('admin.title'),
+                'en' => __('admin.en'),
+                'ar' => __('admin.ar'),
+                'slug' => __('admin.slug'),
+                'shortmeta' => __('admin.shortmeta'),
+                'keywords' => __('admin.keywords'),
+                'images' => __('admin.image'),
+                'content' => __('admin.content'),
+                'save' => __('admin.save'),
+                'update' => __('admin.update'),
+                'add' => __('admin.add'),
+            ],
+        ]);
     }
 
     public function update(Request $request, Post $post)
@@ -66,29 +117,27 @@ class PostController extends Controller
             'keywords' => 'nullable',
             'keywords_ar' => 'nullable',
             'slug' => 'required',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
         $data['slug'] = Str::slug($request->slug);
 
         if ($request->hasFile('image')) {
-            $image = $request->image->store('images\posts', 'public');
+            $image = $request->file('image')->store('images/posts', 'public');
             Storage::disk('public')->delete($post->image);
             $data['image'] = $image;
         }
 
-        session()->flash('success', __('admin.post_updated'));
-
         $post->update($data);
 
-        return redirect()->route('posts.index');
+        return redirect()->route('posts.index')->with('success', __('admin.post_updated'));
     }
 
     public function destroy(post $post)
     {
-        DB::delete('delete from comments where post_id = ?', [$post->id]);
         Storage::disk('public')->delete($post->image);
         $post->delete();
 
-        return redirect()->route('posts.index');
+        return redirect()->route('posts.index')->with('success', __('admin.post_deleted'));
     }
 }
