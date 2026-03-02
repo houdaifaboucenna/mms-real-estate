@@ -56,6 +56,7 @@ return [
     'published' => 'Published',
     'received' => 'Received',
     'save' => 'Save',
+    'contact' => 'Contact',
 
     // others
     'view_website' => 'View Website',
