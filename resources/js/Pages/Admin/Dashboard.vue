@@ -1,6 +1,6 @@
 <script setup>
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
-import { Head, usePage } from '@inertiajs/vue3';
+import { Deferred, Head, usePage } from '@inertiajs/vue3';
 import { computed } from 'vue';
 
 const page = usePage();
@@ -8,7 +8,10 @@ const isEn = computed(() => page.props.locale === 'en');
 const translations = computed(() => page.props.globalTranslations);
 
 const props = defineProps({
-    stats: Object,
+    posts_count: Number,
+    comments_count: Number,
+    estates_count: Number,
+    contacts_count: Number,
     estates_by_city: Array,
     estates_by_type: Array,
 });
@@ -44,78 +47,86 @@ const typesDistribution = computed(() => formatDistribution(props.estates_by_typ
                     </div>
                 </div>
 
-                <!-- Stats Grid -->
-                <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
-                    <!-- Articles Stat -->
-                    <div
-                        class="group overflow-hidden rounded-2xl bg-white p-6 shadow-sm ring-1 ring-gray-100 transition-all hover:shadow-md hover:ring-brand-gold/30">
-                        <div class="flex items-center justify-between">
-                            <div
-                                class="rounded-xl bg-brand-maroon/5 p-3 text-brand-maroon group-hover:bg-brand-maroon group-hover:text-white transition-colors">
-                                <span class="iconify text-2xl" data-icon="carbon:document"></span>
-                            </div>
-                            <span class="text-xs font-bold uppercase tracking-widest text-emerald-600">{{
-                                translations.published }}</span>
-                        </div>
-                        <div class="mt-4">
-                            <h3 class="text-lg font-bold text-gray-400 uppercase tracking-wider">{{
-                                translations.articles }}</h3>
-                            <p class="text-4xl font-extrabold text-brand-maroon">{{ stats.posts_count }}</p>
-                        </div>
-                    </div>
+                <Deferred data="posts_count">
+                    <template #fallback>
+                        <div>Loading...</div>
+                    </template>
 
-                    <!-- Comments Stat -->
-                    <div
-                        class="group overflow-hidden rounded-2xl bg-white p-6 shadow-sm ring-1 ring-gray-100 transition-all hover:shadow-md hover:ring-brand-gold/30">
-                        <div class="flex items-center justify-between">
-                            <div
-                                class="rounded-xl bg-blue-50 p-3 text-blue-600 group-hover:bg-blue-600 group-hover:text-white transition-colors">
-                                <span class="iconify text-2xl" data-icon="carbon:chat"></span>
+                    <!-- Stats Grid -->
+                    <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+                        <!-- Articles Stat -->
+                        <div
+                            class="group overflow-hidden rounded-2xl bg-white p-6 shadow-sm ring-1 ring-gray-100 transition-all hover:shadow-md hover:ring-brand-gold/30">
+                            <div class="flex items-center justify-between">
+                                <div
+                                    class="rounded-xl bg-brand-maroon/5 p-3 text-brand-maroon group-hover:bg-brand-maroon group-hover:text-white transition-colors">
+                                    <span class="iconify text-2xl" data-icon="carbon:document"></span>
+                                </div>
+                                <span class="text-xs font-bold uppercase tracking-widest text-emerald-600">{{
+                                    translations.published }}</span>
                             </div>
-                            <span class="text-xs font-bold uppercase tracking-widest text-blue-600">{{
-                                translations.received }}</span>
+                            <div class="mt-4">
+                                <h3 class="text-lg font-bold text-gray-400 uppercase tracking-wider">{{
+                                    translations.articles }}</h3>
+                                <p class="text-4xl font-extrabold text-brand-maroon">{{ posts_count }}</p>
+                            </div>
                         </div>
-                        <div class="mt-4">
-                            <h3 class="text-lg font-bold text-gray-400 uppercase tracking-wider">{{
-                                translations.comments }}</h3>
-                            <p class="text-4xl font-extrabold text-brand-maroon">{{ stats.comments_count }}</p>
-                        </div>
-                    </div>
 
-                    <!-- Estates Stat -->
-                    <div
-                        class="group overflow-hidden rounded-2xl bg-white p-6 shadow-sm ring-1 ring-gray-100 transition-all hover:shadow-md hover:ring-brand-gold/30">
-                        <div class="flex items-center justify-between">
-                            <div
-                                class="rounded-xl bg-brand-gold/10 p-3 text-brand-gold-dark group-hover:bg-brand-gold group-hover:text-brand-maroon transition-colors">
-                                <span class="iconify text-2xl" data-icon="carbon:home"></span>
+                        <!-- Comments Stat -->
+                        <div
+                            class="group overflow-hidden rounded-2xl bg-white p-6 shadow-sm ring-1 ring-gray-100 transition-all hover:shadow-md hover:ring-brand-gold/30">
+                            <div class="flex items-center justify-between">
+                                <div
+                                    class="rounded-xl bg-blue-50 p-3 text-blue-600 group-hover:bg-blue-600 group-hover:text-white transition-colors">
+                                    <span class="iconify text-2xl" data-icon="carbon:chat"></span>
+                                </div>
+                                <span class="text-xs font-bold uppercase tracking-widest text-blue-600">{{
+                                    translations.received }}</span>
                             </div>
-                            <span class="text-xs font-bold uppercase tracking-widest text-brand-gold-dark">Active</span>
+                            <div class="mt-4">
+                                <h3 class="text-lg font-bold text-gray-400 uppercase tracking-wider">{{
+                                    translations.comments }}</h3>
+                                <p class="text-4xl font-extrabold text-brand-maroon">{{ comments_count }}</p>
+                            </div>
                         </div>
-                        <div class="mt-4">
-                            <h3 class="text-lg font-bold text-gray-400 uppercase tracking-wider">{{ translations.estates
-                            }}</h3>
-                            <p class="text-4xl font-extrabold text-brand-maroon">{{ stats.estates_count }}</p>
-                        </div>
-                    </div>
 
-                    <!-- Messages Stat -->
-                    <div
-                        class="group overflow-hidden rounded-2xl bg-white p-6 shadow-sm ring-1 ring-gray-100 transition-all hover:shadow-md hover:ring-brand-gold/30">
-                        <div class="flex items-center justify-between">
-                            <div
-                                class="rounded-xl bg-purple-50 p-3 text-purple-600 group-hover:bg-purple-600 group-hover:text-white transition-colors">
-                                <span class="iconify text-2xl" data-icon="carbon:email"></span>
+                        <!-- Estates Stat -->
+                        <div
+                            class="group overflow-hidden rounded-2xl bg-white p-6 shadow-sm ring-1 ring-gray-100 transition-all hover:shadow-md hover:ring-brand-gold/30">
+                            <div class="flex items-center justify-between">
+                                <div
+                                    class="rounded-xl bg-brand-gold/10 p-3 text-brand-gold-dark group-hover:bg-brand-gold group-hover:text-brand-maroon transition-colors">
+                                    <span class="iconify text-2xl" data-icon="carbon:home"></span>
+                                </div>
+                                <span
+                                    class="text-xs font-bold uppercase tracking-widest text-brand-gold-dark">Active</span>
                             </div>
-                            <span class="text-xs font-bold uppercase tracking-widest text-purple-600">Total</span>
+                            <div class="mt-4">
+                                <h3 class="text-lg font-bold text-gray-400 uppercase tracking-wider">{{
+                                    translations.estates
+                                }}</h3>
+                                <p class="text-4xl font-extrabold text-brand-maroon">{{ estates_count }}</p>
+                            </div>
                         </div>
-                        <div class="mt-4">
-                            <h3 class="text-lg font-bold text-gray-400 uppercase tracking-wider">{{
-                                translations.messages }}</h3>
-                            <p class="text-4xl font-extrabold text-brand-maroon">{{ stats.contacts_count }}</p>
+
+                        <!-- Messages Stat -->
+                        <div
+                            class="group overflow-hidden rounded-2xl bg-white p-6 shadow-sm ring-1 ring-gray-100 transition-all hover:shadow-md hover:ring-brand-gold/30">
+                            <div class="flex items-center justify-between">
+                                <div
+                                    class="rounded-xl bg-purple-50 p-3 text-purple-600 group-hover:bg-purple-600 group-hover:text-white transition-colors">
+                                    <span class="iconify text-2xl" data-icon="carbon:email"></span>
+                                </div>
+                                <span class="text-xs font-bold uppercase tracking-widest text-purple-600">Total</span>
+                            </div>
+                            <div class="mt-4">
+                                <h3 class="text-lg font-bold text-gray-400 uppercase tracking-wider">{{
+                                    translations.messages }}</h3>
+                                <p class="text-4xl font-extrabold text-brand-maroon">{{ contacts_count }}</p>
+                            </div>
                         </div>
                     </div>
-                </div>
+                </Deferred>
 
                 <!-- Visualization Sections -->
                 <div class="grid grid-cols-1 gap-8 lg:grid-cols-2">

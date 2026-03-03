@@ -19,12 +19,6 @@ class AdminController extends Controller
     public function index()
     {
         return Inertia::render('Admin/Dashboard', [
-            'stats' => [
-                'posts_count' => Post::count(),
-                'estates_count' => Estate::count(),
-                'contacts_count' => Contact::count(),
-                'comments_count' => Comment::count(),
-            ],
             'estates_by_city' => Estate::with('city')
                 ->get()
                 ->groupBy('city_id')
@@ -40,6 +34,10 @@ class AdminController extends Controller
                     'label' => EstateTypeEnum::labels()[$type] ?? $type,
                     'count' => $group->count(),
                 ])->values(),
+            'posts_count' => Inertia::defer(fn () => Post::count()),
+            'estates_count' => Inertia::defer(fn () => Estate::count()),
+            'contacts_count' => Inertia::defer(fn () => Contact::count()),
+            'comments_count' => Inertia::defer(fn () => Comment::count()),
         ]);
     }
 }
