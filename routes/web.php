@@ -6,28 +6,24 @@ use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
 // ─── Public Routes (Inertia) ───────────────────────────────────────
-Route::get('/', [Controllers\HomeController::class, 'index']);
-Route::get('home', [Controllers\HomeController::class, 'index'])->name('app.home');
-Route::get('about', [Controllers\HomeController::class, 'about'])->name('app.about');
-Route::get('posts', [Controllers\HomeController::class, 'posts'])->name('app.posts');
-Route::get('faq', [Controllers\HomeController::class, 'faq'])->name('app.faq');
-Route::get('contact', [Controllers\HomeController::class, 'contact'])->name('app.contact');
-Route::get('post/{post}', [Controllers\HomeController::class, 'post'])->name('app.post');
-Route::get('estates/search', [Controllers\HomeController::class, 'filterEstate'])->name('app.estate_filter');
-Route::get('estate/{estate}', [Controllers\HomeController::class, 'estate'])->name('app.estate');
-Route::get('estates', [Controllers\HomeController::class, 'estates'])->name('app.estates');
+Route::get('/', [Controllers\Front\PageController::class, 'home'])->name('app.home');
+Route::get('about', [Controllers\Front\PageController::class, 'about'])->name('app.about');
+Route::get('faq', [Controllers\Front\PageController::class, 'faq'])->name('app.faq');
 
-// ─── Public Routes (Still Blade — to be converted) ────────────────
-Route::get('lang', [Controllers\HomeController::class, 'switchLang'])->name('app.switch_lang');
-Route::get('search', [Controllers\HomeController::class, 'search'])->name('app.search');
+Route::get('contact', [Controllers\Front\PublicContactController::class, 'contact'])->name('app.contact');
+Route::post('contacts', [Controllers\Front\PublicContactController::class, 'store'])->name('app.contact.store');
 
-Route::resource('contacts', Controllers\ContactController::class)->only(['store']);
-Route::resource('comments', Controllers\CommentController::class)->only(['store']);
+Route::get('posts', [Controllers\Front\PublicPostController::class, 'posts'])->name('app.posts');
+Route::get('post/{post}', [Controllers\Front\PublicPostController::class, 'post'])->name('app.post');
+Route::post('post/{post}/comment', [Controllers\Front\PublicPostController::class, 'storeComment'])->name('app.post.comment');
 
-// ─── Ajax Routes ───────────────────────────────────────────────────
-Route::post('towns', [Controllers\EstateController::class, 'fetchTownsByCityId']);
-Route::post('delete-setting-image', [Controllers\SettingController::class, 'deleteImage']);
-Route::post('delete-estate-image/{estate}', [Controllers\EstateController::class, 'deleteImage']);
+Route::get('estates/search', [Controllers\Front\PublicEstateController::class, 'filterEstate'])->name('app.estate_filter');
+Route::get('estate/{estate}', [Controllers\Front\PublicEstateController::class, 'estate'])->name('app.estate');
+Route::get('estates', [Controllers\Front\PublicEstateController::class, 'estates'])->name('app.estates');
+Route::post('towns', [Controllers\Front\PublicEstateController::class, 'fetchTownsByCityId']);
+
+Route::get('lang', [Controllers\Front\LanguageController::class, 'switchLang'])->name('app.switch_lang');
+Route::get('search', [Controllers\Front\SearchController::class, 'search'])->name('app.search');
 
 // ─── Admin Routes (Auth via Breeze) ────────────────────────────────
 Route::middleware('auth')->group(function () {
@@ -45,6 +41,7 @@ Route::prefix('admin')->middleware(['auth', 'role:admin'])->group(function () {
     Route::resource('posts', Controllers\PostController::class);
     Route::resource('comments', Controllers\CommentController::class)->only(['index', 'destroy']);
     Route::resource('estates', Controllers\EstateController::class);
+    Route::post('delete-estate-image/{estate}', [Controllers\EstateController::class, 'deleteImage']);
     Route::resource('contacts', Controllers\ContactController::class)->only(['index', 'destroy']);
     Route::resource('faq', Controllers\FaqController::class);
 

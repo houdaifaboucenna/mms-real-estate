@@ -107,7 +107,7 @@ function getGravatar(email) {
                             <div class="mt-12 pt-8 border-t border-gray-100">
                                 <h4 class="text-lg font-bold text-brand-maroon mb-6">{{ translations.add_comment }}</h4>
                                 <form
-                                    @submit.prevent="commentForm.post(route('comments.store'), { onSuccess: () => commentForm.reset() })"
+                                    @submit.prevent="commentForm.post(route('app.post.comment', post.id), { onSuccess: () => commentForm.reset() })"
                                     class="space-y-6">
                                     <div class="grid grid-cols-1 gap-6 sm:grid-cols-2">
                                         <div>

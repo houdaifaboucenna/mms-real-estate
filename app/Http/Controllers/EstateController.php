@@ -6,7 +6,6 @@ use App\Enums\EstateTypeEnum;
 use App\Http\Requests\EstateStoreRequest;
 use App\Http\Requests\EstateUpdateRequest;
 use App\Models\City;
-use App\Models\CityTown;
 use App\Models\Estate;
 use Exception;
 use Illuminate\Http\Request;
@@ -146,13 +145,6 @@ class EstateController extends Controller
         $estate->delete();
 
         return to_route('estates.index')->with('success', __('admin.estate_deleted'));
-    }
-
-    public function fetchTownsByCityId(Request $request)
-    {
-        $response = CityTown::where('city_id', $request['city'])->get();
-
-        return response()->json($response);
     }
 
     public function deleteImage(Request $request, Estate $estate)

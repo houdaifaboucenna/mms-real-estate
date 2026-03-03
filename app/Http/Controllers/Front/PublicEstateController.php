@@ -1,104 +1,17 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Front;
 
 use App\Enums\EstateTypeEnum;
+use App\Http\Controllers\Controller;
 use App\Models\City;
+use App\Models\CityTown;
 use App\Models\Estate;
-use App\Models\Faq;
-use App\Models\Post;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\App;
 use Inertia\Inertia;
 
-class HomeController extends Controller
+class PublicEstateController extends Controller
 {
-    public function index()
-    {
-        return Inertia::render('Home', [
-            'types' => EstateTypeEnum::labels(),
-            'cities' => City::all(),
-            'maxPrice' => Estate::max('max'),
-            'minPrice' => Estate::min('min'),
-            'posts' => Post::orderBy('id')->limit(4)->get(),
-            'postCount' => Post::count(),
-            'faqs' => Faq::where('show_home', 1)->get(),
-            'faqCount' => Faq::count(),
-            'estates' => Estate::orderBy('id')->limit(6)->get(),
-            'estateCount' => Estate::count(),
-        ]);
-    }
-
-    public function posts()
-    {
-        return Inertia::render('Posts', [
-            'posts' => Post::paginate(9),
-            'translations' => [
-                'posts' => __('home.posts'),
-                'all_articles' => __('home.all_articles'),
-            ],
-        ]);
-    }
-
-    public function post($slug)
-    {
-        $post = Post::where('slug', $slug)->first();
-
-        return Inertia::render('PostShow', [
-            'post' => $post,
-            'comments' => $post->comments,
-            'translations' => [
-                'post' => __('home.post'),
-                'all_articles' => __('home.all_articles'),
-                'add_comment' => __('home.add_comment'),
-                'comments' => __('home.comments'),
-                'name' => __('home.name'),
-                'email' => __('home.email'),
-                'be_first_comment' => __('home.No comments yet. Be the first to comment!'),
-                'content' => __('home.content'),
-                'contact_form' => __('home.contact_form'),
-            ],
-        ]);
-    }
-
-    public function faq()
-    {
-        return Inertia::render('Faq', [
-            'faqs' => Faq::all(),
-            'translations' => [
-                'faq' => __('home.faq'),
-                'faq_header' => __('home.Find answers to common questions about our real estate services.'),
-                'contact_form' => __('home.contact_form'),
-            ],
-        ]);
-    }
-
-    public function contact()
-    {
-        return Inertia::render('Contactus', [
-            'translations' => [
-                'address' => __('home.address'),
-                'adrs' => __('home.adrs'),
-                'contact_form' => __('home.contact_form'),
-            ],
-        ]);
-    }
-
-    public function about()
-    {
-        return Inertia::render('About', [
-            'translations' => [
-                'about' => __('home.about'),
-                'who' => __('home.who'),
-                'who_txt' => __('home.who_txt'),
-                'vision' => __('home.vision'),
-                'vision_txt' => __('home.vision_txt'),
-                'mission' => __('home.mission'),
-                'mission_txt' => __('home.mission_txt'),
-            ],
-        ]);
-    }
-
     public function estate($slug)
     {
         $estate = Estate::with('city', 'town')->where('slug', $slug)->first();
@@ -208,45 +121,10 @@ class HomeController extends Controller
         ]);
     }
 
-    public function switchLang()
+    public function fetchTownsByCityId(Request $request)
     {
-        $lang = isLang('en') ? 'ar' : 'en';
-        session(['lang' => $lang]);
-        App::setLocale($lang);
+        $response = CityTown::where('city_id', $request['city'])->get();
 
-        return redirect()->back();
-    }
-
-    public function search(Request $request)
-    {
-        $query = $request['q'];
-
-        $posts = isLang('en')
-            ? Post::where('title', 'LIKE', '%' . $query . '%')->get()
-            : Post::where('title_ar', 'LIKE', '%' . $query . '%')->get();
-
-        $estates = isLang('en')
-            ? Estate::with('city', 'town')->where('title', 'LIKE', '%' . $query . '%')->get()
-            : Estate::with('city', 'town')->where('title_ar', 'LIKE', '%' . $query . '%')->get();
-
-        $faqs = isLang('en')
-            ? Faq::where('question', 'LIKE', '%' . $query . '%')->orWhere('answer', 'LIKE', '%' . $query . '%')->get()
-            : Faq::where('question_ar', 'LIKE', '%' . $query . '%')->orWhere('answer_ar', 'LIKE', '%' . $query . '%')->get();
-
-        return Inertia::render('Search', [
-            'posts' => $posts,
-            'estates' => $estates,
-            'faqs' => $faqs,
-            'translations' => [
-                'search_res' => __('home.search_res'),
-                'articles' => __('home.articles'),
-                'estates' => __('home.estates'),
-                'faq' => __('home.faq'),
-                'nofound' => __('home.nofound'),
-                'nofound_desc' => __('home.nofound_desc'),
-                'back_to_home' => __('home.back_to_home'),
-                'view_details' => __('home.view_details'),
-            ],
-        ]);
+        return response()->json($response);
     }
 }

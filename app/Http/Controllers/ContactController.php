@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\ContactStoreRequest;
 use App\Models\Contact;
 use Illuminate\Http\RedirectResponse;
 use Inertia\Inertia;
@@ -30,13 +29,6 @@ class ContactController extends Controller
                 'confirm_delete' => __('admin.confirm_delete'),
             ],
         ]);
-    }
-
-    public function store(ContactStoreRequest $request): RedirectResponse
-    {
-        Contact::create($request->validated());
-
-        return redirect()->back()->with('success', __('admin.contact_received'));
     }
 
     public function destroy(Contact $contact): RedirectResponse

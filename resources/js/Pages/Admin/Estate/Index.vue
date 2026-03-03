@@ -209,8 +209,7 @@ const deleteEstate = (id) => {
                         <div class="grid grid-cols-1 md:grid-cols-2 h-full min-h-[500px]">
                             <!-- Left: Images -->
                             <div class="relative bg-gray-100 flex items-center justify-center">
-                                <img :src="'/storage/' + (typeof selectedEstate.image === 'string' ? JSON.parse(selectedEstate.image)[0] : selectedEstate.image[0])"
-                                    class="h-full w-full object-cover">
+                                <img :src="'/storage/' + selectedEstate.image[0]" class="h-full w-full object-cover">
                                 <div class="absolute bottom-6 left-6 right-6 flex items-center gap-2">
                                     <span
                                         class="px-3 py-1 bg-brand-maroon/90 text-[10px] font-black text-white uppercase tracking-widest rounded-full backdrop-blur-sm">

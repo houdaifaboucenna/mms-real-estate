@@ -19,7 +19,8 @@ const form = useForm({
 
 <template>
     <div class="relative">
-        <form @submit.prevent="form.post(route('contacts.store'), { onSuccess: () => form.reset() })" class="space-y-5">
+        <form @submit.prevent="form.post(route('app.contact.store'), { onSuccess: () => form.reset() })"
+            class="space-y-5">
 
             <!-- Success Message -->
             <Transition enter-active-class="transition duration-300 ease-out"

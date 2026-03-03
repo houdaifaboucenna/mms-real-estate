@@ -61,7 +61,7 @@ const props = defineProps({
                 <Link v-for="estate in estates" :key="estate.id" :href="route('app.estate', estate.slug)"
                     class="estate-card">
                     <div class="estate-image">
-                        <img v-if="estate.image" :src="`/storage/${JSON.parse(estate.image)?.[0]}`"
+                        <img v-if="estate.image" :src="`/storage/${estate.image[0]}`"
                             :alt="isEn ? estate.title : estate.title_ar" />
                         <div v-else class="estate-image-placeholder">🏠</div>
                         <span class="estate-type">{{ types[estate.type] || estate.type }}</span>

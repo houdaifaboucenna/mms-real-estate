@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\CommentStoreRequest;
 use App\Models\Comment;
 use Illuminate\Http\RedirectResponse;
 use Inertia\Inertia;
@@ -29,13 +28,6 @@ class CommentController extends Controller
                 'confirm_delete' => __('admin.confirm_delete'),
             ],
         ]);
-    }
-
-    public function store(CommentStoreRequest $request): RedirectResponse
-    {
-        Comment::create($request->validated());
-
-        return back()->with('success', __('admin.comment_received'));
     }
 
     public function destroy(Comment $comment): RedirectResponse
