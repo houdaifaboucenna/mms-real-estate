@@ -29,11 +29,6 @@ class Estate extends Model
         'max',
     ];
 
-    protected $casts = [
-        'type' => EstateTypeEnum::class,
-        'image' => 'array',
-    ];
-
     public function town(): BelongsTo
     {
         return $this->belongsTo(CityTown::class, 'town_id');
@@ -42,5 +37,13 @@ class Estate extends Model
     public function city(): HasOneThrough
     {
         return $this->hasOneThrough(City::class, CityTown::class, 'id', 'id', 'town_id', 'city_id');
+    }
+
+    protected function casts(): array
+    {
+        return [
+            'type' => EstateTypeEnum::class,
+            'image' => 'array',
+        ];
     }
 }
