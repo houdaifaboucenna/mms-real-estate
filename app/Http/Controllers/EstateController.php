@@ -83,7 +83,7 @@ class EstateController extends Controller
 
         Estate::create($valid);
 
-        return redirect()->route('estates.index')->with('success', __('admin.estate_created'));
+        return to_route('estates.index')->with('success', __('admin.estate_created'));
     }
 
     public function edit(Estate $estate)
@@ -132,15 +132,17 @@ class EstateController extends Controller
 
         $estate->update($valid);
 
-        return back()->with('success', __('admin.estate_updated'));
+        return to_route('estates.index')->with('success', __('admin.estate_updated'));
     }
 
     public function destroy(Estate $estate)
     {
         $this->authorize('delete', $estate);
 
-        foreach ($estate->image as $image) {
-            Storage::disk('public')->delete($image);
+        if (! empty($estate->image)) {
+            foreach ($estate->image as $image) {
+                Storage::disk('public')->delete($image);
+            }
         }
         $estate->delete();
 

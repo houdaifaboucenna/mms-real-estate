@@ -20,8 +20,8 @@ class PostFactory extends Factory
             'short_ar' => fake()->realText(20),
             'image' => fake()->image(),
             'slug' => fake()->slug(),
-            'keywords' => fake()->words(5),
-            'keywords_ar' => fake()->words(5),
+            'keywords' => fake()->realText(20),
+            'keywords_ar' => fake()->realText(20),
             'user_id' => 1,
         ];
     }
