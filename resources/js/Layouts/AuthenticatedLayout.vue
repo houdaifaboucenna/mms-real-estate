@@ -89,6 +89,14 @@ const toggleSidebar = () => {
                     <span class="iconify mr-3 text-xl" data-icon="carbon:help"></span>
                     {{ translations.faq }}
                 </Link>
+
+                <Link prefetch :class="[
+                    'group flex items-center rounded-xl px-4 py-3 text-sm font-bold transition-all duration-200',
+                    route().current('trash.*') ? 'bg-brand-gold text-brand-maroon shadow-lg shadow-gold-500/20' : 'text-white/70 hover:bg-white/5 hover:text-white'
+                ]" :href="route('trash.index')">
+                    <span class="iconify mr-3 text-xl" data-icon="carbon:trash"></span>
+                    {{ translations.trash }}
+                </Link>
             </nav>
 
             <!-- Bottom Navigation -->

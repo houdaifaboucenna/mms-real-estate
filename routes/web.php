@@ -48,6 +48,10 @@ Route::prefix('admin')->middleware(['auth', 'role:admin'])->group(function () {
     Route::get('settings', [Controllers\SettingController::class, 'index'])->name('settings.index');
     Route::put('settings/update', [Controllers\SettingController::class, 'update'])->name('settings.update');
     Route::delete('settings/delete-image', [Controllers\SettingController::class, 'deleteImage'])->name('settings.deleteImage');
+
+    Route::get('trash', [Controllers\TrashController::class, 'index'])->name('trash.index');
+    Route::post('trash/restore/{id}/{type}', [Controllers\TrashController::class, 'restore'])->name('trash.restore');
+    Route::delete('trash/force-delete/{id}/{type}', [Controllers\TrashController::class, 'forceDelete'])->name('trash.forceDelete');
 });
 
 require __DIR__ . '/auth.php';

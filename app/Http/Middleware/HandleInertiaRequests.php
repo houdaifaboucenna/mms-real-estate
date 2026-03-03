@@ -73,6 +73,7 @@ class HandleInertiaRequests extends Middleware
                 'estates' => __('admin.estates'),
                 'messages' => __('home.messages'),
                 'faq' => __('admin.faq'),
+                'trash' => __('admin.trash'),
                 'settings' => __('admin.settings'),
                 'profile' => __('admin.profile'),
                 'logout' => __('admin.logout'),

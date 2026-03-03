@@ -54,6 +54,9 @@ return [
     'logout' => 'تسجيل الخروج',
     'published' => 'منشور',
     'received' => 'مستلم',
+    'trash' => 'سلة المهملات',
+    'restore' => 'استعادة',
+    'force_delete' => 'حذف نهائي',
 
     // others
     'view_website' => 'View Website',
@@ -86,6 +89,8 @@ return [
     'estate_updated' => 'Estate updated successfully',
     'profile_updated' => 'Profile updated successfully',
     'settings_updated' => 'Settings updated successfully',
+    'item_restored' => 'تم استعادة العنصر بنجاح',
+    'item_deleted_permanently' => 'تم حذف العنصر نهائياً',
 
     // create pages
     'edit_article' => 'Edit Article',

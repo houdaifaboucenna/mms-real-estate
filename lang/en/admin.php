@@ -14,6 +14,7 @@ return [
     'all_estates' => 'All Estates',
     'all_contacts' => 'All Messages',
     'all_settings' => 'All Settings',
+    'trash' => 'Trash',
     'number' => '#',
     'title' => 'Title',
     'content' => 'Content',
@@ -57,6 +58,9 @@ return [
     'received' => 'Received',
     'save' => 'Save',
     'contact' => 'Contact',
+    'trash' => 'Trash',
+    'restore' => 'Restore',
+    'force_delete' => 'Delete Permanently',
 
     // others
     'view_website' => 'View Website',
@@ -94,6 +98,8 @@ return [
     'estate_deleted' => 'Estate deleted successfully',
     'faq_deleted' => 'Faq deleted successfully',
     'contact_deleted' => 'Contact deleted successfully',
+    'item_restored' => 'Item restored successfully',
+    'item_deleted_permanently' => 'Item deleted permanently',
 
     // create pages
     'create_estate' => 'Create Estate',
