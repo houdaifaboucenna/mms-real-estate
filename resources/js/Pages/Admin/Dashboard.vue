@@ -47,9 +47,23 @@ const typesDistribution = computed(() => formatDistribution(props.estates_by_typ
                     </div>
                 </div>
 
-                <Deferred data="posts_count">
+                <Deferred :data="['posts_count', 'estates_count', 'contacts_count', 'comments_count']">
                     <template #fallback>
-                        <div>Loading...</div>
+                        <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+                            <div v-for="i in 4" :key="i"
+                                class="rounded-2xl bg-white p-6 shadow-sm ring-1 ring-gray-100">
+                                <div class="animate-pulse space-y-4">
+                                    <div class="flex justify-between">
+                                        <div class="h-12 w-12 rounded-xl bg-gray-200" />
+                                        <div class="h-4 w-16 rounded bg-gray-200" />
+                                    </div>
+                                    <div class="space-y-2">
+                                        <div class="h-4 w-20 rounded bg-gray-200" />
+                                        <div class="h-10 w-16 rounded bg-gray-200" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </template>
 
                     <!-- Stats Grid -->
@@ -104,7 +118,7 @@ const typesDistribution = computed(() => formatDistribution(props.estates_by_typ
                             <div class="mt-4">
                                 <h3 class="text-lg font-bold text-gray-400 uppercase tracking-wider">{{
                                     translations.estates
-                                }}</h3>
+                                    }}</h3>
                                 <p class="text-4xl font-extrabold text-brand-maroon">{{ estates_count }}</p>
                             </div>
                         </div>
@@ -128,63 +142,69 @@ const typesDistribution = computed(() => formatDistribution(props.estates_by_typ
                     </div>
                 </Deferred>
 
-                <!-- Visualization Sections -->
-                <div class="grid grid-cols-1 gap-8 lg:grid-cols-2">
-                    <!-- Estates by Cities -->
-                    <div class="overflow-hidden rounded-3xl bg-white shadow-sm ring-1 ring-gray-100">
-                        <div class="border-b border-gray-50 bg-gray-50/50 px-8 py-6">
-                            <h2 class="flex items-center text-xl font-extrabold text-brand-maroon">
-                                <span class="iconify mr-3 text-brand-gold" data-icon="carbon:map"></span>
-                                {{ translations.estatescities }}
-                            </h2>
-                        </div>
-                        <div class="p-8 space-y-6">
-                            <div v-for="city in citiesDistribution" :key="city.name" class="space-y-2">
-                                <div class="flex items-end justify-between">
-                                    <span class="text-sm font-bold text-gray-700">{{ isEn ? city.name : city.name_ar
-                                    }}</span>
-                                    <span
-                                        class="text-xs font-extrabold text-brand-maroon bg-brand-gold/10 px-2 py-0.5 rounded-full">{{
-                                            city.count }} {{ translations.estates }}</span>
-                                </div>
-                                <div class="h-2 w-full overflow-hidden rounded-full bg-gray-100">
-                                    <div class="h-full bg-brand-maroon transition-all duration-1000 ease-out"
-                                        :style="{ width: city.percentage + '%' }"></div>
-                                </div>
-                            </div>
-                            <div v-if="citiesDistribution.length === 0" class="py-10 text-center">
-                                <p class="text-sm font-medium text-gray-400 italic">No city data available.</p>
-                            </div>
-                        </div>
-                    </div>
+                <Deferred :data="['estates_by_city', 'estates_by_type']">
+                    <template #fallback>
+                        <div>Loading...</div>
+                    </template>
 
-                    <!-- Estates by Types -->
-                    <div class="overflow-hidden rounded-3xl bg-white shadow-sm ring-1 ring-gray-100">
-                        <div class="border-b border-gray-50 bg-gray-50/50 px-8 py-6">
-                            <h2 class="flex items-center text-xl font-extrabold text-brand-maroon">
-                                <span class="iconify mr-3 text-brand-gold" data-icon="carbon:category"></span>
-                                {{ translations.estatestypes }}
-                            </h2>
-                        </div>
-                        <div class="p-8 space-y-6">
-                            <div v-for="type in typesDistribution" :key="type.type" class="space-y-2">
-                                <div class="flex items-end justify-between">
-                                    <span class="text-sm font-bold text-gray-700">{{ type.label }}</span>
-                                    <span
-                                        class="text-xs font-extrabold text-brand-maroon bg-brand-gold/10 px-2 py-0.5 rounded-full">{{
-                                            type.count }}</span>
+                    <!-- Visualization Sections -->
+                    <div class="grid grid-cols-1 gap-8 lg:grid-cols-2">
+                        <!-- Estates by Cities -->
+                        <div class="overflow-hidden rounded-3xl bg-white shadow-sm ring-1 ring-gray-100">
+                            <div class="border-b border-gray-50 bg-gray-50/50 px-8 py-6">
+                                <h2 class="flex items-center text-xl font-extrabold text-brand-maroon">
+                                    <span class="iconify mr-3 text-brand-gold" data-icon="carbon:map"></span>
+                                    {{ translations.estatescities }}
+                                </h2>
+                            </div>
+                            <div class="p-8 space-y-6">
+                                <div v-for="city in citiesDistribution" :key="city.name" class="space-y-2">
+                                    <div class="flex items-end justify-between">
+                                        <span class="text-sm font-bold text-gray-700">{{ isEn ? city.name : city.name_ar
+                                        }}</span>
+                                        <span
+                                            class="text-xs font-extrabold text-brand-maroon bg-brand-gold/10 px-2 py-0.5 rounded-full">{{
+                                                city.count }} {{ translations.estates }}</span>
+                                    </div>
+                                    <div class="h-2 w-full overflow-hidden rounded-full bg-gray-100">
+                                        <div class="h-full bg-brand-maroon transition-all duration-1000 ease-out"
+                                            :style="{ width: city.percentage + '%' }"></div>
+                                    </div>
                                 </div>
-                                <div class="h-2 w-full overflow-hidden rounded-full bg-gray-100">
-                                    <div class="h-full bg-brand-gold transition-all duration-1000 ease-out"
-                                        :style="{ width: type.percentage + '%' }"></div>
+                                <div v-if="citiesDistribution.length === 0" class="py-10 text-center">
+                                    <p class="text-sm font-medium text-gray-400 italic">No city data available.</p>
                                 </div>
                             </div>
-                            <div v-if="typesDistribution.length === 0" class="py-10 text-center">
-                                <p class="text-sm font-medium text-gray-400 italic">No type data available.</p>
+                        </div>
+
+                        <!-- Estates by Types -->
+                        <div class="overflow-hidden rounded-3xl bg-white shadow-sm ring-1 ring-gray-100">
+                            <div class="border-b border-gray-50 bg-gray-50/50 px-8 py-6">
+                                <h2 class="flex items-center text-xl font-extrabold text-brand-maroon">
+                                    <span class="iconify mr-3 text-brand-gold" data-icon="carbon:category"></span>
+                                    {{ translations.estatestypes }}
+                                </h2>
+                            </div>
+                            <div class="p-8 space-y-6">
+                                <div v-for="type in typesDistribution" :key="type.type" class="space-y-2">
+                                    <div class="flex items-end justify-between">
+                                        <span class="text-sm font-bold text-gray-700">{{ type.label }}</span>
+                                        <span
+                                            class="text-xs font-extrabold text-brand-maroon bg-brand-gold/10 px-2 py-0.5 rounded-full">{{
+                                                type.count }}</span>
+                                    </div>
+                                    <div class="h-2 w-full overflow-hidden rounded-full bg-gray-100">
+                                        <div class="h-full bg-brand-gold transition-all duration-1000 ease-out"
+                                            :style="{ width: type.percentage + '%' }"></div>
+                                    </div>
+                                </div>
+                                <div v-if="typesDistribution.length === 0" class="py-10 text-center">
+                                    <p class="text-sm font-medium text-gray-400 italic">No type data available.</p>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
+                </Deferred>
             </div>
         </template>
     </AuthenticatedLayout>
