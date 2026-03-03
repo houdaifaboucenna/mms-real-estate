@@ -32,7 +32,7 @@ class PostUpdateRequest extends FormRequest
             'keywords' => 'nullable',
             'keywords_ar' => 'nullable',
             'slug' => 'required',
-            // 'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
         ];
     }
 }

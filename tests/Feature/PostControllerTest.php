@@ -19,7 +19,7 @@ test('test_admin_can_create_post', function () {
     $admin = User::factory()->create()->assignRole(RoleEnum::ADMIN);
     $this->actingAs($admin);
 
-    Storage::fake('public');
+    Storage::fake();
     $file = UploadedFile::fake()->image('image.jpg');
 
     $response = $this->post(route('posts.store'), [
@@ -48,6 +48,7 @@ test('test_admin_can_update_post', function () {
     $this->actingAs($admin);
 
     $post = Post::factory()->create();
+    Storage::fake();
     $file = UploadedFile::fake()->image('image.jpg');
 
     $response = $this->put(route('posts.update', $post->id), [
@@ -73,6 +74,7 @@ test('test_admin_can_delete_post', function () {
     $admin = User::factory()->create()->assignRole(RoleEnum::ADMIN);
     $this->actingAs($admin);
 
+    Storage::fake();
     $post = Post::factory()->create();
 
     $response = $this->delete(route('posts.destroy', $post->id));
