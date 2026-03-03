@@ -37,6 +37,8 @@ class PostController extends Controller
 
     public function create()
     {
+        $this->authorize('create', Post::class);
+
         return Inertia::render('Admin/Post/Create', [
             'translations' => [
                 'add_article' => __('admin.add_article'),
@@ -58,8 +60,9 @@ class PostController extends Controller
 
     public function store(PostStoreRequest $request)
     {
-        $validated = $request->validated();
+        $this->authorize('create', Post::class);
 
+        $validated = $request->validated();
         $validated['slug'] = Str::slug($request->slug);
 
         if ($request->hasFile('image')) {
@@ -74,6 +77,8 @@ class PostController extends Controller
 
     public function edit(Post $post)
     {
+        $this->authorize('update', $post);
+
         return Inertia::render('Admin/Post/Create', [
             'post' => $post,
             'translations' => [
@@ -96,6 +101,8 @@ class PostController extends Controller
 
     public function update(PostUpdateRequest $request, Post $post)
     {
+        $this->authorize('update', $post);
+
         $data = $request->validated();
 
         $data['slug'] = Str::slug($request->slug);
@@ -115,6 +122,8 @@ class PostController extends Controller
 
     public function destroy(Post $post)
     {
+        $this->authorize('delete', $post);
+
         Storage::disk('public')->delete($post->image);
         $post->delete();
 

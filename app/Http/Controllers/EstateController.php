@@ -41,6 +41,8 @@ class EstateController extends Controller
 
     public function create()
     {
+        $this->authorize('create', Estate::class);
+
         return Inertia::render('Admin/Estate/Create', [
             'types' => EstateTypeEnum::labels(),
             'cities' => City::all(),
@@ -68,8 +70,9 @@ class EstateController extends Controller
 
     public function store(EstateStoreRequest $request)
     {
-        $valid = $request->validated();
+        $this->authorize('create', Estate::class);
 
+        $valid = $request->validated();
         $valid['slug'] = Str::slug($valid['slug']);
 
         foreach ($valid['images'] ?? [] as $key => $image) {
@@ -86,6 +89,8 @@ class EstateController extends Controller
 
     public function edit(Estate $estate)
     {
+        $this->authorize('update', $estate);
+
         return Inertia::render('Admin/Estate/Create', [
             'estate' => $estate->load('city'),
             'types' => EstateTypeEnum::labels(),
@@ -116,8 +121,9 @@ class EstateController extends Controller
 
     public function update(EstateUpdateRequest $request, Estate $estate)
     {
-        $valid = $request->validated();
+        $this->authorize('update', $estate);
 
+        $valid = $request->validated();
         $valid['slug'] = Str::slug($valid['slug']);
         $valid['image'] = $estate->image;
 
@@ -134,6 +140,8 @@ class EstateController extends Controller
 
     public function destroy(Estate $estate)
     {
+        $this->authorize('delete', $estate);
+
         foreach ($estate->image as $image) {
             Storage::disk('public')->delete($image);
         }
@@ -151,6 +159,8 @@ class EstateController extends Controller
 
     public function deleteImage(Request $request, Estate $estate)
     {
+        $this->authorize('update', $estate);
+
         $request->validate([
             'image' => 'required',
         ]);

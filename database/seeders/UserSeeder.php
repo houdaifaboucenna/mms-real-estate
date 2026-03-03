@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Enums\RoleEnum;
 use App\Models\Profile;
 use App\Models\User;
 use Illuminate\Database\Seeder;
@@ -16,15 +17,19 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        $user = User::create([
-            'name' => 'Test',
+        $user = User::firstOrCreate([
             'email' => 'test@gmail.com',
+        ], [
+            'name' => 'Test',
             'password' => Hash::make('Jix9NG!Dg699QLa'),
         ]);
-        $profile = Profile::create([
+        $profile = Profile::firstOrCreate([
             'user_id' => $user->id,
+        ], [
             'username' => $user->name,
             'picture' => getGravatar($user->email),
         ]);
+
+        $user->assignRole(RoleEnum::ADMIN);
     }
 }

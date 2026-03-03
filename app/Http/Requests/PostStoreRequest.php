@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Enums\PermissionEnum;
 use Illuminate\Foundation\Http\FormRequest;
 
 class PostStoreRequest extends FormRequest
@@ -11,7 +12,7 @@ class PostStoreRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return true;
+        return $this->user()->can(PermissionEnum::CREATE_ARTICLES->value);
     }
 
     /**

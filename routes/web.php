@@ -37,19 +37,20 @@ Route::middleware('auth')->group(function () {
     Route::patch('profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-    // Admin resources (still Blade — to be converted)
-    Route::prefix('admin')->group(function () {
-        Route::get('/', [Controllers\AdminController::class, 'index'])->name('admin.dashboard');
-        Route::resource('posts', Controllers\PostController::class);
-        Route::resource('comments', Controllers\CommentController::class)->only(['index', 'destroy']);
-        Route::resource('estates', Controllers\EstateController::class);
-        Route::resource('contacts', Controllers\ContactController::class)->only(['index', 'destroy']);
-        Route::resource('faq', Controllers\FaqController::class);
+});
 
-        Route::get('settings', [Controllers\SettingController::class, 'index'])->name('settings.index');
-        Route::put('settings/update', [Controllers\SettingController::class, 'update'])->name('settings.update');
-        Route::delete('settings/delete-image', [Controllers\SettingController::class, 'deleteImage'])->name('settings.deleteImage');
-    });
+// Admin resources (still Blade — to be converted)
+Route::prefix('admin')->middleware('role:admin')->group(function () {
+    Route::get('/', [Controllers\AdminController::class, 'index'])->name('admin.dashboard');
+    Route::resource('posts', Controllers\PostController::class);
+    Route::resource('comments', Controllers\CommentController::class)->only(['index', 'destroy']);
+    Route::resource('estates', Controllers\EstateController::class);
+    Route::resource('contacts', Controllers\ContactController::class)->only(['index', 'destroy']);
+    Route::resource('faq', Controllers\FaqController::class);
+
+    Route::get('settings', [Controllers\SettingController::class, 'index'])->name('settings.index');
+    Route::put('settings/update', [Controllers\SettingController::class, 'update'])->name('settings.update');
+    Route::delete('settings/delete-image', [Controllers\SettingController::class, 'deleteImage'])->name('settings.deleteImage');
 });
 
 require __DIR__ . '/auth.php';

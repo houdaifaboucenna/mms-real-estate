@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Enums\PermissionEnum;
 use Illuminate\Foundation\Http\FormRequest;
 
 class EstateStoreRequest extends FormRequest
@@ -11,7 +12,7 @@ class EstateStoreRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return true;
+        return $this->user()->can(PermissionEnum::CREATE_ESTATES->value);
     }
 
     /**
