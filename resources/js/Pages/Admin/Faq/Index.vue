@@ -84,7 +84,7 @@ const deleteFaq = (id) => {
                                     class="group hover:bg-gray-50/50 transition-colors">
                                     <td
                                         class="px-8 py-5 whitespace-nowrap font-black text-xs text-brand-maroon/30 tracking-widest italic text-center">
-                                        #{{ index + 1 }}
+                                        #{{ faq.id }}
                                     </td>
                                     <td class="px-8 py-5">
                                         <div class="space-y-1.5 max-w-2xl">

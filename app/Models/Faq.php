@@ -16,4 +16,11 @@ class Faq extends Model
         'answer_ar',
         'show_home',
     ];
+
+    protected function casts(): array
+    {
+        return [
+            'show_home' => 'boolean',
+        ];
+    }
 }

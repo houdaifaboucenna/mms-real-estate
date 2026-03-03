@@ -31,7 +31,7 @@ class PostStoreRequest extends FormRequest
             'keywords' => 'nullable',
             'keywords_ar' => 'nullable',
             'user_id' => 'required',
-            'slug' => 'required',
+            'slug' => 'required|unique:posts',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ];
     }

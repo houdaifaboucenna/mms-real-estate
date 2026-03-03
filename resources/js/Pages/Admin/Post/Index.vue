@@ -95,7 +95,7 @@ const formatDate = (dateString) => {
                                     class="group hover:bg-gray-50/50 transition-colors">
                                     <td
                                         class="px-8 py-5 whitespace-nowrap font-black text-xs text-brand-maroon/30 tracking-widest italic group-hover:text-brand-gold transition-colors">
-                                        #{{ index + 1 }}
+                                        #{{ post.id }}
                                     </td>
                                     <td class="px-8 py-5">
                                         <div class="flex items-center gap-4">
@@ -198,7 +198,7 @@ const formatDate = (dateString) => {
                             </div>
                             <div>
                                 <h3 class="text-2xl font-black text-brand-maroon tracking-tight">{{ translations.article
-                                }} Preview</h3>
+                                    }} Preview</h3>
                                 <p class="text-xs font-bold text-gray-400 uppercase tracking-widest mt-0.5">Article
                                     Details Overview</p>
                             </div>
@@ -229,7 +229,7 @@ const formatDate = (dateString) => {
                                         <span class="text-xs font-black text-brand-maroon/60 uppercase">{{
                                             translations.writer }}</span>
                                         <span class="text-xs font-bold text-gray-700">{{ selectedPost.user.name
-                                        }}</span>
+                                            }}</span>
                                     </div>
                                     <div class="flex items-center justify-between">
                                         <span class="text-xs font-black text-brand-maroon/60 uppercase">{{

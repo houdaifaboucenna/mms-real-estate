@@ -11,7 +11,7 @@ use Inertia\Inertia;
 
 class PostController extends Controller
 {
-    public function index(post $post)
+    public function index()
     {
         return Inertia::render('Admin/Post/Index', [
             'posts' => Post::with('user')->paginate(10),
@@ -72,7 +72,7 @@ class PostController extends Controller
         return redirect()->route('posts.index')->with('success', __('admin.post_created'));
     }
 
-    public function edit(post $post)
+    public function edit(Post $post)
     {
         return Inertia::render('Admin/Post/Create', [
             'post' => $post,
@@ -113,7 +113,7 @@ class PostController extends Controller
         return redirect()->route('posts.index')->with('success', __('admin.post_updated'));
     }
 
-    public function destroy(post $post)
+    public function destroy(Post $post)
     {
         Storage::disk('public')->delete($post->image);
         $post->delete();

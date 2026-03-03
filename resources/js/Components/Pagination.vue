@@ -21,11 +21,3 @@ const props = defineProps({
         </ul>
     </nav>
 </template>
-
-<style scoped>
-.active {
-    background-color: #1a8b58;
-    color: #fff;
-    border-color: #1a8b58;
-}
-</style>

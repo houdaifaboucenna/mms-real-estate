@@ -83,7 +83,7 @@ const deleteComment = (id) => {
                                     class="group hover:bg-gray-50/50 transition-colors">
                                     <td
                                         class="px-8 py-6 whitespace-nowrap font-black text-xs text-brand-maroon/30 tracking-widest italic text-center">
-                                        #{{ index + 1 }}
+                                        #{{ comment.id }}
                                     </td>
                                     <td class="px-8 py-6">
                                         <div class="flex items-center gap-4">

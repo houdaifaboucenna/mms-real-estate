@@ -22,8 +22,8 @@ class FaqUpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'question' => 'required',
-            'question_ar' => 'required',
+            'question' => 'required|unique:faqs,question,' . $this->faq->id,
+            'question_ar' => 'required|unique:faqs,question_ar,' . $this->faq->id,
             'answer' => 'required',
             'answer_ar' => 'required',
             'show_home' => 'required|boolean',
