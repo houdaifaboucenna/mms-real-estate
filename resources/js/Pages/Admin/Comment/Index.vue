@@ -111,7 +111,7 @@ const deleteComment = (id) => {
                                         <div
                                             class="mt-2 flex items-center gap-1.5 text-[9px] font-black uppercase tracking-widest text-gray-400">
                                             <Icon icon="carbon:calendar" class="text-xs" />
-                                            {{ comment.date }}
+                                            {{ new Date(comment.created_at).toLocaleDateString() }}
                                         </div>
                                     </td>
                                     <td class="px-8 py-6">

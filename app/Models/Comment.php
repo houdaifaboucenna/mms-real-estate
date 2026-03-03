@@ -2,14 +2,24 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Model;
 
 class Comment extends Model
 {
     protected $fillable = ['name', 'email', 'post_id', 'content'];
 
+    protected $appends = ['gravatar'];
+
     public function post()
     {
         return $this->belongsTo(Post::class);
+    }
+
+    public function gravatar(): Attribute
+    {
+        return Attribute::make(
+            get: fn () => getGravatar($this->email),
+        );
     }
 }

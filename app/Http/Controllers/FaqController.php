@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\FaqStoreRequest;
+use App\Http\Requests\FaqUpdateRequest;
 use App\Models\Faq;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Inertia\Response;
 
@@ -48,17 +49,9 @@ class FaqController extends Controller
         ]);
     }
 
-    public function store(Request $request): RedirectResponse
+    public function store(FaqStoreRequest $request): RedirectResponse
     {
-        $validated = $request->validate([
-            'question' => 'required',
-            'question_ar' => 'required',
-            'answer' => 'required',
-            'answer_ar' => 'required',
-            'show_home' => 'required|boolean',
-        ]);
-
-        Faq::create($validated);
+        Faq::create($request->validated());
 
         return redirect()->route('faq.index')->with('success', __('admin.faq_created'));
     }
@@ -81,17 +74,9 @@ class FaqController extends Controller
         ]);
     }
 
-    public function update(Request $request, Faq $faq): RedirectResponse
+    public function update(FaqUpdateRequest $request, Faq $faq): RedirectResponse
     {
-        $validated = $request->validate([
-            'question' => 'required',
-            'question_ar' => 'required',
-            'answer' => 'required',
-            'answer_ar' => 'required',
-            'show_home' => 'required|boolean',
-        ]);
-
-        $faq->update($validated);
+        $faq->update($request->validated());
 
         return redirect()->route('faq.index')->with('success', __('admin.faq_updated'));
     }
@@ -100,6 +85,6 @@ class FaqController extends Controller
     {
         $faq->delete();
 
-        return redirect()->route('faq.index')->with('success', __('admin.comment_deleted')); // Reusing comment_deleted or adding dedicated one
+        return redirect()->route('faq.index')->with('success', __('admin.faq_deleted'));
     }
 }

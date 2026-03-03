@@ -92,6 +92,8 @@ return [
     'image_deleted' => 'Image deleted successfully',
     'post_deleted' => 'Post deleted successfully',
     'estate_deleted' => 'Estate deleted successfully',
+    'faq_deleted' => 'Faq deleted successfully',
+    'contact_deleted' => 'Contact deleted successfully',
 
     // create pages
     'create_estate' => 'Create Estate',

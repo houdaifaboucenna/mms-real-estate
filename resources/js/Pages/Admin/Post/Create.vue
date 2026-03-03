@@ -28,7 +28,6 @@ const form = useForm({
     content_ar: props.post?.content_ar || '',
     image: null,
     user_id: props.post?.user_id || page.props.auth.user.id,
-    _method: props.post ? 'PUT' : 'POST',
 });
 
 const activeLang = ref('en'); // en, ar
@@ -48,8 +47,7 @@ const handleImageUpload = (e) => {
 
 const submit = () => {
     if (props.post) {
-        // For file uploads in Laravel/Inertia, we use POST with _method=PUT
-        form.post(route('posts.update', props.post.id), {
+        form.put(route('posts.update', props.post.id), {
             forceFormData: true,
             preserveScroll: true,
         });

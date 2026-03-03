@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Enums\EstateTypeEnum;
+use App\Http\Requests\EstateStoreRequest;
+use App\Http\Requests\EstateUpdateRequest;
 use App\Models\City;
 use App\Models\CityTown;
 use App\Models\Estate;
@@ -64,24 +66,9 @@ class EstateController extends Controller
         ]);
     }
 
-    public function store(Request $request)
+    public function store(EstateStoreRequest $request)
     {
-        $valid = $request->validate([
-            'title' => 'required|unique:estates',
-            'content' => 'required',
-            'title_ar' => 'required|unique:estates',
-            'content_ar' => 'required',
-            'short' => 'nullable',
-            'short_ar' => 'nullable',
-            'keywords' => 'nullable',
-            'keywords_ar' => 'nullable',
-            'type' => 'required',
-            'min' => 'nullable|numeric',
-            'max' => 'nullable|numeric',
-            'town_id' => 'required',
-            'slug' => 'required|unique:estates',
-            'images' => 'nullable|array',
-        ]);
+        $valid = $request->validated();
 
         $valid['slug'] = Str::slug($valid['slug']);
 
@@ -127,24 +114,9 @@ class EstateController extends Controller
         ]);
     }
 
-    public function update(Request $request, Estate $estate)
+    public function update(EstateUpdateRequest $request, Estate $estate)
     {
-        $valid = $request->validate([
-            'title' => 'required|unique:estates,title,' . $estate->id,
-            'content' => 'required',
-            'title_ar' => 'required|unique:estates,title_ar,' . $estate->id,
-            'content_ar' => 'required',
-            'short' => 'nullable',
-            'short_ar' => 'nullable',
-            'keywords' => 'nullable',
-            'keywords_ar' => 'nullable',
-            'type' => 'required',
-            'min' => 'nullable|numeric',
-            'max' => 'nullable|numeric',
-            'town_id' => 'required',
-            'slug' => 'required|unique:estates,slug,' . $estate->id,
-            'images' => 'nullable|array',
-        ]);
+        $valid = $request->validated();
 
         $valid['slug'] = Str::slug($valid['slug']);
         $valid['image'] = $estate->image;

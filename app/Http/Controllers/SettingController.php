@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\SettingUpdateRequest;
 use App\Models\Setting;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
@@ -22,24 +23,9 @@ class SettingController extends Controller
         ]);
     }
 
-    public function update(Request $request): RedirectResponse
+    public function update(SettingUpdateRequest $request): RedirectResponse
     {
-        $data = $request->validate([
-            'facebook' => ['nullable', 'url', 'max:255'],
-            'instagram' => ['nullable', 'url', 'max:255'],
-            'twitter' => ['nullable', 'url', 'max:255'],
-            'youtube' => ['nullable', 'url', 'max:255'],
-            'telegram' => ['nullable', 'url', 'max:255'],
-            'whatsapp' => ['nullable', 'string', 'max:255'],
-            'phone' => ['nullable', 'string', 'max:50'],
-            'email' => ['nullable', 'email', 'max:255'],
-            'desc' => ['nullable', 'string', 'max:1000'],
-            'desc_ar' => ['nullable', 'string', 'max:1000'],
-            'keywords' => ['nullable', 'string', 'max:500'],
-            'keywords_ar' => ['nullable', 'string', 'max:500'],
-            'home_imgs' => ['nullable', 'array'],
-            'home_imgs.*' => ['image', 'max:2048'],
-        ]);
+        $data = $request->validated();
 
         // Handle home images upload
         $existingImages = json_decode(setting('home_imgs'), true) ?? [];

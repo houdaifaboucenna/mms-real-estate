@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\PostStoreRequest;
+use App\Http\Requests\PostUpdateRequest;
 use App\Models\Post;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Inertia\Inertia;
@@ -55,21 +56,9 @@ class PostController extends Controller
         ]);
     }
 
-    public function store(Request $request)
+    public function store(PostStoreRequest $request)
     {
-        $validated = $request->validate([
-            'title' => 'required|unique:posts',
-            'content' => 'required',
-            'title_ar' => 'required|unique:posts',
-            'content_ar' => 'required',
-            'short' => 'nullable',
-            'short_ar' => 'nullable',
-            'keywords' => 'nullable',
-            'keywords_ar' => 'nullable',
-            'user_id' => 'required',
-            'slug' => 'required',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-        ]);
+        $validated = $request->validated();
 
         $validated['slug'] = Str::slug($request->slug);
 
@@ -105,27 +94,18 @@ class PostController extends Controller
         ]);
     }
 
-    public function update(Request $request, Post $post)
+    public function update(PostUpdateRequest $request, Post $post)
     {
-        $data = $request->validate([
-            'title' => 'required|unique:posts,title,' . $post->id,
-            'content' => 'required',
-            'title_ar' => 'required|unique:posts,title,' . $post->id,
-            'content_ar' => 'required',
-            'short' => 'nullable',
-            'short_ar' => 'nullable',
-            'keywords' => 'nullable',
-            'keywords_ar' => 'nullable',
-            'slug' => 'required',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-        ]);
+        $data = $request->validated();
 
         $data['slug'] = Str::slug($request->slug);
 
         if ($request->hasFile('image')) {
             $image = $request->file('image')->store('images/posts', 'public');
-            Storage::disk('public')->delete($post->image);
             $data['image'] = $image;
+            if ($post->image) {
+                Storage::disk('public')->delete($post->image);
+            }
         }
 
         $post->update($data);
