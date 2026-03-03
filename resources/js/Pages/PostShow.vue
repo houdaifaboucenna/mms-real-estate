@@ -9,7 +9,6 @@ import md5 from 'md5';
 const props = defineProps({
     translations: Object,
     post: Object,
-    comments: Object,
 });
 
 const page = usePage();
@@ -90,7 +89,7 @@ function getGravatar(email) {
                         <div class="p-6 sm:p-10">
                             <!-- Comment List -->
                             <div class="space-y-8">
-                                <div v-for="comment in comments" :key="comment.id" class="flex gap-4">
+                                <div v-for="comment in post.comments" :key="comment.id" class="flex gap-4">
                                     <img :src="getGravatar(comment.email)" :alt="comment.name"
                                         class="h-12 w-12 shrink-0 rounded-full border-2 border-brand-gold/20 shadow-sm">
                                     <div class="flex-1 rounded-2xl bg-gray-50 p-4 ring-1 ring-gray-100">
@@ -98,7 +97,7 @@ function getGravatar(email) {
                                         <p class="text-gray-600 text-sm leading-normal">{{ comment.content }}</p>
                                     </div>
                                 </div>
-                                <p v-if="!comments.length" class="text-center text-gray-400 italic">
+                                <p v-if="!post.comments.length" class="text-center text-gray-400 italic">
                                     {{ translations.be_first_comment }}
                                 </p>
                             </div>

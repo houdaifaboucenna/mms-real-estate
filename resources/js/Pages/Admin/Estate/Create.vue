@@ -87,7 +87,7 @@ const removeNewImage = (index) => {
 const removeExistingImage = async (img, index) => {
     if (confirm(props.translations.confirm_delete || 'Are you sure you want to delete this image?')) {
         try {
-            await axios.post('/delete-estate-image/' + props.estate.id, {
+            await axios.delete('/estates/delete-image/' + props.estate.id, {
                 image: img,
             });
             existingImages.value.splice(index, 1);

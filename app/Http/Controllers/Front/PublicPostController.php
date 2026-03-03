@@ -22,13 +22,10 @@ class PublicPostController extends Controller
         ]);
     }
 
-    public function post($slug)
+    public function post(Post $post)
     {
-        $post = Post::where('slug', $slug)->first();
-
         return Inertia::render('PostShow', [
-            'post' => $post,
-            'comments' => $post->comments,
+            'post' => $post->load('comments'),
             'translations' => [
                 'post' => __('home.post'),
                 'all_articles' => __('home.all_articles'),

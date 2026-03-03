@@ -12,17 +12,15 @@ use Inertia\Inertia;
 
 class PublicEstateController extends Controller
 {
-    public function estate($slug)
+    public function estate(Estate $estate)
     {
-        $estate = Estate::with('city', 'town')->where('slug', $slug)->first();
-
         return Inertia::render('EstateShow', [
-            'estate' => $estate,
+            'estate' => $estate->load('city', 'town'),
             'others' => Estate::with('city', 'town')->where('id', '!=', $estate->id)->inRandomOrder()->limit(4)->get(),
             'translations' => [
                 'estate' => __('home.estate'),
                 'similar' => __('home.similar'),
-                'contact_form' => __('home.contact_form'),
+                'contact_form' => __('home.contact_us'),
                 'city' => __('home.city'),
                 'town' => __('home.town'),
                 'type' => __('home.type'),

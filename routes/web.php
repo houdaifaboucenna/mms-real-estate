@@ -14,11 +14,11 @@ Route::get('contact', [Controllers\Front\PublicContactController::class, 'contac
 Route::post('contacts', [Controllers\Front\PublicContactController::class, 'store'])->name('app.contact.store');
 
 Route::get('posts', [Controllers\Front\PublicPostController::class, 'posts'])->name('app.posts');
-Route::get('post/{post}', [Controllers\Front\PublicPostController::class, 'post'])->name('app.post');
+Route::get('post/{post:slug}', [Controllers\Front\PublicPostController::class, 'post'])->name('app.post');
 Route::post('post/{post}/comment', [Controllers\Front\PublicPostController::class, 'storeComment'])->name('app.post.comment');
 
 Route::get('estates/search', [Controllers\Front\PublicEstateController::class, 'filterEstate'])->name('app.estate_filter');
-Route::get('estate/{estate}', [Controllers\Front\PublicEstateController::class, 'estate'])->name('app.estate');
+Route::get('estate/{estate:slug}', [Controllers\Front\PublicEstateController::class, 'estate'])->name('app.estate');
 Route::get('estates', [Controllers\Front\PublicEstateController::class, 'estates'])->name('app.estates');
 Route::post('towns', [Controllers\Front\PublicEstateController::class, 'fetchTownsByCityId']);
 
@@ -41,7 +41,7 @@ Route::prefix('admin')->middleware(['auth', 'role:admin'])->group(function () {
     Route::resource('posts', Controllers\PostController::class);
     Route::resource('comments', Controllers\CommentController::class)->only(['index', 'destroy']);
     Route::resource('estates', Controllers\EstateController::class);
-    Route::post('delete-estate-image/{estate}', [Controllers\EstateController::class, 'deleteImage']);
+    Route::delete('estates/delete-image/{estate}', [Controllers\EstateController::class, 'deleteImage']);
     Route::resource('contacts', Controllers\ContactController::class)->only(['index', 'destroy']);
     Route::resource('faq', Controllers\FaqController::class);
 
