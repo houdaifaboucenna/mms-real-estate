@@ -115,7 +115,7 @@ return [
     'admin' => 'Admin',
     'user' => 'User',
 
-    'create_articles' => 'Create Articles',
+    'create articles' => 'Create Articles',
     'edit articles' => 'Edit Articles',
     'delete articles' => 'Delete Articles',
     'view articles' => 'View Articles',

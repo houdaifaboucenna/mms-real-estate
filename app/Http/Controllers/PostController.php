@@ -13,6 +13,8 @@ class PostController extends Controller
 {
     public function index()
     {
+        $this->authorize('viewAny', Post::class);
+
         return Inertia::render('Admin/Post/Index', [
             'posts' => Post::with('user')->paginate(10),
             'translations' => [
@@ -60,8 +62,6 @@ class PostController extends Controller
 
     public function store(PostStoreRequest $request)
     {
-        $this->authorize('create', Post::class);
-
         $validated = $request->validated();
         $validated['slug'] = Str::slug($request->slug);
 
@@ -101,10 +101,7 @@ class PostController extends Controller
 
     public function update(PostUpdateRequest $request, Post $post)
     {
-        $this->authorize('update', $post);
-
         $data = $request->validated();
-
         $data['slug'] = Str::slug($request->slug);
 
         if ($request->hasFile('image')) {

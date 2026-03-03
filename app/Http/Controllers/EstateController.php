@@ -18,6 +18,8 @@ class EstateController extends Controller
 {
     public function index()
     {
+        $this->authorize('viewAny', Estate::class);
+
         return Inertia::render('Admin/Estate/Index', [
             'estates' => Estate::with('city', 'town')->paginate(10),
             'types' => EstateTypeEnum::labels(),
@@ -70,8 +72,6 @@ class EstateController extends Controller
 
     public function store(EstateStoreRequest $request)
     {
-        $this->authorize('create', Estate::class);
-
         $valid = $request->validated();
         $valid['slug'] = Str::slug($valid['slug']);
 
@@ -121,8 +121,6 @@ class EstateController extends Controller
 
     public function update(EstateUpdateRequest $request, Estate $estate)
     {
-        $this->authorize('update', $estate);
-
         $valid = $request->validated();
         $valid['slug'] = Str::slug($valid['slug']);
         $valid['image'] = $estate->image;

@@ -40,7 +40,7 @@ Route::middleware('auth')->group(function () {
 });
 
 // Admin resources (still Blade — to be converted)
-Route::prefix('admin')->middleware('role:admin')->group(function () {
+Route::prefix('admin')->middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/', [Controllers\AdminController::class, 'index'])->name('admin.dashboard');
     Route::resource('posts', Controllers\PostController::class);
     Route::resource('comments', Controllers\CommentController::class)->only(['index', 'destroy']);

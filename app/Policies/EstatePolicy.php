@@ -13,7 +13,7 @@ class EstatePolicy
      */
     public function viewAny(User $user): bool
     {
-        return false;
+        return $user->can(PermissionEnum::VIEW_ESTATES->value);
     }
 
     /**
@@ -21,7 +21,7 @@ class EstatePolicy
      */
     public function view(User $user, Estate $estate): bool
     {
-        return false;
+        return $user->can(PermissionEnum::VIEW_ESTATES->value);
     }
 
     /**

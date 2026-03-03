@@ -23,7 +23,8 @@ class UserSeeder extends Seeder
             'name' => 'Test',
             'password' => Hash::make('Jix9NG!Dg699QLa'),
         ]);
-        $profile = Profile::firstOrCreate([
+
+        Profile::firstOrCreate([
             'user_id' => $user->id,
         ], [
             'username' => $user->name,
