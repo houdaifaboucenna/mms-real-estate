@@ -56,7 +56,7 @@ function submitSearch() {
 
                 <div class="mx-auto flex max-w-7xl flex-wrap items-end justify-between gap-4">
                     <!-- Logo -->
-                    <Link :href="route('app.home')" class="shrink-0">
+                    <Link prefetch :href="route('app.home')" class="shrink-0">
                         <img src="/images/logo1.png" alt="MmsEstate"
                             class="h-[90px] w-[115px] rounded-lg brightness-110" />
                     </Link>
@@ -166,7 +166,7 @@ function submitSearch() {
                         <!-- Lower row: nav links -->
                         <ul class="mt-3 flex list-none flex-wrap gap-0.5 p-0">
                             <li v-for="link in navLinks" :key="link.route">
-                                <Link :href="route(link.route)"
+                                <Link prefetch :href="route(link.route)"
                                     class="inline-block rounded px-3 py-1.5 text-lg text-gray-300 transition hover:text-white"
                                     :class="{ 'text-white font-semibold': route().current(link.route) }">
                                     {{ isEn ? link.name : link.nameAr }}
@@ -200,7 +200,7 @@ function submitSearch() {
                             </a>
                         </div>
                         <!-- Nav links -->
-                        <Link v-for="link in navLinks" :key="link.route" :href="route(link.route)"
+                        <Link prefetch v-for="link in navLinks" :key="link.route" :href="route(link.route)"
                             class="rounded px-3 py-2 text-gray-200 transition hover:bg-white/10"
                             :class="{ 'bg-white/10 font-semibold': route().current(link.route) }">
                             {{ isEn ? link.name : link.nameAr }}
@@ -237,7 +237,7 @@ function submitSearch() {
                     <h3 class="mb-3 text-lg font-medium">{{ translations.latest_articles }}</h3>
                     <ul class="list-none space-y-2 p-0">
                         <li v-for="post in latestPosts" :key="post.id">
-                            <Link :href="route('app.post', post.slug)"
+                            <Link prefetch :href="route('app.post', post.slug)"
                                 class="text-gray-300 transition hover:text-white">
                                 {{ isEn ? post.title : post.title_ar }}
                             </Link>
@@ -250,7 +250,7 @@ function submitSearch() {
                     <h3 class="mb-3 text-lg font-medium">{{ translations.property_types }}</h3>
                     <ul class="list-none space-y-2 p-0">
                         <li v-for="type in propertyTypes" :key="type.key">
-                            <Link :href="route('app.estate_filter', { type: type.key })"
+                            <Link prefetch :href="route('app.estate_filter', { type: type.key })"
                                 class="text-gray-300 transition hover:text-white">
                                 {{ type.label }}
                                 <span class="text-sm text-gray-400">({{ type.count }})</span>

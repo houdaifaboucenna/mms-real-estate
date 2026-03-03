@@ -42,7 +42,7 @@ const toggleSidebar = () => {
 
             <!-- Navigation Links -->
             <nav class="mt-6 flex-grow overflow-y-auto px-4 space-y-1">
-                <Link :class="[
+                <Link prefetch :class="[
                     'group flex items-center rounded-xl px-4 py-3 text-sm font-bold transition-all duration-200',
                     route().current('admin.dashboard') ? 'bg-brand-gold text-brand-maroon shadow-lg shadow-gold-500/20' : 'text-white/70 hover:bg-white/5 hover:text-white'
                 ]" :href="route('admin.dashboard')">
@@ -50,7 +50,7 @@ const toggleSidebar = () => {
                     {{ translations.overview }}
                 </Link>
 
-                <Link :class="[
+                <Link prefetch :class="[
                     'group flex items-center rounded-xl px-4 py-3 text-sm font-bold transition-all duration-200',
                     route().current('posts.*') ? 'bg-brand-gold text-brand-maroon shadow-lg shadow-gold-500/20' : 'text-white/70 hover:bg-white/5 hover:text-white'
                 ]" :href="route('posts.index')">
@@ -58,7 +58,7 @@ const toggleSidebar = () => {
                     {{ translations.articles }}
                 </Link>
 
-                <Link :class="[
+                <Link prefetch :class="[
                     'group flex items-center rounded-xl px-4 py-3 text-sm font-bold transition-all duration-200',
                     route().current('comments.*') ? 'bg-brand-gold text-brand-maroon shadow-lg shadow-gold-500/20' : 'text-white/70 hover:bg-white/5 hover:text-white'
                 ]" :href="route('comments.index')">
@@ -66,7 +66,7 @@ const toggleSidebar = () => {
                     {{ translations.comments }}
                 </Link>
 
-                <Link :class="[
+                <Link prefetch :class="[
                     'group flex items-center rounded-xl px-4 py-3 text-sm font-bold transition-all duration-200',
                     route().current('estates.*') ? 'bg-brand-gold text-brand-maroon shadow-lg shadow-gold-500/20' : 'text-white/70 hover:bg-white/5 hover:text-white'
                 ]" :href="route('estates.index')">
@@ -74,7 +74,7 @@ const toggleSidebar = () => {
                     {{ translations.estates }}
                 </Link>
 
-                <Link :class="[
+                <Link prefetch :class="[
                     'group flex items-center rounded-xl px-4 py-3 text-sm font-bold transition-all duration-200',
                     route().current('contacts.*') ? 'bg-brand-gold text-brand-maroon shadow-lg shadow-gold-500/20' : 'text-white/70 hover:bg-white/5 hover:text-white'
                 ]" :href="route('contacts.index')">
@@ -82,7 +82,7 @@ const toggleSidebar = () => {
                     {{ translations.messages }}
                 </Link>
 
-                <Link :class="[
+                <Link prefetch :class="[
                     'group flex items-center rounded-xl px-4 py-3 text-sm font-bold transition-all duration-200',
                     route().current('faq.*') ? 'bg-brand-gold text-brand-maroon shadow-lg shadow-gold-500/20' : 'text-white/70 hover:bg-white/5 hover:text-white'
                 ]" :href="route('faq.index')">
@@ -93,14 +93,14 @@ const toggleSidebar = () => {
 
             <!-- Bottom Navigation -->
             <div class="mt-auto border-t border-brand-maroon-dark/50 p-4 space-y-1">
-                <Link :class="[
+                <Link prefetch :class="[
                     'group flex items-center rounded-xl px-4 py-3 text-sm font-bold transition-all duration-200',
                     route().current('settings.*') ? 'bg-brand-gold text-brand-maroon' : 'text-white/70 hover:bg-white/5'
                 ]" :href="route('settings.index')">
                     <span class="iconify mr-3 text-xl" data-icon="carbon:settings"></span>
                     {{ translations.settings }}
                 </Link>
-                <Link :class="[
+                <Link prefetch :class="[
                     'group flex items-center rounded-xl px-4 py-3 text-sm font-bold transition-all duration-200',
                     route().current('profile.*') ? 'bg-brand-gold text-brand-maroon' : 'text-white/70 hover:bg-white/5'
                 ]" :href="route('profile.edit')">
