@@ -1,4 +1,5 @@
 <script setup>
+import Pagination from '@/Components/Pagination.vue';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import { Icon } from '@iconify/vue';
 import { Head, Link, router, usePage } from '@inertiajs/vue3';
@@ -90,7 +91,7 @@ const formatDate = (dateString) => {
                                 </tr>
                             </thead>
                             <tbody class="divide-y divide-gray-50">
-                                <tr v-for="(post, index) in posts" :key="post.id"
+                                <tr v-for="(post, index) in posts.data" :key="post.id"
                                     class="group hover:bg-gray-50/50 transition-colors">
                                     <td
                                         class="px-8 py-5 whitespace-nowrap font-black text-xs text-brand-maroon/30 tracking-widest italic group-hover:text-brand-gold transition-colors">
@@ -154,7 +155,7 @@ const formatDate = (dateString) => {
                                         </div>
                                     </td>
                                 </tr>
-                                <tr v-if="posts.length === 0">
+                                <tr v-if="posts.data.length === 0">
                                     <td colspan="5" class="px-8 py-20 text-center">
                                         <div class="flex flex-col items-center">
                                             <div
@@ -173,6 +174,8 @@ const formatDate = (dateString) => {
                         </table>
                     </div>
                 </div>
+
+                <Pagination :links="posts.links" />
             </div>
 
             <!-- Preview Modal -->
@@ -195,7 +198,7 @@ const formatDate = (dateString) => {
                             </div>
                             <div>
                                 <h3 class="text-2xl font-black text-brand-maroon tracking-tight">{{ translations.article
-                                    }} Preview</h3>
+                                }} Preview</h3>
                                 <p class="text-xs font-bold text-gray-400 uppercase tracking-widest mt-0.5">Article
                                     Details Overview</p>
                             </div>
@@ -226,7 +229,7 @@ const formatDate = (dateString) => {
                                         <span class="text-xs font-black text-brand-maroon/60 uppercase">{{
                                             translations.writer }}</span>
                                         <span class="text-xs font-bold text-gray-700">{{ selectedPost.user.name
-                                            }}</span>
+                                        }}</span>
                                     </div>
                                     <div class="flex items-center justify-between">
                                         <span class="text-xs font-black text-brand-maroon/60 uppercase">{{

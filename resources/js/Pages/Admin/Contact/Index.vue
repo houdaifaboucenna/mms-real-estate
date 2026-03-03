@@ -1,4 +1,5 @@
 <script setup>
+import Pagination from '@/Components/Pagination.vue';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import { Icon } from '@iconify/vue';
 import { Head, Link, router, usePage } from '@inertiajs/vue3';
@@ -95,7 +96,7 @@ const deleteContact = (id) => {
                                 </tr>
                             </thead>
                             <tbody class="divide-y divide-gray-50">
-                                <tr v-for="(contact, index) in contacts" :key="contact.id"
+                                <tr v-for="(contact, index) in contacts.data" :key="contact.id"
                                     class="group hover:bg-gray-50/50 transition-colors">
                                     <td
                                         class="px-8 py-6 whitespace-nowrap font-black text-xs text-brand-maroon/30 tracking-widest italic text-center">
@@ -140,7 +141,7 @@ const deleteContact = (id) => {
                                     </td>
                                 </tr>
 
-                                <tr v-if="contacts.length === 0">
+                                <tr v-if="contacts.data.length === 0">
                                     <td colspan="6" class="px-8 py-20 text-center">
                                         <div class="flex flex-col items-center gap-4">
                                             <div
@@ -158,6 +159,8 @@ const deleteContact = (id) => {
                         </table>
                     </div>
                 </div>
+
+                <Pagination :links="contacts.links" />
             </div>
 
             <!-- Preview Modal -->

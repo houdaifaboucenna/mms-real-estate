@@ -14,7 +14,7 @@ class FaqController extends Controller
     public function index(): Response
     {
         return Inertia::render('Admin/Faq/Index', [
-            'faqs' => Faq::all(),
+            'faqs' => Faq::paginate(10),
             'translations' => [
                 'faq' => __('admin.faq'),
                 'add_question' => __('admin.add_question'),

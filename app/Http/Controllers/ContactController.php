@@ -13,7 +13,7 @@ class ContactController extends Controller
     public function index(): Response
     {
         return Inertia::render('Admin/Contact/Index', [
-            'contacts' => Contact::latest()->get(),
+            'contacts' => Contact::latest()->paginate(10),
             'translations' => [
                 'contacts' => __('admin.contacts'),
                 'all_contacts' => __('admin.all_contacts'),

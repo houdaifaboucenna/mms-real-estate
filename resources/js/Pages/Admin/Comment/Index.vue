@@ -1,4 +1,5 @@
 <script setup>
+import Pagination from '@/Components/Pagination.vue';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import { Icon } from '@iconify/vue';
 import { Head, Link, router, usePage } from '@inertiajs/vue3';
@@ -78,7 +79,7 @@ const deleteComment = (id) => {
                                 </tr>
                             </thead>
                             <tbody class="divide-y divide-gray-50">
-                                <tr v-for="(comment, index) in comments" :key="comment.id"
+                                <tr v-for="(comment, index) in comments.data" :key="comment.id"
                                     class="group hover:bg-gray-50/50 transition-colors">
                                     <td
                                         class="px-8 py-6 whitespace-nowrap font-black text-xs text-brand-maroon/30 tracking-widest italic text-center">
@@ -133,7 +134,7 @@ const deleteComment = (id) => {
                                     </td>
                                 </tr>
 
-                                <tr v-if="comments.length === 0">
+                                <tr v-if="comments.data.length === 0">
                                     <td colspan="5" class="px-8 py-20 text-center">
                                         <div class="flex flex-col items-center gap-4">
                                             <div
@@ -147,6 +148,8 @@ const deleteComment = (id) => {
                                         </div>
                                     </td>
                                 </tr>
+
+                                <Pagination :links="comments.links" />
                             </tbody>
                         </table>
                     </div>

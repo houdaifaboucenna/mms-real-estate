@@ -1,4 +1,5 @@
 <script setup>
+import Pagination from '@/Components/Pagination.vue';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import { Icon } from '@iconify/vue';
 import { Head, Link, router, usePage } from '@inertiajs/vue3';
@@ -18,8 +19,8 @@ const selectedEstate = ref(null);
 const isModalOpen = ref(false);
 
 const filteredEstates = computed(() => {
-    if (activeTab.value === 'all') return props.estates;
-    return props.estates.filter(estate => estate.type === activeTab.value);
+    if (activeTab.value === 'all') return props.estates.data;
+    return props.estates.data.filter(estate => estate.type === activeTab.value);
 });
 
 const openPreview = (estate) => {
@@ -186,6 +187,8 @@ const deleteEstate = (id) => {
                         </table>
                     </div>
                 </div>
+
+                <Pagination :links="estates.links" />
             </div>
 
             <!-- Preview Modal -->

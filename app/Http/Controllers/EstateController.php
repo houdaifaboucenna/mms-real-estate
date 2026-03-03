@@ -19,7 +19,7 @@ class EstateController extends Controller
     public function index()
     {
         return Inertia::render('Admin/Estate/Index', [
-            'estates' => Estate::with('city', 'town')->get(),
+            'estates' => Estate::with('city', 'town')->paginate(10),
             'types' => EstateTypeEnum::labels(),
             'translations' => [
                 'all_estates' => __('admin.all_estates'),

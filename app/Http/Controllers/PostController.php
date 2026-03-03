@@ -14,7 +14,7 @@ class PostController extends Controller
     public function index(post $post)
     {
         return Inertia::render('Admin/Post/Index', [
-            'posts' => Post::with('user')->get(),
+            'posts' => Post::with('user')->paginate(10),
             'translations' => [
                 'all_articles' => __('admin.all_articles'),
                 'add_article' => __('admin.add_article'),

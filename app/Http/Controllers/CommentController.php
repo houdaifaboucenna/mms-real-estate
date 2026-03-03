@@ -13,7 +13,7 @@ class CommentController extends Controller
     public function index(): Response
     {
         return Inertia::render('Admin/Comment/Index', [
-            'comments' => Comment::with('post:id,title,slug')->latest()->get(),
+            'comments' => Comment::with('post:id,title,slug')->latest()->paginate(10),
             'translations' => [
                 'comments' => __('admin.comments'),
                 'all_comments' => __('admin.all_comments'),

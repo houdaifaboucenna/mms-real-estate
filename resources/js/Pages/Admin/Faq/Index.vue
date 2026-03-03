@@ -1,4 +1,5 @@
 <script setup>
+import Pagination from '@/Components/Pagination.vue';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import { Icon } from '@iconify/vue';
 import { Head, Link, router, usePage } from '@inertiajs/vue3';
@@ -79,7 +80,7 @@ const deleteFaq = (id) => {
                                 </tr>
                             </thead>
                             <tbody class="divide-y divide-gray-50">
-                                <tr v-for="(faq, index) in faqs" :key="faq.id"
+                                <tr v-for="(faq, index) in faqs.data" :key="faq.id"
                                     class="group hover:bg-gray-50/50 transition-colors">
                                     <td
                                         class="px-8 py-5 whitespace-nowrap font-black text-xs text-brand-maroon/30 tracking-widest italic text-center">
@@ -128,7 +129,7 @@ const deleteFaq = (id) => {
                                     </td>
                                 </tr>
 
-                                <tr v-if="faqs.length === 0">
+                                <tr v-if="faqs.data.length === 0">
                                     <td colspan="4" class="px-8 py-20 text-center">
                                         <div class="flex flex-col items-center gap-4">
                                             <div
@@ -149,6 +150,8 @@ const deleteFaq = (id) => {
                         </table>
                     </div>
                 </div>
+
+                <Pagination :links="faqs.links" />
             </div>
         </template>
     </AuthenticatedLayout>
