@@ -37,7 +37,7 @@ class PublicEstateController extends Controller
     public function estates()
     {
         return Inertia::render('Estates', [
-            'estates' => Estate::with('city', 'town')->paginate(9),
+            'estates' => Inertia::scroll(Estate::with('city', 'town')->paginate(6)),
             'types' => EstateTypeEnum::labels(),
             'cities' => City::with('towns')->get(),
             'maxPrice' => Estate::max('max') ?? 1000,
@@ -89,10 +89,10 @@ class PublicEstateController extends Controller
             ->when($request->filled('town'), function ($query) use ($request) {
                 $query->where('town_id', $request->town);
             })
-            ->paginate(9);
+            ->paginate(3);
 
         return Inertia::render('Estates', [
-            'estates' => $estates,
+            'estates' => Inertia::scroll($estates),
             'title' => __('home.search_res') . '(' . $estates->count() . ')',
             'types' => EstateTypeEnum::labels(),
             'cities' => City::with('towns')->get(),

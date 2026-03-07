@@ -1,8 +1,7 @@
 <script setup>
 import EstateCard from '@/Components/EstateCard.vue';
-import Pagination from '@/Components/Pagination.vue';
 import AppLayout from '@/Layouts/AppLayout.vue';
-import { Head, Link, usePage, useForm } from '@inertiajs/vue3';
+import { Head, Link, usePage, useForm, InfiniteScroll } from '@inertiajs/vue3';
 import { computed, watch } from 'vue';
 
 const props = defineProps({
@@ -26,6 +25,13 @@ const filterForm = useForm({
     from: query.value.get('from') || null,
     to: query.value.get('to') || null,
 });
+const submitFilters = () => {
+    filterForm.get(route('app.estate_filter'), {
+        preserveScroll: true,
+        preserveState: true,
+        reset: ['estates'],
+    });
+};
 
 // Dynamic Towns based on selected City
 const availableTowns = computed(() => {
@@ -38,13 +44,6 @@ const availableTowns = computed(() => {
 watch(() => filterForm.city, () => {
     filterForm.town = '';
 });
-
-const submitFilters = () => {
-    filterForm.get(route('app.estate_filter'), {
-        preserveScroll: true,
-        preserveState: true,
-    });
-};
 
 </script>
 
@@ -166,15 +165,17 @@ const submitFilters = () => {
                         </Link>
                     </div>
 
-                    <div v-else class="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
+                    <InfiniteScroll v-else data="estates"
+                        class="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
                         <EstateCard v-for="estate in estates.data" :key="estate.id" :estate="estate" :is-en="isEn"
                             :types="types" variant="list" />
-                    </div>
+                    </InfiniteScroll>
 
-                    <!-- Modern Pagination -->
-                    <div class="mt-16 flex justify-center">
-                        <Pagination :links="estates.links" />
-                    </div>
+                    <!-- End of results -->
+                    <p v-if="estates.data.length > 0 && !estates.next_page_url"
+                        class="py-8 text-center text-sm font-medium text-gray-400">
+                        {{ isEn ? 'No more results' : 'لا مزيد من النتائج' }}
+                    </p>
                 </div>
             </div>
         </div>
