@@ -1,6 +1,7 @@
 <script setup>
 import { computed, ref } from 'vue';
 import { Link, usePage } from '@inertiajs/vue3';
+import Toast from '@/Components/Toast.vue';
 
 const isSidebarOpen = ref(false);
 
@@ -118,6 +119,9 @@ const toggleSidebar = () => {
             </div>
         </aside>
 
+        <!-- Alert Messages (Shared across Admin) -->
+        <Toast />
+
         <!-- Main Content Area -->
         <div class="flex flex-col min-h-screen lg:pl-72">
             <!-- Header -->
@@ -182,15 +186,6 @@ const toggleSidebar = () => {
                 <!-- Content Header Slot (Optional) -->
                 <div v-if="$slots.header" class="mb-8 flex items-center justify-between">
                     <slot name="header" />
-                </div>
-
-                <!-- Alert Messages (Shared across Admin) -->
-                <div v-if="page.props.flash.success"
-                    class="mb-6 overflow-hidden rounded-2xl bg-emerald-50 border-l-4 border-emerald-500 p-4 shadow-sm animate-fade-in-down">
-                    <div class="flex items-center">
-                        <span class="iconify text-2xl text-emerald-500" data-icon="carbon:checkmark-filled"></span>
-                        <p class="ml-3 text-sm font-bold text-emerald-800">{{ page.props.flash.success }}</p>
-                    </div>
                 </div>
 
                 <!-- Slot for Dashboard Content -->

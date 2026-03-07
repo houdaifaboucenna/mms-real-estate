@@ -52,6 +52,7 @@ class HandleInertiaRequests extends Middleware
             ],
             'flash' => [
                 'success' => $request->session()->get('success'),
+                'error' => $request->session()->get('error'),
             ],
             'latestPosts' => Post::latest()->limit(3)->get(['id', 'title', 'title_ar', 'slug']),
             'propertyTypes' => collect(EstateTypeEnum::labels())->map(fn ($label, $key) => [

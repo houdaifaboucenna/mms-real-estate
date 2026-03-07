@@ -1,4 +1,5 @@
 <script setup>
+import Toast from '@/Components/Toast.vue';
 import { Link, usePage, router } from '@inertiajs/vue3';
 import { computed, ref, onMounted, onUnmounted } from 'vue';
 
@@ -210,10 +211,8 @@ function submitSearch() {
             </nav>
         </header>
 
-        <!-- ═══════════════════ FLASH ═══════════════════ -->
-        <div v-if="$page.props.flash?.success" class="bg-emerald-500 py-3 text-center font-medium text-white">
-            {{ $page.props.flash.success }}
-        </div>
+        <!-- ═══════════════════ TOAST FLASH ═══════════════════ -->
+        <Toast />
 
         <!-- ═══════════════════ MAIN ═══════════════════ -->
         <main class="mx-auto w-full max-w-7xl flex-1 px-[6%] py-8">
