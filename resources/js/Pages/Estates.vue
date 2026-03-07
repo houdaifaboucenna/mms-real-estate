@@ -1,4 +1,5 @@
 <script setup>
+import EstateCard from '@/Components/EstateCard.vue';
 import Pagination from '@/Components/Pagination.vue';
 import AppLayout from '@/Layouts/AppLayout.vue';
 import { Head, Link, usePage, useForm } from '@inertiajs/vue3';
@@ -166,59 +167,8 @@ const submitFilters = () => {
                     </div>
 
                     <div v-else class="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
-                        <div v-for="estate in estates.data" :key="estate.id"
-                            class="group relative overflow-hidden rounded-2xl bg-white shadow-xl transition-all hover:-translate-y-2 hover:shadow-2xl ring-1 ring-black/5">
-                            <Link :href="route('app.estate', estate.slug)" class="block">
-                                <!-- Image with Type Badge -->
-                                <div class="relative aspect-[16/10] overflow-hidden">
-                                    <img v-if="estate.image && estate.image[0]" :src="'/storage/' + estate.image[0]"
-                                        :alt="estate.title"
-                                        class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110">
-                                    <img v-else src="/images/background/background-5.jpg" :alt="estate.title"
-                                        class="h-full w-full object-cover">
-
-                                    <div class="absolute right-4 top-4">
-                                        <span
-                                            class="rounded-lg bg-white/90 px-3 py-1.5 text-xs font-bold uppercase tracking-wider text-brand-maroon shadow-lg backdrop-blur-sm">
-                                            {{ estate.type }}
-                                        </span>
-                                    </div>
-                                </div>
-
-                                <!-- Card Content -->
-                                <div class="p-6">
-                                    <h4
-                                        class="mb-3 text-xl font-bold text-brand-maroon transition-colors group-hover:text-brand-red line-clamp-1">
-                                        {{ isEn ? estate.title : estate.title_ar }}
-                                    </h4>
-
-                                    <div class="flex items-center gap-2 text-sm text-gray-500 mb-4">
-                                        <span class="iconify text-brand-gold flex-shrink-0"
-                                            data-icon="carbon:location-filled"></span>
-                                        <span class="truncate">{{ estate.city.name }}, {{ estate.town.name }}</span>
-                                    </div>
-
-                                    <p class="mb-6 text-sm text-gray-600 line-clamp-2 leading-relaxed">
-                                        {{ isEn ? estate.short : estate.short_ar }}
-                                    </p>
-
-                                    <div class="flex items-center justify-between border-t border-gray-100 pt-4">
-                                        <div class="flex flex-col">
-                                            <span class="text-xs font-bold uppercase tracking-wider text-gray-400">{{
-                                                translations.price }}</span>
-                                            <span class="text-lg font-extrabold text-brand-maroon">
-                                                {{ estate.min }}$ <span class="text-gray-400 font-normal">-</span> {{
-                                                    estate.max }}$
-                                            </span>
-                                        </div>
-                                        <span
-                                            class="flex h-10 w-10 items-center justify-center rounded-full bg-brand-maroon text-white transition group-hover:bg-brand-gold">
-                                            <span class="iconify" data-icon="carbon:arrow-right"></span>
-                                        </span>
-                                    </div>
-                                </div>
-                            </Link>
-                        </div>
+                        <EstateCard v-for="estate in estates.data" :key="estate.id" :estate="estate" :is-en="isEn"
+                            :types="types" variant="list" />
                     </div>
 
                     <!-- Modern Pagination -->

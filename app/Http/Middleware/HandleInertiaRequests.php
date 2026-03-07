@@ -82,6 +82,7 @@ class HandleInertiaRequests extends Middleware
                 'estatescities' => __('admin.estatescities'),
                 'published' => __('admin.published'),
                 'received' => __('admin.received'),
+                'price' => __('home.price'),
             ],
         ];
     }

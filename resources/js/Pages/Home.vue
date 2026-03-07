@@ -1,4 +1,5 @@
 <script setup>
+import EstateCard from '@/Components/EstateCard.vue';
 import AppLayout from '@/Layouts/AppLayout.vue';
 import { Link, Head, usePage } from '@inertiajs/vue3';
 import { computed } from 'vue';
@@ -53,27 +54,13 @@ const props = defineProps({
         <section class="section" v-if="estates.length">
             <div class="section-header">
                 <h2 class="section-title">{{ isEn ? 'Featured Properties' : 'عقارات مميزة' }}</h2>
-                <a :href="route('app.estates')" class="see-all">
+                <Link :href="route('app.estates')" class="see-all">
                     {{ isEn ? 'See All' : 'عرض الكل' }} →
-                </a>
+                </Link>
             </div>
             <div class="estates-grid">
-                <Link v-for="estate in estates" :key="estate.id" :href="route('app.estate', estate.slug)"
-                    class="estate-card">
-                    <div class="estate-image">
-                        <img v-if="estate.image" :src="`/storage/${estate.image[0]}`"
-                            :alt="isEn ? estate.title : estate.title_ar" />
-                        <div v-else class="estate-image-placeholder">🏠</div>
-                        <span class="estate-type">{{ types[estate.type] || estate.type }}</span>
-                    </div>
-                    <div class="estate-info">
-                        <h3>{{ isEn ? estate.title : estate.title_ar }}</h3>
-                        <p class="estate-desc">{{ isEn ? estate.short : estate.short_ar }}</p>
-                        <div class="estate-price" v-if="estate.min || estate.max">
-                            {{ estate.min?.toLocaleString() }} - {{ estate.max?.toLocaleString() }}
-                        </div>
-                    </div>
-                </Link>
+                <EstateCard v-for="estate in estates" :key="estate.id" :estate="estate" :is-en="isEn" :types="types"
+                    variant="grid" />
             </div>
         </section>
 
@@ -207,88 +194,12 @@ const props = defineProps({
     transform: translateY(-2px);
 }
 
-/* ─── Estates Grid ────────────────────────────────────────────── */
 .estates-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     gap: 1.5rem;
 }
 
-.estate-card {
-    background: #fff;
-    border-radius: 12px;
-    overflow: hidden;
-    text-decoration: none;
-    color: inherit;
-    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
-    transition: transform 0.2s, box-shadow 0.2s;
-}
-
-.estate-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
-}
-
-.estate-image {
-    position: relative;
-    height: 200px;
-    background: #e2e8f0;
-    overflow: hidden;
-}
-
-.estate-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-.estate-image-placeholder {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100%;
-    font-size: 3rem;
-}
-
-.estate-type {
-    position: absolute;
-    top: 0.75rem;
-    left: 0.75rem;
-    background: #2563eb;
-    color: #fff;
-    padding: 0.25rem 0.75rem;
-    border-radius: 20px;
-    font-size: 0.75rem;
-    font-weight: 600;
-    text-transform: uppercase;
-}
-
-.estate-info {
-    padding: 1.25rem;
-}
-
-.estate-info h3 {
-    font-size: 1.1rem;
-    font-weight: 600;
-    margin-bottom: 0.5rem;
-    color: #1e293b;
-}
-
-.estate-desc {
-    font-size: 0.85rem;
-    color: #64748b;
-    margin-bottom: 0.75rem;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-}
-
-.estate-price {
-    font-weight: 700;
-    color: #2563eb;
-    font-size: 1rem;
-}
 
 /* ─── Posts Grid ───────────────────────────────────────────────── */
 .posts-grid {
