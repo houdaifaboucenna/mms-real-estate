@@ -16,7 +16,7 @@ class PublicContactController extends Controller
             'translations' => [
                 'address' => __('home.address'),
                 'adrs' => __('home.adrs'),
-                'contact_form' => __('home.contact_us'),
+                'contact_form' => __('home.contact_form'),
             ],
         ]);
     }
